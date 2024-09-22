@@ -4,8 +4,10 @@ import App from './App.vue'
 import i18n from "./i18n.js";
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
-
 import 'primeflex/primeflex.css'
+
+import router from './router/index.js'
+
 import ConfirmationService from "primevue/confirmationservice";
 import DialogService from "primevue/dialogservice";
 import ToastService from "primevue/toastservice";
@@ -67,6 +69,8 @@ app.component('pv-button', Button)
 const app = createApp(App);
 
 app.use(i18n);
+
+app.use(router)
 
 
 app.mount('#app');
