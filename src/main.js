@@ -1,12 +1,12 @@
-import { createApp } from 'vue'
-import './style.css'
-import App from './App.vue'
+import { createApp } from 'vue';
+import './style.css';
+import App from './App.vue';
 import i18n from "./i18n.js";
 import PrimeVue from 'primevue/config';
 import Aura from '@primevue/themes/aura';
-import 'primeflex/primeflex.css'
+import 'primeflex/primeflex.css';
 
-import router from './router/index.js'
+import router from './router/index.js';
 
 import ConfirmationService from "primevue/confirmationservice";
 import DialogService from "primevue/dialogservice";
@@ -35,13 +35,16 @@ import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
 
-app.use(PrimeVue, { theme: { preset:Aura },  ripple: true })
+const app = createApp(App);
+
+app.use(PrimeVue, { theme: { preset: Aura }, ripple: true })
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService)
+    .use(i18n)
+    .use(router);
 
-//primevue components
-
+// PrimeVue components
 app.component('pv-button', Button)
     .component('pv-card', Card)
     .component('pv-column', Column)
@@ -65,12 +68,5 @@ app.component('pv-button', Button)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast);
-
-const app = createApp(App);
-
-app.use(i18n);
-
-app.use(router)
-
 
 app.mount('#app');

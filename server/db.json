@@ -1,4 +1,21 @@
 {
-  "teachers" : [],
-  "administrators": []
+  "teachers": [
+    {
+      "id": "1",
+      "name": "Juan",
+      "lastName": "Pérez",
+      "email": "juan.perez@example.com",
+      "days": [
+        "Monday",
+        "Wednesday",
+        "Friday"
+      ],
+      "cellphone": "+51987654321",
+      "field": "Mathematics",
+      "workingHours": 30,
+      "age": 35,
+      "dni": "12345678",
+      "role": "Professor"
+    }
+  ]
 }
