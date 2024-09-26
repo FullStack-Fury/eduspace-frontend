@@ -1,5 +1,5 @@
 <script>
-import TeacherInformation from "./ Teacher Management/components/teacher-information.vue";
+import TeacherInformation from "./teacher-management/components/teacher-information.vue";
 
 export default {
   name: 'App',

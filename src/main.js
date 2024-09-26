@@ -34,6 +34,8 @@ import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
+import MultiSelect from 'primevue/multiselect';
+
 
 const app = createApp(App);
 
@@ -47,6 +49,7 @@ app.use(PrimeVue, { theme: { preset: Aura }, ripple: true })
 // PrimeVue components
 app.component('pv-button', Button)
     .component('pv-card', Card)
+
     .component('pv-column', Column)
     .component('pv-confirm-dialog', ConfirmDialog)
     .component('pv-checkbox', Checkbox)
@@ -67,6 +70,8 @@ app.component('pv-button', Button)
     .component('pv-tag', Tag)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
+    .component('pv-multiselect', MultiSelect)
     .component('pv-toast', Toast);
+
 
 app.mount('#app');

@@ -1,5 +1,6 @@
+// teacher.entity.js
 export class Teacher {
-    constructor(id, name, lastName, email, days, cellphone, field, workingHours, age, dni, role) {
+    constructor({ id = null, name = '', lastName = '', email = '', days = [], cellphone = '', field = '', workingHours = 0, age = 0, dni = '', role = '' } = {}) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
