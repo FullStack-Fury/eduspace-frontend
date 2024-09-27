@@ -1,3 +1,172 @@
 {
-  "meet": []
+  "meet": [
+    {
+      "id": 1,
+      "name": "Planning extracurricular  activities",
+      "day": "2024-09-30",
+      "hour": "Inval",
+      "location": "A104",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Laura",
+          "lastname": "Vivas",
+          "username": "laura123"
+        },
+        {
+          "id": 2,
+          "name": "Carlos",
+          "lastname": "Pérez",
+          "username": "carlos_88"
+        },
+        {
+          "id": 3,
+          "name": "Marta",
+          "lastname": "López",
+          "username": "marta.l"
+        },
+        {
+          "id": 4,
+          "name": "Fernando",
+          "lastname": "Gómez",
+          "username": "fer.gomez"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Evaluation of half-yearly results",
+      "day": "2024-10-28",
+      "hour": "Inval",
+      "location": "A107",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Laura",
+          "lastname": "Vivas",
+          "username": "laura123"
+        },
+        {
+          "id": 2,
+          "name": "Carlos",
+          "lastname": "Pérez",
+          "username": "carlos_88"
+        },
+        {
+          "id": 3,
+          "name": "Marta",
+          "lastname": "López",
+          "username": "marta.l"
+        },
+        {
+          "id": 4,
+          "name": "Fernando",
+          "lastname": "Gómez",
+          "username": "fer.gomez"
+        }
+      ]
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Laura",
+      "lastname": "Vivas",
+      "username": "laura123",
+      "birthdate": "03-03-05",
+      "phone": "950 679 345",
+      "status": "educational",
+      "email": "example@gmail.com"
+    },
+    {
+      "id": 2,
+      "name": "Carlos",
+      "lastname": "Pérez",
+      "username": "carlos_88",
+      "birthdate": "15-04-85",
+      "phone": "951 234 567",
+      "status": "educational",
+      "email": "carlos.perez@example.com"
+    },
+    {
+      "id": 3,
+      "name": "Marta",
+      "lastname": "López",
+      "username": "marta.l",
+      "birthdate": "22-06-90",
+      "phone": "952 345 678",
+      "status": "educational",
+      "email": "marta.lopez@example.com"
+    },
+    {
+      "id": 4,
+      "name": "Fernando",
+      "lastname": "Gómez",
+      "username": "fer.gomez",
+      "birthdate": "10-12-78",
+      "phone": "953 456 789",
+      "status": "educational",
+      "email": "fer.gomez@example.com"
+    },
+    {
+      "id": 5,
+      "name": "Ana",
+      "lastname": "Martínez",
+      "username": "ana.martinez",
+      "birthdate": "25-11-92",
+      "phone": "954 567 890",
+      "status": "educational",
+      "email": "ana.martinez@example.com"
+    },
+    {
+      "id": 6,
+      "name": "Javier",
+      "lastname": "Sánchez",
+      "username": "javier_s",
+      "birthdate": "30-08-83",
+      "phone": "955 678 901",
+      "status": "educational",
+      "email": "javier.sanchez@example.com"
+    },
+    {
+      "id": 7,
+      "name": "Claudia",
+      "lastname": "Torres",
+      "username": "claudia_t",
+      "birthdate": "05-02-95",
+      "phone": "956 789 012",
+      "status": "educational",
+      "email": "claudia.torres@example.com"
+    },
+    {
+      "id": 8,
+      "name": "Diego",
+      "lastname": "Ramírez",
+      "username": "diego.r",
+      "birthdate": "12-09-76",
+      "phone": "957 890 123",
+      "status": "educational",
+      "email": "diego.ramirez@example.com"
+    },
+    {
+      "id": 9,
+      "name": "Isabel",
+      "lastname": "Hernández",
+      "username": "isabel.h",
+      "birthdate": "18-01-89",
+      "phone": "958 901 234",
+      "status": "educational",
+      "email": "isabel.hernandez@example.com"
+    },
+    {
+      "id": 10,
+      "name": "Raúl",
+      "lastname": "Cruz",
+      "username": "raul.cruz",
+      "birthdate": "23-05-82",
+      "phone": "959 012 345",
+      "status": "educational",
+      "email": "raul.cruz@example.com"
+    }
+  ]
 }

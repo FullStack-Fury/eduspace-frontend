@@ -99,6 +99,12 @@ export default {
       });
       this.notifySuccessfulAction('Meetings Deleted');
     },
+    getTeacherNames(teacherIds) {
+      return teacherIds.map(id => {
+        const teacher = this.teachers.find(t => t.id === id);
+        return teacher ? `${teacher.name} ${teacher.lastname}` : '';
+      }).join(', ');
+    },
     //#endregion
   },
   //#region Lifecycle Hooks
@@ -128,6 +134,16 @@ export default {
         <pv-column :sortable="true" field="day" header="Day" style="min-width: 24rem"/>
         <pv-column :sortable="true" field="hour" header="Hour" style="min-width: 24rem"/>
         <pv-column :sortable="true" field="location" header="Location" style="min-width: 24rem"/>
+        <pv-column header="Invite" style="min-width: 24rem">
+          <template #body="slotProps">
+    <span v-if="slotProps.data.teachers && slotProps.data.teachers.length">
+      {{ slotProps.data.teachers.map(teacher => teacher.name + ' ' + teacher.lastname).join(', ') }}
+    </span>
+            <span v-else>
+      No teachers invited
+    </span>
+          </template>
+        </pv-column>
       </template>
     </data-manager>
     <meet-create-and-edit-dialog

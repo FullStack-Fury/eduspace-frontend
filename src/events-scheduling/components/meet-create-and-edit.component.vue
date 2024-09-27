@@ -1,5 +1,6 @@
 <script>
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
+import {TeachersService} from "../services/teachers.service.js";
 
 export default {
   name: "meet-create-and-edit-dialog",
@@ -10,10 +11,29 @@ export default {
   },
   data() {
     return {
-      submitted: false
+      submitted: false,
+      teachers: [],
+      selectedTeachers: []
     }
   },
+  created() {
+    this.loadTeachers();
+  },
   methods: {
+    loadTeachers() {
+      const teacherService = new TeachersService();
+      teacherService.getAllTeachers().then(response => {
+        this.teachers = response.data.map(teacher => ({
+          id: teacher.id,
+          name: teacher.name,
+          lastname: teacher.lastname,
+          username: teacher.username
+        }));
+        console.log("Teachers loaded:", this.teachers);
+      }).catch(error => {
+        console.error("Error loading teachers:", error);
+      });
+    },
     formatDate(date) {
       const d = new Date(date);
       return d.toISOString().split('T')[0];
@@ -28,9 +48,19 @@ export default {
     onSaveRequested() {
       this.submitted = true;
       if (this.item.day && this.item.hour) {
-
         this.item.day = this.formatDate(this.item.day);
         this.item.hour = this.formatTime(this.item.hour);
+
+        const selectedTeachers = this.teachers.filter(teacher =>
+            this.item.teachers.includes(teacher.id)
+        ).map(teacher => ({
+          id: teacher.id,
+          name: teacher.name,
+          lastname: teacher.lastname,
+          username: teacher.username
+        }));
+
+        this.item.teachers = selectedTeachers;
 
         this.$emit('save-requested', this.item);
       }
@@ -78,6 +108,20 @@ export default {
               </template>
             </pv-date-picker>
           </pv-float-label>
+
+          <pv-float-label>
+            <label for="invite">Invite</label>
+            <pv-multi-select
+                id="invite"
+                v-model="item.teachers"
+            :options="teachers"
+            option-label="name"
+            option-value="id"
+            placeholder="Select teachers"
+            :class="{ 'p-invalid': submitted && !item.teachers }"
+            />
+          </pv-float-label>
+
           <pv-float-label>
             <label for="location">Location</label>
             <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }" />
