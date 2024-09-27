@@ -48,10 +48,9 @@ import router from "./router/index.js";
 import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
 import DatePicker from "primevue/datepicker";
+import SelectButton from "primevue/selectbutton";
 
 // Create app instance
-
-const app = createApp(App);
 
 // Use i18n
 
@@ -98,7 +97,7 @@ app.component('pv-button', Button)
     .component('pv-multiselect', MultiSelect)
     .component('pv-input-password', Password)
     .component('pv-toast', Toast)
-    .component ('pv-dropdown', Dropdown);
+    .component ('pv-dropdown', Dropdown)
 
 
     .component('pv-toast', Toast);
