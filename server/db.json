@@ -3,7 +3,17 @@
     {
       "id": 1,
       "name": "swimming pool",
-      "description": "swimming pool that is shared by all the teachers"
+      "description": "swimming pool that is shared by all the teachers and students"
+    },
+    {
+      "id": 2,
+      "name": "primary schoolyard",
+      "description": "Schoolyard that is shared by all the primary students"
+    },
+    {
+      "id": 3,
+      "name": "secondary schoolyard",
+      "description": "Schoolyard that is shared by all the secondary students"
     }
   ],
   "teachers": [
