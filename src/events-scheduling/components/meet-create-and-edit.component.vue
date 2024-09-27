@@ -14,12 +14,26 @@ export default {
     }
   },
   methods: {
+    formatDate(date) {
+      const d = new Date(date);
+      return d.toISOString().split('T')[0];
+    },
+    formatTime(time) {
+      const d = new Date(time);
+      return d.toTimeString().split(' ')[0].substring(0, 5);
+    },
     onCancelRequested() {
       this.$emit('cancel-requested');
     },
     onSaveRequested() {
       this.submitted = true;
-      this.$emit('save-requested', this.item);
+      if (this.item.day && this.item.hour) {
+
+        this.item.day = this.formatDate(this.item.day);
+        this.item.hour = this.formatTime(this.item.hour);
+
+        this.$emit('save-requested', this.item);
+      }
     }
   }
 }
