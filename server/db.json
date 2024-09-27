@@ -53,6 +53,54 @@
       "cellphone": "975540245",
       "address": "Av. Nicolas de Pierola 1061",
       "dni": "76276189"
+    },
+    {
+      "id": "e30f",
+      "name": "gustavo",
+      "lastName": "huanca",
+      "email": "gustavo@gmail.com",
+      "cellphone": "975540245",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "76276189",
+      "rol": {
+        "label": "Educational",
+        "value": 1
+      },
+      "username": "gus",
+      "password": "gusa123."
+    },
+    {
+      "id": "6701",
+      "name": "gustavo",
+      "lastName": "huanca",
+      "email": "gustavo@gmail.com",
+      "cellphone": "975540245",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "76276189"
+    },
+    {
+      "id": "2e75",
+      "name": "gustavo",
+      "lastName": "huanca",
+      "email": "gustavo@gmail.com",
+      "cellphone": "975540245",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "76276189"
+    },
+    {
+      "id": "107a",
+      "name": "Gustavo",
+      "lastName": "Huanca",
+      "email": "gustavohuanca1020@gmail.com",
+      "cellphone": "977540224",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "97754022",
+      "rol": {
+        "label": "Auxiliary",
+        "value": 2
+      },
+      "username": "rene",
+      "password": "rene12313."
     }
   ],
   "administrators": [],

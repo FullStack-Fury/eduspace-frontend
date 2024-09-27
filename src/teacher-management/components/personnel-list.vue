@@ -26,23 +26,26 @@ const getTeachersByRole = (roleValue) => {
   return teachers.value.filter(t => t.rol.value === roleValue);
 };
 
-const goToTeacherInformation = () => {
+const goToAddPersonnel = () => {
   router.push({ name: 'AddPersonnel' });
 };
 </script>
 
 <template>
   <div class="personnel-list">
-    <button @click="goToTeacherInformation" class="add-personnel-button">Go to Teacher Information</button>
-    <div v-for="(roleName, roleValue) in roles" :key="roleValue" class="role-column">
-      <h2>{{ roleName }}</h2>
-      <div v-for="teacher in getTeachersByRole(Number(roleValue))" :key="teacher.id" class="teacher-card">
-        <div class="teacher-info">
-          <h3>{{ teacher.name }} {{ teacher.lastName }}</h3>
-          <p>Email: {{ teacher.email }}</p>
-          <p>DNI: {{ teacher.dni }}</p>
-          <p>Cell phone: {{ teacher.cellphone }}</p>
-          <p>Status: <span class="certified-label">Certified</span></p>
+    <h1>Personal Data</h1>
+    <button @click="goToAddPersonnel" class="add-personnel-button">Add Personnel</button>
+    <div class="roles-container">
+      <div v-for="(roleName, roleValue) in roles" :key="roleValue" class="role-column">
+        <h2>{{ roleName }}</h2>
+        <div v-for="teacher in getTeachersByRole(Number(roleValue))" :key="teacher.id" class="teacher-card">
+          <div class="teacher-info">
+            <h3>{{ teacher.name }} {{ teacher.lastName }}</h3>
+            <p>Email: {{ teacher.email }}</p>
+            <p>DNI: {{ teacher.dni }}</p>
+            <p>Cell phone: {{ teacher.cellphone }}</p>
+            <p>Status: <span class="certified-label">Certified</span></p>
+          </div>
         </div>
       </div>
     </div>
@@ -52,10 +55,16 @@ const goToTeacherInformation = () => {
 <style scoped>
 .personnel-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
+  flex-direction: column; /* Vertical layout for the title and button */
+  align-items: center; /* Center align content */
   padding: 20px;
+}
+
+.roles-container {
+  display: flex; /* Horizontal layout for roles */
+  flex-wrap: wrap; /* Allow wrapping */
+  gap: 20px; /* Gap between role columns */
+  justify-content: center; /* Center roles */
 }
 
 .role-column {
