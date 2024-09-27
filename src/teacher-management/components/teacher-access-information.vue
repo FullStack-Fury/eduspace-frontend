@@ -5,9 +5,15 @@ export default {
   name: 'TeacherAccessInformation',
   props: ['teacher'],
   setup(props, { emit }) {
-    const rol = ref('');
+    const rol = ref(null);
     const username = ref('');
     const password = ref('');
+
+    // Opciones de roles para el dropdown
+    const roleOptions = [
+      { label: 'Teacher', value: 1 },
+      { label: 'Admin', value: 2 }
+    ];
 
     const submitForm = () => {
       emit('submitAccessInfo', {
@@ -21,6 +27,7 @@ export default {
       rol,
       username,
       password,
+      roleOptions,
       submitForm
     };
   }
@@ -33,8 +40,16 @@ export default {
     <form @submit.prevent="submitForm" class="p-fluid">
       <div class="field">
         <label for="rol">Rol</label>
-        <pv-input-number id="rol" v-model="rol" required />
+        <!-- Dropdown de PrimeVue para seleccionar el rol -->
+        <pv-dropdown
+            id="rol"
+            v-model="rol"
+            :options="roleOptions"
+            option-label="label"
+            placeholder="Select a Role"
+            required />
       </div>
+
       <div class="field">
         <label for="username">Username</label>
         <pv-input-text id="username" v-model="username" required />
@@ -48,8 +63,6 @@ export default {
     </form>
   </div>
 </template>
-
-
 
 <style scoped>
 .card {
