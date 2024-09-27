@@ -42,6 +42,7 @@ import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
 import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
+import DatePicker from "primevue/datepicker";
 
 // Create app instance
 
@@ -71,6 +72,7 @@ app.component('pv-button', Button)
     .component('pv-checkbox', Checkbox)
     .component('pv-data-table', DataTable)
     .component('pv-dialog', Dialog)
+    .component('pv-date-picker', DatePicker)
     .component('pv-select', Select)
     .component('pv-calendar', Calendar)
     .component('pv-input-mask', InputMask)

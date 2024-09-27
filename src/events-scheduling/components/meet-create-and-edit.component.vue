@@ -51,17 +51,32 @@ export default {
           </pv-float-label>
           <pv-float-label>
             <label for="day">Day</label>
-            <pv-calendar id="day" v-model="item.day" date-format="yy-mm-dd" show-icon
-                         :class="{ 'p-invalid': submitted && !item.day }"
-                         placeholder="Select a day"
-                         show-button-bar />
+            <pv-date-picker
+                v-model="item.day"
+                showIcon
+                fluid
+                :showOnFocus="false"
+                date-format="yy-mm-dd"
+                :class="{ 'p-invalid': submitted && !item.day }"
+                placeholder="Select a day"
+            />
           </pv-float-label>
+
           <pv-float-label>
             <label for="hour">Hour</label>
-            <pv-calendar id="hour" v-model="item.hour" time-only hour-format="24"
-                         :class="{ 'p-invalid': submitted && !item.hour }"
-                         placeholder="Select a time"
-                         show-button-bar />
+            <pv-date-picker
+                v-model="item.hour"
+                showIcon
+                fluid
+                timeOnly
+                iconDisplay="input"
+                :class="{ 'p-invalid': submitted && !item.hour }"
+                placeholder="Select a time"
+            >
+              <template #inputicon="slotProps">
+                <i class="pi pi-clock" @click="slotProps.clickCallback" />
+              </template>
+            </pv-date-picker>
           </pv-float-label>
           <pv-float-label>
             <label for="location">Location</label>
