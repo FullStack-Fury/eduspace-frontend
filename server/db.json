@@ -1,31 +1,28 @@
 {
   "teachers": [
     {
-      "id": 1,
-      "name": "rene carlos",
-      "lastName": "vazques",
-      "email": "juan@gmail.com",
-      "cellphone": "977540224",
-      "address": "Av. Nicolas de Pierola 1061",
-      "dni": "97754022"
+      "id": "533c",
+      "name": "tutor1",
+      "lastName": "tutorlastname",
+      "email": "tutor@gmail.com",
+      "cellphone": "977540225",
+      "address": "av alameda",
+      "dni": "76276148",
+      "rol": 1,
+      "username": "tutor1",
+      "password": "tutor123.."
     },
     {
-      "id": 2,
-      "name": "roco carlos",
-      "lastName": "vazques",
-      "email": "juan@gmail.com",
-      "cellphone": "977540224",
-      "address": "Av. Nicolas de Pierola 1061",
-      "dni": "97754022"
-    },
-    {
-      "id": 3,
-      "name": "laura maria",
-      "lastName": "vazques",
-      "email": "juan@gmail.com",
-      "cellphone": "977540224",
-      "address": "Av. Nicolas de Pierola 1061",
-      "dni": "97754022"
+      "id": "beff",
+      "name": "tutor1",
+      "lastName": "tutorlastname",
+      "email": "tutor@gmail.com",
+      "cellphone": "977540225",
+      "address": "av alameda",
+      "dni": "76276148",
+      "rol": 1,
+      "username": "gus",
+      "password": "ggustavo1231.."
     }
   ]
 }

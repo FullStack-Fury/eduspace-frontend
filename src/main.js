@@ -35,6 +35,7 @@ import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
 import MultiSelect from 'primevue/multiselect';
+import Password from "primevue/password";
 
 
 const app = createApp(App);
@@ -71,6 +72,7 @@ app.component('pv-button', Button)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-multiselect', MultiSelect)
+    .component('pv-input-password', Password)
     .component('pv-toast', Toast);
 
 

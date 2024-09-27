@@ -19,7 +19,7 @@
     "primevue": "^4.0.7",
     "vue": "^3.4.37",
     "vue-i18n": "^10.0.2",
-    "vue-router": "^4.4.5"
+    "vue-router": "^4.0.13"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.1.2",
