@@ -1,14 +1,27 @@
 <script>
 import TeacherInformation from "./teacher-management/components/teacher-information.vue";
 import PersonnelList from "./teacher-management/components/personnel-list.vue";
+import LanguageSwitcher from "./public/components/language-switcher.component.vue";
 
 export default {
-  name: 'App',
-  components: {
-    TeacherInformation,
-    PersonnelList
+  name: 'app',
+  components: {LanguageSwitcher,TeacherInformation,
+    PersonnelList},
+  title: 'EduSpace',
+  data() {
+    return {
+      drawer: false,
+      items: [
+        {label: 'Meet', to: '/events-scheduling/meet'}
+      ]
+    }
+  },
+  methods: {
+    toggleDrawer() {
+      this.drawer = !this.drawer;
+    }
   }
-};
+}
 </script>
 
 <template>
@@ -18,9 +31,6 @@ export default {
   </div>
 </template>
 
+<style scoped>
 
-
-<style>
-
-@import 'primeicons/primeicons.css';
 </style>
