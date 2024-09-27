@@ -1,5 +1,20 @@
 {
-  "teachers": [],
+  "shared-area": [
+    {
+      "id": 1,
+      "name": "swimming pool",
+      "description": "swimming pool that is shared by all the teachers"
+    }
+  ],
+  "teachers": [
+    {
+      "id": 1,
+      "name": "Maria",
+      "email": "maria@gmail.com",
+      "phone": "9381172111",
+      "location": "Peru"
+    }
+  ],
   "administrators": [],
   "meet": [
     {
@@ -8,7 +23,31 @@
       "day": "2024-09-05",
       "hour": "09:52",
       "location": "aa",
-      "apiId": "v1"
+      "apiId": "v1",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria",
+          "email": "maria@gmail.com",
+          "phone": "9381172111",
+          "location": "Peru"
+        },
+        {
+          "id": 2,
+          "name": "Pepe",
+          "email": "pepe@gmail.com",
+          "phone": "938172132",
+          "location": "Peru"
+        }
+      ]
+    }
+  ],
+  "shared-area-reservation": [
+    {
+      "areaId": "1" ,
+      "teacherId": "1" ,
+      "hour": "1",
+      "day": "09/27/24"
     }
   ]
 }
