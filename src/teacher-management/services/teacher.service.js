@@ -1,6 +1,15 @@
 import http from "../../shared/services/http-common.js";
 
 class TeacherService {
+    async getAll() {
+        try {
+            const response = await http.get('teachers');
+            return response.data;
+        } catch (error) {
+            this.handleError(error, 'Error fetching teachers');
+        }
+    }
+
     async create(data) {
         try {
             const response = await http.post('teachers', data);
