@@ -9,7 +9,8 @@ export default {
     return {
       drawer: false,
       items: [
-        {label: 'Meet', to: '/events-scheduling/meet'}
+        { label: 'Meet', to: '/events-scheduling/meet' },
+        { label: 'Reservation', to: '/reservation-scheduling'}
       ]
     }
   },
