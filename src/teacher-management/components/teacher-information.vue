@@ -63,7 +63,7 @@ const closeDialog = () => {
 
 <template>
   <div class="card" v-if="!showAccessInfo">
-    <h2 class="text-2xl font-bold mb-4">Add Personal</h2>
+    <h2 class="text-2xl font-bold mb-4">Add Personal Data</h2>
     <form @submit.prevent="submitForm" class="p-fluid">
       <div v-for="field in ['name', 'lastName', 'email', 'cellphone', 'address', 'dni']" :key="field" class="field">
         <label :for="field">{{ field.charAt(0).toUpperCase() + field.slice(1) }}</label>
