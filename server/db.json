@@ -1,4 +1,44 @@
 {
-  "teachers" : [],
+  "teachers" : [
+    {
+      "id": 1,
+      "paymentPeriod": {
+        "initialDate": "01-08-2024",
+        "lastDate": "31-08-2024"
+      },
+      "salary": {
+        "amount": 3500,
+        "initialDate": "08-31-2024"
+      },
+      "performanceBonus": {
+          "amount": 200,
+          "date": "08-15-2024"
+        },
+      "seniorityBonus": {
+          "amount": 150,
+          "date": "08-31-2024"
+        },
+      "goalAchievedBonus": {
+          "amount": 250,
+          "date": "08-25-2024"
+        },
+      "latePenaltyDiscount": {
+          "amount": 50,
+          "date": "08-10-2024"
+        },
+      "unjustifiedAbsenceDiscount": {
+          "amount": 100,
+          "date": "08-18-2024"
+        },
+      "afp": {
+          "amount": 175,
+          "date": "08-31-2024"
+      },
+      "taxWithholding": {
+          "amount": 280,
+          "date": "08-31-2024"
+      }
+    }
+  ],
   "administrators": []
 }
