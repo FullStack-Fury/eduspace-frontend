@@ -1,13 +1,31 @@
 {
   "teachers": [
     {
-      "id": "1",
-      "name": "Juan",
-      "lastName": "Pérez",
-      "email": "juan.perez@example.com",
-      "dni": "12345678",
-      "address": "Professor",
-      "cellphone": "+51987654321"
+      "id": 1,
+      "name": "rene carlos",
+      "lastName": "vazques",
+      "email": "juan@gmail.com",
+      "cellphone": "977540224",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "97754022"
+    },
+    {
+      "id": 2,
+      "name": "roco carlos",
+      "lastName": "vazques",
+      "email": "juan@gmail.com",
+      "cellphone": "977540224",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "97754022"
+    },
+    {
+      "id": 3,
+      "name": "laura maria",
+      "lastName": "vazques",
+      "email": "juan@gmail.com",
+      "cellphone": "977540224",
+      "address": "Av. Nicolas de Pierola 1061",
+      "dni": "97754022"
     }
   ]
 }

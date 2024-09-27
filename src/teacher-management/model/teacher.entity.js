@@ -1,4 +1,3 @@
-// teacher.entity.js
 export class Teacher {
     constructor({ id = null, name = '', lastName = '', email = '', cellphone = '', address = '', dni = '' } = {}) {
         this.id = id;
