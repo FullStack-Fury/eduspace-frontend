@@ -1,5 +1,5 @@
 <script>
-import LanguageSwitcher from "./eduspace/components/language-switcher.component.vue";
+import LanguageSwitcher from "./public/components/language-switcher.component.vue";
 
 export default {
   name: 'app',
