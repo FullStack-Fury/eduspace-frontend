@@ -29,6 +29,21 @@
       },
       "username": "m",
       "password": "tutr123."
+    },
+    {
+      "id": "7d17",
+      "name": "tutor3",
+      "lastName": "tutorlastname",
+      "email": "tutor@gmail.com",
+      "cellphone": "977540225",
+      "address": "av alameda",
+      "dni": "76276148",
+      "rol": {
+        "label": "Concierge",
+        "value": 3
+      },
+      "username": "concierge31.",
+      "password": "concierge12321."
     }
   ]
 }

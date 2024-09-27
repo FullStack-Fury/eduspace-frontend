@@ -11,8 +11,9 @@ export default {
 
 
     const roleOptions = [
-      { label: 'Teacher', value: 1 },
-      { label: 'Admin', value: 2 }
+      { label: 'Educational', value: 1 },
+      { label: 'Auxiliary', value: 2 },
+      {label: 'Concierge', value: 3}
     ];
 
     const submitForm = () => {
