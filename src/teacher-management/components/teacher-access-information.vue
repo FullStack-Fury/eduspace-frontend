@@ -9,7 +9,7 @@ export default {
     const username = ref('');
     const password = ref('');
 
-    // Opciones de roles para el dropdown
+
     const roleOptions = [
       { label: 'Teacher', value: 1 },
       { label: 'Admin', value: 2 }
@@ -40,7 +40,6 @@ export default {
     <form @submit.prevent="submitForm" class="p-fluid">
       <div class="field">
         <label for="rol">Rol</label>
-        <!-- Dropdown de PrimeVue para seleccionar el rol -->
         <pv-dropdown
             id="rol"
             v-model="rol"
