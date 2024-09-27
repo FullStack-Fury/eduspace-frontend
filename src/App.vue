@@ -1,12 +1,9 @@
 <script>
-import TeacherInformation from "./teacher-management/components/teacher-information.vue";
-import PersonnelList from "./teacher-management/components/personnel-list.vue";
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
 
 export default {
   name: 'app',
-  components: {LanguageSwitcher,TeacherInformation,
-    PersonnelList},
+  components: { LanguageSwitcher },
   title: 'EduSpace',
   data() {
     return {
@@ -27,10 +24,9 @@ export default {
 <template>
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold mb-6">Teacher Management</h1>
-    <PersonnelList />
+    <router-view></router-view>
   </div>
 </template>
 
 <style scoped>
-
 </style>

@@ -43,7 +43,7 @@ import Dropdown from "primevue/dropdown";
 
 
 const app = createApp(App);
-
+import Router from "./router/index.js";
 import router from "./router/index.js";
 import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";

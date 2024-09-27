@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import TeacherService from '../services/teacher.service.js';
 import { Teacher } from "../model/teacher.entity.js";
 
@@ -9,6 +10,8 @@ const roles = {
   2: 'Auxiliary',
   3: 'Concierge'
 };
+
+const router = useRouter();
 
 onMounted(async () => {
   try {
@@ -22,10 +25,15 @@ onMounted(async () => {
 const getTeachersByRole = (roleValue) => {
   return teachers.value.filter(t => t.rol.value === roleValue);
 };
+
+const goToTeacherInformation = () => {
+  router.push({ name: 'AddPersonnel' });
+};
 </script>
 
 <template>
   <div class="personnel-list">
+    <button @click="goToTeacherInformation" class="add-personnel-button">Go to Teacher Information</button>
     <div v-for="(roleName, roleValue) in roles" :key="roleValue" class="role-column">
       <h2>{{ roleName }}</h2>
       <div v-for="teacher in getTeachersByRole(Number(roleValue))" :key="teacher.id" class="teacher-card">
@@ -34,7 +42,7 @@ const getTeachersByRole = (roleValue) => {
           <p>Email: {{ teacher.email }}</p>
           <p>DNI: {{ teacher.dni }}</p>
           <p>Cell phone: {{ teacher.cellphone }}</p>
-          <p>Status: <span class="certified-label">Certified</span></p> <!-- Muestra el estado de certificado -->
+          <p>Status: <span class="certified-label">Certified</span></p>
         </div>
       </div>
     </div>
@@ -44,38 +52,38 @@ const getTeachersByRole = (roleValue) => {
 <style scoped>
 .personnel-list {
   display: flex;
-  flex-wrap: wrap; /* Permitir que los elementos se envuelvan si no hay espacio */
-  gap: 20px; /* Espacio entre las columnas */
-  justify-content: center; /* Centrar columnas */
-  padding: 20px; /* Agregar un poco de relleno */
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
 }
 
 .role-column {
   flex: 1;
-  min-width: 250px; /* Ancho mínimo para cada columna */
-  max-width: 300px; /* Ancho máximo para cada columna */
-  background-color: #f9f9f9; /* Color de fondo más suave */
+  min-width: 250px;
+  max-width: 300px;
+  background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra más pronunciada */
-  transition: transform 0.2s; /* Efecto de transformación suave */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
 }
 
 .role-column:hover {
-  transform: scale(1.02); /* Efecto de hover para resaltar */
+  transform: scale(1.02);
 }
 
 .teacher-card {
-  background-color: #ffffff; /* Fondo blanco para tarjetas */
+  background-color: #ffffff;
   border-radius: 8px;
   padding: 15px;
   margin-bottom: 15px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra más suave */
-  transition: box-shadow 0.2s; /* Transición de sombra */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.2s;
 }
 
 .teacher-card:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más fuerte en hover */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .teacher-info {
@@ -83,23 +91,32 @@ const getTeachersByRole = (roleValue) => {
 }
 
 .certified-label {
-  color: green; /* Color para indicar que está certificado */
-  font-weight: bold; /* Resaltar el texto */
+  color: green;
+  font-weight: bold;
 }
 
 h2 {
   margin-bottom: 15px;
-  color: #333; /* Color para el encabezado h2 */
-  text-align: center; /* Centrar el texto */
+  color: #333;
+  text-align: center;
 }
 
 h3 {
   margin: 0 0 10px 0;
-  color: #444; /* Color para el encabezado h3 */
+  color: #444;
 }
 
 p {
   margin: 5px 0;
-  color: #555; /* Color para los párrafos */
+  color: #555;
+}
+
+.add-personnel-button {
+  background-color: #ffd700;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
 }
 </style>
