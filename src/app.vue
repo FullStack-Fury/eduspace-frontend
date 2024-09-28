@@ -1,5 +1,6 @@
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
+import {mapGetters} from "vuex";
 
 export default {
   name: 'app',
@@ -9,14 +10,46 @@ export default {
     return {
       drawer: false,
       items: [
+        { label: 'Home', to: '/home' },
         { label: 'Meet', to: '/events-scheduling/meet' },
-        { label: 'Reservation', to: '/reservation-scheduling'}
+        { label: 'Reservation', to: '/reservation-scheduling'},
+        { label: 'Login', to: '/login' },
       ]
     }
+  },
+  computed: {
+    ...mapGetters('user', ['userId', 'userRole'])
   },
   methods: {
     toggleDrawer() {
       this.drawer = !this.drawer;
+    },
+    changeToolbar() {
+      if(this.userRole === 1) {
+       console.log('welcome admin')
+        this.items = [
+          { label: 'Home', to: '/home' },
+          { label: 'Meet', to: '/events-scheduling/meet' },
+          { label: 'Reservation', to: '/reservation-scheduling'},
+        ]
+
+      }
+      else {
+        console.log('welcome my bro')
+
+        this.items = [
+          { label: 'Home', to: '/home' },
+          { label: 'Login', to: '/login' }
+        ]
+      }
+    }
+  },
+  created(){
+    this.changeToolbar()
+  },
+  watch: {
+    userRole(newRole) {
+      this.changeToolbar();
     }
   }
 }

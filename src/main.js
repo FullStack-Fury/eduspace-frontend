@@ -10,6 +10,9 @@ import Aura from '@primevue/themes/aura';
 // PrimeFlex
 import 'primeflex/primeflex.css';
 
+//store
+import store from './store/index.js';
+
 // PrimeIcons
 import 'primeicons/primeicons.css';
 import ConfirmationService from "primevue/confirmationservice";
@@ -49,6 +52,9 @@ import MultiSelect from "primevue/multiselect";
 // Create app instance
 
 const app = createApp(App);
+
+//user vuex
+app.use(store);
 
 // Use i18n
 
