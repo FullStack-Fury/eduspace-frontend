@@ -2,17 +2,17 @@
   "shared-area": [
     {
       "id": 1,
-      "name": "swimming pool",
+      "name": "Swimming pool",
       "description": "swimming pool that is shared by all the teachers and students"
     },
     {
       "id": 2,
-      "name": "primary schoolyard",
+      "name": "Primary schoolyard",
       "description": "Schoolyard that is shared by all the primary students"
     },
     {
       "id": 3,
-      "name": "secondary schoolyard",
+      "name": "Secondary schoolyard",
       "description": "Schoolyard that is shared by all the secondary students"
     }
   ],
@@ -54,8 +54,8 @@
   ],
   "shared-area-reservation": [
     {
-      "areaId": "1" ,
-      "teacherId": "1" ,
+      "areaId": 1 ,
+      "teacherId": 1 ,
       "hour": "1",
       "day": "09/27/24"
     }
