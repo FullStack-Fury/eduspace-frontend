@@ -4,6 +4,7 @@ import ReservationToolbar from "../components/reservation-toolbar.component.vue"
 import {SpaceReservationService} from "../services/space-reservation.service.js";
 import {SharedAreaService} from "../../shared/services/shared-area.service.js";
 import {SharedArea} from "../../shared/model/shared-area.entity.js";
+import {Reservation} from "../model/reservation.entity.js";
 
 export default {
   name: "reservation-management",
@@ -11,6 +12,7 @@ export default {
   data() {
     return {
       areas: [],
+      reservations: [],
       areaId: null,
       reservationService: null,
       sharedAreaService: null,
@@ -21,8 +23,10 @@ export default {
 
     //#region EventHandlers
 
+
     onSharedSpaceSelected(item) {
       this.areaId = item.id;
+      this.getReservationsByAreaId(this.areaId);
       console.log(this.areaId)
     },
 
@@ -40,6 +44,13 @@ export default {
         console.error(error)
         this.loading = false;
       });
+    },
+
+    getReservationsByAreaId(areaId) {
+      this.reservationService.findAllByAreaId(areaId).then(response => {
+        this.reservations = response.data.map(reservation => new Reservation(reservation))
+        console.log(this.reservations);
+      })
     }
 
     //#endregion

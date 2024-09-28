@@ -56,7 +56,64 @@
     {
       "areaId": 1 ,
       "teacherId": 1 ,
-      "hour": "1",
+      "start": "2am",
+      "end": "4am",
+      "day": "09/28/24"
+    },
+    {
+      "areaId": 1 ,
+      "teacherId": 2 ,
+      "start": "12am",
+      "end": "2am",
+      "day": "09/28/24"
+    },    {
+      "areaId": 1 ,
+      "teacherId": 3 ,
+      "start": "12am",
+      "end": "1am",
+      "day": "09/27/24"
+    },
+    {
+      "areaId": 2 ,
+      "teacherId": 1 ,
+      "start": "2am",
+      "end": "4am",
+      "day": "09/28/24"
+    },
+    {
+      "areaId": 2 ,
+      "teacherId": 2 ,
+      "start": "12am",
+      "end": "2am",
+      "day": "09/28/24"
+    },
+    {
+      "areaId": 2 ,
+      "teacherId": 3 ,
+      "start": "12am",
+      "end": "1am",
+      "day": "09/27/24"
+    }
+  ,
+    {
+      "areaId": 3 ,
+      "teacherId": 1 ,
+      "start": "2am",
+      "end": "4am",
+      "day": "09/28/24"
+    },
+    {
+      "areaId": 3 ,
+      "teacherId": 2 ,
+      "start": "12am",
+      "end": "2am",
+      "day": "09/28/24"
+    },
+    {
+      "areaId": 3 ,
+      "teacherId": 3 ,
+      "start": "12am",
+      "end": "1am",
       "day": "09/27/24"
     }
   ]

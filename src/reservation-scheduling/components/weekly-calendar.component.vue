@@ -3,10 +3,14 @@
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
+import {SpaceReservationService} from "../services/space-reservation.service.js";
 
 
 export default {
   name: "weekly-calendar",
+  props: {
+    events: {type: Array, required: true},
+  },
   data() {
     return {
       calendarOptions: {
@@ -39,6 +43,8 @@ export default {
     }
   },
   methods: {
+
+
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
@@ -66,7 +72,7 @@ export default {
     handleEvents(events) {
       this.currentEvents = events
     },
-  }
+  },
 
 }
 </script>
