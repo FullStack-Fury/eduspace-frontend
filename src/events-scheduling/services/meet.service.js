@@ -39,4 +39,11 @@ export class MeetService {
         return http.get(`${this.resourceEndpoint}?location=${location}`);
     }
 
+    findByTeacher(teacherName) {
+        return http.get(`${this.resourceEndpoint}?teachers.name=${teacherName}`);
+    }
+
+    findByInvitee(teacherName) {
+        return http.get(`${this.resourceEndpoint}?invite.name=${teacherName}`);
+    }
 }
