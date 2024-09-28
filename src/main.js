@@ -38,7 +38,6 @@ import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
 import FullCalendar from "@fullcalendar/vue3"
-import MultiSelect from 'primevue/multiselect';
 import Password from "primevue/password";
 import Dropdown from "primevue/dropdown";
 
