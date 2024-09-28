@@ -1,55 +1,29 @@
 <script>
-import { ref } from 'vue';
-
 export default {
-  name: 'TeacherAccessInformation',
+  name: "teacher-access-information",
   props: ['teacher'],
-  setup(props, { emit }) {
-    const rol = ref(null);
-    const username = ref('');
-    const password = ref('');
-
-
-    const roleOptions = [
-      { label: 'Educational', value: 1 },
-      { label: 'Auxiliary', value: 2 },
-      {label: 'Concierge', value: 3}
-    ];
-
-    const submitForm = () => {
-      emit('submitAccessInfo', {
-        rol: rol.value,
-        username: username.value,
-        password: password.value
-      });
-    };
-
+  data() {
     return {
-      rol,
-      username,
-      password,
-      roleOptions,
-      submitForm
-    };
+      username: '',
+      password: ''
+    }
+  },
+  methods: {
+    submitForm() {
+      this.$emit('submit-access-info', {
+        rol: 2,
+        username: this.username,
+        password: this.password
+      });
+    }
   }
-};
+}
 </script>
 
 <template>
   <div class="card">
     <h2 class="text-2xl font-bold mb-4">Access Information</h2>
     <form @submit.prevent="submitForm" class="p-fluid">
-      <div class="field">
-        <label for="rol">Rol</label>
-        <pv-dropdown
-            id="rol"
-            v-model="rol"
-            :options="roleOptions"
-            option-label="label"
-            placeholder="Select a Role"
-            required />
-      </div>
-
       <div class="field">
         <label for="username">Username</label>
         <pv-input-text id="username" v-model="username" required />

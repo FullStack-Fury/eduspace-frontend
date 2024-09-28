@@ -1,64 +1,72 @@
-<script setup>
-import { ref } from 'vue';
+<script>
 import { useToast } from 'primevue/usetoast';
 import TeacherAccessInformation from "./teacher-access-information.vue";
 import TeacherService from '../services/teacher.service.js';
 import { Teacher } from "../model/teacher.entity.js";
 import Dialog from 'primevue/dialog';
 
-const toast = useToast();
-const teacher = ref(new Teacher());
-const showAccessInfo = ref(false);
-const showDialog = ref(false);
-const dialogMessage = ref('');
-
-const submitForm = async () => {
-  try {
-    const teacherData = {
-      name: teacher.value.name,
-      lastName: teacher.value.lastName,
-      email: teacher.value.email,
-      cellphone: teacher.value.cellphone,
-      address: teacher.value.address,
-      dni: teacher.value.dni
-    };
-
-    const response = await TeacherService.create(teacherData);
-    if (response && response.id) {
-      teacher.value = new Teacher({ ...response }); // Create a new Teacher instance with the response data
-      dialogMessage.value = 'Teacher added successfully';
-      showDialog.value = true;
-      showAccessInfo.value = true;
-    } else {
-      throw new Error('No ID returned from the server');
+export default {
+  name: "teacher-information",
+  components: {
+    TeacherAccessInformation,
+    Dialog
+  },
+  data() {
+    return {
+      teacher: new Teacher(),
+      showAccessInfo: false,
+      showDialog: false,
+      dialogMessage: '',
+      toast: useToast()
     }
-  } catch (error) {
-    handleError(error, 'Failed to add teacher');
+  },
+  methods: {
+    async submitForm() {
+      try {
+        const teacherData = {
+          name: this.teacher.name,
+          lastName: this.teacher.lastName,
+          email: this.teacher.email,
+          cellphone: this.teacher.cellphone,
+          address: this.teacher.address,
+          dni: this.teacher.dni
+        };
+
+        const response = await TeacherService.create(teacherData);
+        if (response && response.id) {
+          this.teacher = new Teacher({ ...response });
+          this.dialogMessage = 'Teacher added successfully';
+          this.showDialog = true;
+          this.showAccessInfo = true;
+        } else {
+          throw new Error('No ID returned from the server');
+        }
+      } catch (error) {
+        this.handleError(error, 'Failed to add teacher');
+      }
+    },
+    async submitAccessInfo(accessInfo) {
+      try {
+        Object.assign(this.teacher, accessInfo);
+        const updatedTeacher = await TeacherService.update(this.teacher);
+        this.teacher = new Teacher({ ...updatedTeacher });
+        this.dialogMessage = 'Access Information Saved';
+        this.showDialog = true;
+      } catch (error) {
+        this.handleError(error, 'Failed to save access information');
+      }
+    },
+    handleError(error, defaultMessage) {
+      console.error(error);
+      this.dialogMessage = error.response?.data?.message || error.message || defaultMessage;
+      this.showDialog = true;
+      this.toast.add({ severity: 'error', summary: 'Error', detail: this.dialogMessage, life: 3000 });
+    },
+    closeDialog() {
+      this.showDialog = false;
+    }
   }
-};
-
-const submitAccessInfo = async (accessInfo) => {
-  try {
-    Object.assign(teacher.value, accessInfo);
-    const updatedTeacher = await TeacherService.update(teacher.value);
-    teacher.value = new Teacher({ ...updatedTeacher }); // Update the teacher with the response data
-    dialogMessage.value = 'Access Information Saved';
-    showDialog.value = true;
-  } catch (error) {
-    handleError(error, 'Failed to save access information');
-  }
-};
-
-const handleError = (error, defaultMessage) => {
-  console.error(error);
-  dialogMessage.value = error.response?.data?.message || error.message || defaultMessage;
-  showDialog.value = true;
-  toast.add({ severity: 'error', summary: 'Error', detail: dialogMessage.value, life: 3000 });
-};
-
-const closeDialog = () => {
-  showDialog.value = false;
-};
+}
 </script>
 
 <template>

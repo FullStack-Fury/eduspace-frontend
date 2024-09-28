@@ -1,16 +1,6 @@
 export class Teacher {
-    constructor({
-                    id = null,
-                    name = '',
-                    lastName = '',
-                    email = '',
-                    cellphone = '',
-                    address = '',
-                    dni = '',
-                    rol = { label: '', value: 0 },
-                    username = '',
-                    password = ''
-                } = {}) {
+    constructor({id = null, name, lastName, email, cellphone, address, dni, rol = 2, username, password} = {})
+    {
         this.id = id;
         this.name = name;
         this.lastName = lastName;

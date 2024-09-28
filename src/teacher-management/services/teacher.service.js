@@ -1,34 +1,29 @@
 import http from "../../shared/services/http-common.js";
 
-class TeacherService {
-    async getAll() {
-        try {
-            const response = await http.get('teachers');
-            return response.data;
-        } catch (error) {
-            this.handleError(error, 'Error fetching teachers');
-        }
+export class TeacherService {
+    resourceEndpoint = 'teachers';
+
+    getAll() {
+        console.log(http.defaults.baseURL);
+        console.log(this.resourceEndpoint);
+        return http.get(this.resourceEndpoint)
+            .then(response => response.data)
+            .catch(error => this.handleError(error, 'Error fetching teachers'));
     }
 
-    async create(data) {
-        try {
-            const response = await http.post('teachers', data);
-            return response.data;
-        } catch (error) {
-            this.handleError(error, 'Error creating teacher');
-        }
+    create(teacherResource) {
+        return http.post(this.resourceEndpoint, teacherResource)
+            .then(response => response.data)
+            .catch(error => this.handleError(error, 'Error creating teacher'));
     }
 
-    async update(data) {
-        if (!data.id) {
+    update(id, teacherResource) {
+        if (!id) {
             throw new Error('Teacher ID is required for update');
         }
-        try {
-            const response = await http.put(`teachers/${data.id}`, data);
-            return response.data;
-        } catch (error) {
-            this.handleError(error, 'Error updating teacher');
-        }
+        return http.put(`${this.resourceEndpoint}/${id}`, teacherResource)
+            .then(response => response.data)
+            .catch(error => this.handleError(error, 'Error updating teacher'));
     }
 
     handleError(error, message) {
