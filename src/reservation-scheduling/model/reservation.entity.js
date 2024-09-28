@@ -1,8 +1,10 @@
 export class Reservation {
-    constructor(areaId, teacherId, hour, day) {
+    constructor({id, title, start, end, areaId, teacherId}) {
+        this.id = id;
+        this.title = title;
+        this.start = start;
+        this.end = end;
         this.areaId = areaId;
         this.teacherId = teacherId;
-        this.hour = hour;
-        this.day = day;
     }
 }
