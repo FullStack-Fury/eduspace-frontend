@@ -12,7 +12,7 @@ export default {
   data() {
     return {
       areas: [],
-      reservations: [],
+      events: [],
       areaId: null,
       reservationService: null,
       sharedAreaService: null,
@@ -48,8 +48,9 @@ export default {
 
     getReservationsByAreaId(areaId) {
       this.reservationService.findAllByAreaId(areaId).then(response => {
-        this.reservations = response.data.map(reservation => new Reservation(reservation))
-        console.log(this.reservations);
+        this.events = response.data.map(reservation => new Reservation(reservation))
+        console.log('response', response.data)
+        console.log('reservations response objects',this.events);
       })
     }
 
@@ -72,7 +73,7 @@ export default {
   <reservation-toolbar
       :sharedAreas="areas"
       v-on:shared-space-selected="onSharedSpaceSelected($event)"/>
-<weekly-calendar/>
+<weekly-calendar :events="events"/>
   </div>
 </template>
 
