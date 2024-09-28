@@ -9,8 +9,10 @@ export default {
     return {
       drawer: false,
       items: [
+        { label: 'Home', to: '/home' },
         { label: 'Meet', to: '/events-scheduling/meet' },
-        { label: 'Reservation', to: '/reservation-scheduling'}
+        { label: 'Reservation', to: '/reservation-scheduling'},
+        { label: 'Login', to: '/login' },
       ]
     }
   },
