@@ -35,7 +35,8 @@ export default {
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
         eventsSet: this.handleEvents,
-        currentEvents: [],
+        height: 'auto',
+
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
@@ -131,24 +132,12 @@ b { /* used for event dates/times */
   font-size: 14px;
 }
 
-.demo-app-sidebar {
-  width: 300px;
-  line-height: 1.5;
-  background: #eaf9ff;
-  border-right: 1px solid #d3e2e8;
-}
 
-.demo-app-sidebar-section {
-  padding: 2em;
-}
 
 .demo-app-main {
   flex-grow: 1;
   padding: 3em;
 }
 
-.fc { /* the calendar root */
-  max-width: 1100px;
-  margin: 0 auto;
-}
+
 </style>
