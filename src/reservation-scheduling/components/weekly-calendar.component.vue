@@ -11,9 +11,9 @@ export default {
   props: {
     events: {type: Array, required: true},
   },
-  data() {
-    return {
-      calendarOptions: {
+  computed: {
+    calendarOptions() {
+      return {
         plugins: [
           dayGridPlugin,
           timeGridPlugin,
@@ -24,6 +24,8 @@ export default {
           center: 'title',
           right: 'timeGridWeek'
         },
+
+        events: this.events,
         initialView: 'timeGridWeek', // alternatively, use the `events` setting to fetch from a feed
         editable: true,
         selectable: true,
@@ -32,14 +34,20 @@ export default {
         weekends: true,
         select: this.handleDateSelect,
         eventClick: this.handleEventClick,
-        eventsSet: this.handleEvents
+        eventsSet: this.handleEvents,
+        currentEvents: [],
         /* you can update a remote database when these fire:
         eventAdd:
         eventChange:
         eventRemove:
         */
-      },
-      currentEvents: [],
+
+      }
+    },
+  },
+  data() {
+    return {
+
     }
   },
   methods: {
@@ -84,6 +92,7 @@ export default {
       <fc-calendar
           class='demo-app-calendar'
           :options='calendarOptions'
+          :events="events"
       >
         <template v-slot:eventContent='arg'>
           <b>{{ arg.timeText }}</b>
