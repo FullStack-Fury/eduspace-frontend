@@ -37,20 +37,20 @@ import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
+import FullCalendar from "@fullcalendar/vue3"
 import MultiSelect from 'primevue/multiselect';
 import Password from "primevue/password";
 import Dropdown from "primevue/dropdown";
 
-
-const app = createApp(App);
-import Router from "./router/index.js";
 import router from "./router/index.js";
+import SelectButton from "primevue/selectbutton";
 import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
 import DatePicker from "primevue/datepicker";
-import SelectButton from "primevue/selectbutton";
 
 // Create app instance
+
+const app = createApp(App);
 
 // Use i18n
 
@@ -67,7 +67,7 @@ app.use(PrimeVue, { theme: { preset: Aura }, ripple: true })
     .use(DialogService)
     .use(ToastService);
 
-//primevue components
+// Use PrimeVue Components
 
 app.component('pv-button', Button)
     .component('pv-card', Card)
@@ -100,7 +100,9 @@ app.component('pv-button', Button)
     .component ('pv-dropdown', Dropdown)
 
 
-    .component('pv-toast', Toast);
+    .component('pv-toast', Toast)
+    .component('pv-toast', Toast)
+    .component('fc-calendar', FullCalendar);
 
 
 // Mount app

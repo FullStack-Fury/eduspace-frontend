@@ -1,153 +1,129 @@
 {
+  "shared-area": [
+    {
+      "id": 1,
+      "name": "Swimming pool",
+      "description": "swimming pool that is shared by all the teachers and students"
+    },
+    {
+      "id": 2,
+      "name": "Primary schoolyard",
+      "description": "Schoolyard that is shared by all the primary students"
+    },
+    {
+      "id": 3,
+      "name": "Secondary schoolyard",
+      "description": "Schoolyard that is shared by all the secondary students"
+    }
+  ],
   "teachers": [
     {
-      "id": "16ab",
-      "name": "Emma",
-      "lastName": "Thompson",
-      "email": "emma.thompson@example.com",
-      "cellphone": "555-0101",
-      "address": "123 Maple Street",
-      "dni": "98765432",
-      "rol": {
-        "label": "Teacher",
-        "value": 1
-      },
-      "username": "emmathompson",
-      "password": "securePass1!"
-    },
-    {
-      "id": "ee90",
-      "name": "Michael",
-      "lastName": "Chen",
-      "email": "m.chen@schoolmail.org",
-      "cellphone": "555-0202",
-      "address": "456 Oak Avenue",
-      "dni": "87654321",
-      "rol": {
-        "label": "Admin",
-        "value": 2
-      },
-      "username": "mchen",
-      "password": "adminPass2@"
-    },
-    {
-      "id": "7d17",
-      "name": "Sofia",
-      "lastName": "Garcia",
-      "email": "sgarcia@educenter.edu",
-      "cellphone": "555-0303",
-      "address": "789 Pine Road",
-      "dni": "76543210",
-      "rol": {
-        "label": "Concierge",
-        "value": 3
-      },
-      "username": "sofiagarcia",
-      "password": "concierge3#"
-    },
-    {
-      "id": "0f33",
-      "name": "James",
-      "lastName": "Wilson",
-      "email": "jwilson@teachmail.net",
-      "cellphone": "555-0404",
-      "address": "101 Cedar Lane",
-      "dni": "65432109"
-    },
-    {
-      "id": "e30f",
-      "name": "Aisha",
-      "lastName": "Patel",
-      "email": "a.patel@schoolsystem.com",
-      "cellphone": "555-0505",
-      "address": "202 Birch Boulevard",
-      "dni": "54321098",
-      "rol": {
-        "label": "Educational",
-        "value": 1
-      },
-      "username": "apatel",
-      "password": "eduPass4$"
-    },
-    {
-      "id": "6701",
-      "name": "Lucas",
-      "lastName": "Müller",
-      "email": "l.mueller@international.edu",
-      "cellphone": "555-0606",
-      "address": "303 Elm Street",
-      "dni": "43210987"
-    },
-    {
-      "id": "2e75",
-      "name": "Olivia",
-      "lastName": "Brown",
-      "email": "obrown@teachersunion.org",
-      "cellphone": "555-0707",
-      "address": "404 Spruce Avenue",
-      "dni": "32109876"
-    },
-    {
-      "id": "107a",
-      "name": "Hiroshi",
-      "lastName": "Tanaka",
-      "email": "htanaka@globalschool.edu",
-      "cellphone": "555-0808",
-      "address": "505 Willow Way",
-      "dni": "21098765",
-      "rol": {
-        "label": "Auxiliary",
-        "value": 2
-      },
-      "username": "htanaka",
-      "password": "auxPass5%"
-    },
-    {
-      "id": "e7ad",
-      "name": "Zoe",
-      "lastName": "Anderson",
-      "email": "zanderson@learningcenter.net",
-      "cellphone": "555-0909",
-      "address": "606 Aspen Court",
-      "dni": "10987654",
-      "rol": 2,
-      "username": "zoe_a",
-      "password": "zoePass6^"
-    },
-    {
-      "id": "efc0",
-      "name": "Carlos",
-      "lastName": "Fernandez",
-      "email": "cfernandez@educationboard.org",
-      "cellphone": "555-1010",
-      "address": "707 Redwood Road",
-      "dni": "09876543",
-      "rol": 2,
-      "username": "carlosf",
-      "password": "cferPass7&"
-    },
-    {
-      "id": "d4f5",
-      "name": "Fatima",
-      "lastName": "Al-Sayed",
-      "email": "falsayed@multicultural.edu",
-      "cellphone": "555-1111",
-      "address": "808 Sequoia Street",
-      "dni": "98765432",
-      "rol": 2,
-      "username": "fatima_a",
-      "password": "fatimaPass8*"
+      "id": 1,
+      "name": "Maria",
+      "email": "maria@gmail.com",
+      "phone": "9381172111",
+      "location": "Peru"
     }
   ],
   "administrators": [],
   "meet": [
     {
       "id": 1,
-      "name": "Staff Meeting",
+      "name": "aa",
       "day": "2024-09-05",
       "hour": "09:52",
-      "location": "Conference Room A",
-      "apiId": "v1"
+      "location": "aa",
+      "apiId": "v1",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria",
+          "email": "maria@gmail.com",
+          "phone": "9381172111",
+          "location": "Peru"
+        },
+        {
+          "id": 2,
+          "name": "Pepe",
+          "email": "pepe@gmail.com",
+          "phone": "938172132",
+          "location": "Peru"
+        }
+      ]
+    }
+  ],
+  "shared-area-reservation": [
+    {
+      "id": 1,
+      "title": "Teacher 1 Reservation",
+      "start": "2024-09-28T02:00:00",
+      "end": "2024-09-28T04:00:00",
+      "areaId": 1,
+      "teacherId": 1
+    },
+    {
+      "id": 2,
+      "title": "Teacher 2 Reservation",
+      "start": "2024-09-28T00:00:00",
+      "end": "2024-09-28T02:00:00",
+      "areaId": 1,
+      "teacherId": 2
+    },
+    {
+      "id": 3,
+      "title": "Teacher 3 Reservation",
+      "start": "2024-09-27T00:00:00",
+      "end": "2024-09-27T01:00:00",
+      "areaId": 1,
+      "teacherId": 3
+    },
+    {
+      "id": 4,
+      "title": "Teacher 1 Reservation",
+      "start": "2024-09-28T02:00:00",
+      "end": "2024-09-28T04:00:00",
+      "areaId": 2,
+      "teacherId": 1
+    },
+    {
+      "id": 5,
+      "title": "Teacher 2 Reservation",
+      "start": "2024-09-28T00:00:00",
+      "end": "2024-09-28T02:00:00",
+      "areaId": 2,
+      "teacherId": 2
+    },
+    {
+      "id": 6,
+      "title": "Teacher 3 Reservation",
+      "start": "2024-09-27T00:00:00",
+      "end": "2024-09-27T01:00:00",
+      "areaId": 2,
+      "teacherId": 3
+    },
+    {
+      "id": 7,
+      "title": "Teacher 1 Reservation",
+      "start": "2024-09-28T02:00:00",
+      "end": "2024-09-28T04:00:00",
+      "areaId": 3,
+      "teacherId": 1
+    },
+    {
+      "id": 8,
+      "title": "Teacher 2 Reservation",
+      "start": "2024-09-28T00:00:00",
+      "end": "2024-09-28T02:00:00",
+      "areaId": 3,
+      "teacherId": 2
+    },
+    {
+      "id": 9,
+      "title": "Teacher 3 Reservation",
+      "start": "2024-09-27T00:00:00",
+      "end": "2024-09-27T01:00:00",
+      "areaId": 3,
+      "teacherId": 3
     }
   ]
 }
