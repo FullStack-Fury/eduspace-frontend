@@ -1,6 +1,24 @@
 <script>
+
+import { mapActions, mapGetters } from 'vuex'
+
 export default {
-  name: "login"
+  name: "login",
+  computed: {
+    ...mapGetters('user', ['userId', 'userRole'])
+  },
+  methods: {
+    ...mapActions('user', ['setUser', 'clearUser']),
+    saveUser() {
+      this.setUser({ id: 1, role: 1})
+
+      console.log('user id', this.userId)
+      console.log('use role', this.userRole)
+
+
+      this.$router.push({ name: 'home' })
+    }
+  }
 }
 </script>
 
@@ -21,7 +39,7 @@ export default {
       </template>
       <template #footer>
         <div class="flex gap-4 mt-1">
-          <pv-button label="Login" class="w-full" />
+          <pv-button label="Login" @click="saveUser" class="w-full" />
         </div>
       </template>
     </pv-card>
