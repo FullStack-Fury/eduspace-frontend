@@ -1,3 +1,5 @@
+import {createRouter, createWebHistory} from "vue-router";
+import payrollManagementComponent from "../payroll-management/pages/payroll-management.component.vue";
 import { createRouter, createWebHistory } from 'vue-router';
 import PersonnelList from '../teacher-management/components/personnel-list.vue';
 import TeacherInformation from '../teacher-management/components/teacher-information.vue';
@@ -12,6 +14,11 @@ const routes = [
 
 const router = createRouter({
     history: createWebHistory(),
+    routes: [
+        {path: '/payroll-management', name: 'payroll', component: payrollManagementComponent , meta: {title: 'Payroll Management'}},
+        { path: '/',                        redirect: '/home'}
+    ]
+})
     routes
 });
 
@@ -21,4 +28,9 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+router.beforeEach((to, from, next) => {
+    let baseTitle = 'EduSpace';
+    document.title = `${baseTitle} | ${to.meta['title']}`;
+    next();
+})
 export default router;

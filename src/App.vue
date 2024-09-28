@@ -1,6 +1,12 @@
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
 
+import {defineComponent} from "vue";
+import PayrollManagement from "./payroll-management/pages/payroll-management.component.vue";
+
+export default defineComponent({
+  components: {PayrollManagement}
+})
 export default {
   name: 'app',
   components: { LanguageSwitcher },
@@ -22,6 +28,7 @@ export default {
 </script>
 
 <template>
+  <payroll-management></payroll-management>
   <div class="container mx-auto p-4">
     <router-view></router-view>
   </div>
