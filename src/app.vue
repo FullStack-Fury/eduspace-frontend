@@ -31,6 +31,7 @@ export default {
           { label: 'Home', to: '/home' },
           { label: 'Meet', to: '/events-scheduling/meet' },
           { label: 'Reservation', to: '/reservation-scheduling'},
+          { label: 'Wages', to: '/payroll-management'},
         ]
 
       }
