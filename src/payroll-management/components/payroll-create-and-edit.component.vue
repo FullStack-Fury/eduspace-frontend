@@ -135,8 +135,4 @@ h2 {
   justify-content: space-between;
   margin-top: 20px;
 }
-
-.pv-dropdown, .pv-input-number {
-  width: 100%;
-}
 </style>
