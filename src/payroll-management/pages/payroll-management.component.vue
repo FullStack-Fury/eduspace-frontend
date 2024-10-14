@@ -57,8 +57,7 @@ export default {
     },
     calculateNetSalary(payroll) {
       const { salaryAmount, salaryBonus, pensionContribution } = payroll;
-      const netSalary = salaryAmount + salaryBonus - pensionContribution;
-      return netSalary;
+      return salaryAmount + salaryBonus - pensionContribution;
     },
     async savePayroll(payroll) {
       try {
