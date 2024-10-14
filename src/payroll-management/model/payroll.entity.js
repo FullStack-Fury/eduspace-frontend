@@ -14,7 +14,6 @@ export class Payroll {
         this.salaryNet = this.calculateNetSalary();
     }
 
-    // Método para calcular el salario neto
     calculateNetSalary() {
         return this.salaryAmount + this.salaryBonus - this.pensionContribution;
     }
