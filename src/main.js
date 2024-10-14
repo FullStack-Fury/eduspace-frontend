@@ -40,8 +40,9 @@ import Tag from "primevue/tag";
 import Textarea from "primevue/textarea";
 import Toolbar from "primevue/toolbar";
 import Toast from "primevue/toast";
-import FullCalendar from "@fullcalendar/vue3"
+import IftaLabel from "primevue/iftalabel";
 
+import FullCalendar from "@fullcalendar/vue3"
 import router from "./router/index.js";
 import SelectButton from "primevue/selectbutton";
 import InputMask from "primevue/inputmask";
@@ -98,7 +99,9 @@ app.component('pv-button', Button)
     .component('pv-textarea', Textarea)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
-    .component('fc-calendar', FullCalendar);
+    .component('fc-calendar', FullCalendar)
+    .component('pv-iftalabel', IftaLabel);
+
 
 
 // Mount app
