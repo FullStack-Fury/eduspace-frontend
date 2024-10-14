@@ -1,4 +1,71 @@
 {
+  "classrooms": [
+    {
+      "id": 1,
+      "name": "A101",
+      "description": "Classroom for 1st grade students",
+      "teacherId": 1
+    },
+    {
+      "id": 2,
+      "name": "A102",
+      "description": "Classroom for 2st grade students",
+      "teacherId": 1
+    },
+    {
+      "id": 3,
+      "name": "A103",
+      "description": "Classroom for 3st grade students"
+    }
+  ],
+  "resources": [
+    {
+      "id": 1,
+      "name": "Projector",
+      "kind_of_resource": "Electronic",
+      "idClassroom": 1
+    },
+    {
+      "id": 2,
+      "name": "Whiteboard",
+      "kind_of_resource": "Furniture",
+      "idClassroom": 1
+    },
+    {
+      "id": 3,
+      "name": "Textbooks",
+      "kind_of_resource": "Books",
+      "idClassroom": 2
+    },
+    {
+      "id": 4,
+      "name": "Laptops",
+      "kind_of_resource": "Electronic",
+      "idClassroom": 2
+    },
+    {
+      "id": 5,
+      "name": "Microscope",
+      "kind_of_resource": "Scientific",
+      "idClassroom": 3
+    }
+  ],
+  "reports": [
+    {
+      "kind_of_report": "Error",
+      "description": "Error chair",
+      "resourceId": "2",
+      "created_at": "2024-10-08",
+      "id": 1
+    },
+    {
+      "kind_of_report": "rqrq",
+      "description": "afaga",
+      "resourceId": "1",
+      "created_at": "2024-10-16",
+      "id": 2
+    }
+  ],
   "shared-area": [
     {
       "id": 1,
