@@ -105,6 +105,14 @@
       "pensionContribution": 400,
       "salaryBonus": 300,
       "salaryNet": 3100
+    },
+    {
+      "teacherId": 1,
+      "salaryAmount": 3000,
+      "pensionContribution": 1000,
+      "salaryBonus": 200,
+      "salaryNet": 2200,
+      "id": 4
     }
   ]
 }
