@@ -10,6 +10,12 @@ export default {
         salaryAmount: 0,
         pensionContribution: 0,
         salaryBonus: 0,
+        otherDeductions: 0,
+        paymentMethod: "",
+        account: "",
+        observation: "",
+        salaryNet: 0,
+        datePayment: null,
       }),
     },
     availableTeachers: {
@@ -22,12 +28,37 @@ export default {
       form: { ...this.payroll },
     };
   },
+  computed: {
+    totalDeductions() {
+      return (
+          (this.form.pensionContribution || 0) +
+          (this.form.otherDeductions || 0)
+      );
+    },
+    netSalary() {
+      return (
+          (this.form.salaryAmount || 0) +
+          (this.form.salaryBonus || 0) -
+          this.totalDeductions
+      );
+    },
+  },
+  watch: {
+    form: {
+      handler() {
+        this.form.salaryNet = this.netSalary;
+        this.form.totalDeductions = this.totalDeductions;
+      },
+      deep: true,
+    },
+  },
   methods: {
     save() {
       if (!this.form.teacherId) {
-        alert('Please select a teacher.');
+        alert("Please select a teacher.");
         return;
       }
+      console.log("Saving form:", this.form); // Debugging
       this.$emit("save", this.form);
     },
     cancel() {
@@ -39,60 +70,91 @@ export default {
 
 <template>
   <div class="payroll-create-form">
-    <h2>{{ form.id ? 'Edit Payroll' : 'Create Payroll' }}</h2>
-    <form @submit.prevent="save" class="form-container">
-      <pv-float-label class="form-field">
-        <pv-dropdown
-            v-model="form.teacherId"
-            :options="availableTeachers"
-            optionLabel="name"
-            optionValue="id"
-            placeholder="Select a teacher"
-        />
-        <label for="teacherId">Teacher</label>
-      </pv-float-label>
+    <div class="form-header">
+      <h2>Payment Register</h2>
+      <h2>Nomina</h2>
+    </div>
+    <form @submit.prevent="save" class="form-grid">
+      <div class="left-column">
+        <div class="form-field">
+          <label>Serie Automatica:</label>
+          <pv-input-text value="A" disabled />
+        </div>
 
-      <pv-float-label class="form-field">
-        <pv-input-number
-            v-model.number="form.salaryAmount"
-            id="salaryAmount"
-            :min="0"
-            required
-        />
-        <label for="salaryAmount">Salary Amount</label>
-      </pv-float-label>
+        <div class="form-field">
+          <label>Employee:</label>
+          <pv-select
+              v-model="form.teacherId"
+              :options="availableTeachers"
+              option-label="name"
+              option-value="id"
+              placeholder="Select a teacher"
+          />
+        </div>
 
-      <pv-float-label class="form-field">
-        <pv-input-number
-            v-model.number="form.pensionContribution"
-            id="pensionContribution"
-            :min="0"
-            required
-        />
-        <label for="pensionContribution">Pension Contribution</label>
-      </pv-float-label>
+        <div class="form-field">
+          <label>Date Payment:</label>
+          <pv-date-picker
+              v-model="form.datePayment"
+              :show-icon="true"
+              date-format="dd/mm/yy"
+              placeholder="Select a date"
+          />
+        </div>
 
-      <pv-float-label class="form-field">
-        <pv-input-number
-            v-model.number="form.salaryBonus"
-            id="salaryBonus"
-            :min="0"
-            required
-        />
-        <label for="salaryBonus">Bonus</label>
-      </pv-float-label>
+        <div class="form-field">
+          <label>Forma pago:</label>
+          <pv-input-text v-model="form.paymentMethod" placeholder="Method payment" />
+        </div>
+
+        <div class="form-field">
+          <label>Cuenta:</label>
+          <pv-input-text v-model="form.account" placeholder="Cuenta" />
+        </div>
+
+        <div class="form-field">
+          <label>Observation:</label>
+          <pv-input-text v-model="form.observation" placeholder="Observation" />
+        </div>
+      </div>
+
+      <div class="right-column">
+        <div class="form-field">
+          <label>Devengado:</label>
+          <pv-input-number v-model.number="form.salaryAmount" :min="0" />
+        </div>
+
+        <div class="form-field">
+          <label>Aportacion al trabajador:</label>
+          <pv-input-number v-model.number="form.salaryBonus" :min="0" />
+        </div>
+
+        <div class="form-field">
+          <label>Anticipos:</label>
+          <pv-input-number v-model.number="form.pensionContribution" :min="0" />
+        </div>
+
+        <div class="form-field">
+          <label>Otras deducciones:</label>
+          <pv-input-number v-model.number="form.otherDeductions" :min="0" />
+        </div>
+
+        <div class="form-field">
+          <label>Total Deducir:</label>
+          <pv-input-number :value="totalDeductions" disabled />
+        </div>
+
+        <div class="form-field">
+          <label>Total Pay:</label>
+          <pv-input-number :value="netSalary" disabled />
+        </div>
+      </div>
 
       <div class="form-actions">
-        <pv-button
-            type="submit"
-            label="Save"
-            icon="pi pi-check"
-            class="p-button-success"
-        />
+        <pv-button type="submit" label="Save" class="p-button-success" />
         <pv-button
             type="button"
             label="Cancel"
-            icon="pi pi-times"
             class="p-button-secondary"
             @click="cancel"
         />
@@ -103,25 +165,35 @@ export default {
 
 <style scoped>
 .payroll-create-form {
-  width: 100%;
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 30px;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  text-align: center;
-}
-
-h2 {
-  margin-bottom: 20px;
-  color: #fff;
-}
-
-.form-container {
   display: flex;
   flex-direction: column;
-  gap: 20px; /* Espaciado entre los campos */
+  background-color: #1e1e1e;
+  padding: 30px;
+  border-radius: 8px;
+  max-width: 900px;
+  margin: auto;
+  color: white;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  color: #00bcd4;
+  font-weight: bold;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.left-column,
+.right-column {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
 .form-field {
@@ -131,6 +203,7 @@ h2 {
 }
 
 .form-actions {
+  grid-column: span 2;
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
