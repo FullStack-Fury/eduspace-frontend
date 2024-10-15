@@ -48,7 +48,6 @@ import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
 import DatePicker from "primevue/datepicker";
 import MultiSelect from "primevue/multiselect";
-import Dropdown from "primevue/dropdown";
 
 // Create app instance
 
@@ -102,7 +101,7 @@ app.component('pv-button', Button)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
     .component('fc-calendar', FullCalendar)
-.component('pv-dropdown', Dropdown)
+
 
 
 // Mount app
