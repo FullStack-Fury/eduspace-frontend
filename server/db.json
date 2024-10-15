@@ -91,28 +91,34 @@
   ],
   "payroll": [
     {
-      "id": 2,
-      "teacherId": 2,
-      "salaryAmount": 2800,
-      "pensionContribution": 450,
-      "salaryBonus": 150,
-      "salaryNet": 2500
-    },
-    {
-      "id": 3,
-      "teacherId": 3,
-      "salaryAmount": 3200,
-      "pensionContribution": 400,
-      "salaryBonus": 300,
-      "salaryNet": 3100
-    },
-    {
       "teacherId": 1,
       "salaryAmount": 3000,
       "pensionContribution": 1000,
-      "salaryBonus": 200,
-      "salaryNet": 2200,
+      "salaryBonus": 2,
+      "salaryNet": 2002,
       "id": 4
+    },
+    {
+      "teacherId": 2,
+      "salaryAmount": 1000,
+      "pensionContribution": 200,
+      "salaryBonus": 233,
+      "salaryNet": 1033,
+      "id": 5
+    },
+    {
+      "teacherId": 3,
+      "salaryAmount": 1200,
+      "pensionContribution": 30,
+      "salaryBonus": 200,
+      "salaryNet": 1370,
+      "totalDeductions": 70,
+      "otherDeductions": 40,
+      "datePayment": "2024-10-15T05:00:00.000Z",
+      "paymentMethod": "Transferencia",
+      "account": "10084512",
+      "observation": "Ninguna",
+      "id": 6
     }
   ]
 }
