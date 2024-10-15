@@ -9,13 +9,18 @@ export default {
   },
   methods: {
     ...mapActions('user', ['setUser', 'clearUser']),
-    saveUser() {
+    saveProfessionalUser() {
       this.setUser({ id: 1, role: 1})
 
       console.log('user id', this.userId)
-      console.log('use role', this.userRole)
+      console.log('Professional, role:', this.userRole)
 
 
+      this.$router.push({ name: 'home' })
+    },
+    saveTeacherUser() {
+      this.setUser({ id:1, role: 2})
+      console.log('Teacher, role:', this.userRole);
       this.$router.push({ name: 'home' })
     }
   }
@@ -39,7 +44,7 @@ export default {
       </template>
       <template #footer>
         <div class="flex gap-4 mt-1">
-          <pv-button label="Login" @click="saveUser" class="w-full" />
+          <pv-button label="Login" @click="saveProfessionalUser" class="w-full" />
         </div>
       </template>
     </pv-card>
@@ -56,7 +61,7 @@ export default {
       </template>
       <template #footer>
         <div class="flex gap-4 mt-1">
-          <pv-button label="Login" class="w-full" />
+          <pv-button label="Login" @click="saveTeacherUser" class="w-full" />
         </div>
       </template>
     </pv-card>
