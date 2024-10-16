@@ -26,12 +26,7 @@
       <pv-column header="Actions">
         <template #body="{ data }">
           <div class="action-buttons">
-            <pv-button
-                label="Edit"
-                icon="pi pi-pencil"
-                @click="editPayroll(data)"
-                class="p-button-sm p-button-warning"
-            />
+
             <pv-button
                 label="Delete"
                 icon="pi pi-trash"
