@@ -35,9 +35,12 @@ export default {
       if(this.userRole === 1) {
        console.log('welcome admin')
         this.items = [
-          { label: 'Home', to: '/home' },
-          { label: 'Meet', to: '/events-scheduling/meet' },
-          { label: 'Salary Calculation', to: '/salary-calculation'},
+          { label: 'Home', to: '/dashboard-admin/home-admin' },
+          { label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment'},
+          { label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings'},
+          { label: 'Personal Data', to: '/dashboard-admin/personal-data'},
+          { label: 'Personnel Management', to: '/dashboard-admin/personnel-management'},
+          { label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation'},
           { label: 'Log out', onClick: this.handleLogOut },
         ]
 
@@ -46,9 +49,12 @@ export default {
         console.log('welcome teacher')
 
         this.items = [
-          { label: 'Home', to: '/home' },
-          { label: 'Reservation', to: '/reservation-scheduling'},
-          { label: 'Classrooms', to: '/classrooms'},
+          { label: 'Home', to: '/dashboard-teacher/home-teacher' },
+          { label: 'Notifications', to: '/dashboard-teacher/notifications'},
+          { label: 'Reservations', to: '/dashboard-teacher/reservations'},
+          { label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports'},
+          { label: 'Wages', to: '/dashboard-teacher/wages'},
+          { label: 'Space Availability', to: '/dashboard-teacher/space-availability'},
           { label: 'Log out', onClick: this.handleLogOut },
         ]
       }
@@ -74,40 +80,60 @@ export default {
 <template>
   <pv-toast/>
   <header>
-    <pv-toolbar class="bg-primary">
-      <template #start>
-        <pv-button class="p-button-text" icon="pi pi-bars" @click="toggleDrawer"/>
-        <h2>EduSpace</h2>
-      </template>
-      <template #center>
-        <div class=" flex flex-row">
-          <div v-for="item in items" :key="item.label">
-            <router-link v-if="item.to"
-                         :to="item.to"
-            >
-              <pv-button class="p-button-text">
-                {{ item.label}}
-              </pv-button>
-            </router-link>
-            <pv-button v-else
-                       @click="item.onClick">
-              {{ item.label }}
+    <div class="sidenav">
+      <h2>EduSpace</h2>
+      <div class="drawer-content">
+        <div v-for="item in items" :key="item.label">
+          <router-link v-if="item.to"
+                       :to="item.to"
+          >
+            <pv-button class="p-button-text">
+              {{ item.label}}
             </pv-button>
-          </div>
-
+          </router-link>
+          <pv-button v-else
+                     @click="item.onClick">
+            {{ item.label }}
+          </pv-button>
         </div>
-      </template>
-      <template #end>
-        <language-switcher/>
-      </template>
-    </pv-toolbar>
-    <pv-drawer v-model:visible="drawer"/>
+      </div>
+    </div>
   </header>
-  <main>
+  <main class="main-content">
     <router-view/>
   </main>
 </template>
 
 <style scoped>
+.sidenav {
+  width: 250px;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.13);
+  background: rgb(12,192,223);
+  background: linear-gradient(150deg, rgba(12,192,223,1) 0%, rgba(147,227,241,1) 6%, rgba(255,255,255,1) 24%, rgba(246,246,246,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(255,231,120,1) 97%, rgba(255,210,0,1) 100%);}
 
+.drawer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+}
+
+@media (max-width: 768px) {
+  .sidenav {
+    width: 200px;
+  }
+
+  .main-content {
+    margin-left: 200px;
+  }
+}
 </style>
