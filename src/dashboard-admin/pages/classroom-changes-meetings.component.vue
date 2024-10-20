@@ -6,7 +6,7 @@ export default {
       this.$router.push('/');
     },
     goToMeetingManagement() {
-      this.$router.push('/');
+      this.$router.push('/dashboard-admin/classroom-changes-meetings/meeting-management');
     }
   }
 }
