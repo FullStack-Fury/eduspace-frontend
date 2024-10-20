@@ -91,7 +91,7 @@ export default {
               {{ item.label}}
             </pv-button>
           </router-link>
-          <pv-button v-else
+          <pv-button class="pv-button" v-else
                      @click="item.onClick">
             {{ item.label }}
           </pv-button>
@@ -114,7 +114,9 @@ export default {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.13);
   background: rgb(12,192,223);
-  background: linear-gradient(150deg, rgba(12,192,223,1) 0%, rgba(147,227,241,1) 6%, rgba(255,255,255,1) 24%, rgba(246,246,246,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(255,231,120,1) 97%, rgba(255,210,0,1) 100%);}
+  background: linear-gradient(150deg, rgba(12,192,223,1) 0%, rgba(147,227,241,1) 6%, rgba(255,255,255,1) 24%, rgba(246,246,246,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(255,231,120,1) 97%, rgba(255,210,0,1) 100%);
+  text-align: left;
+}
 
 .drawer-content {
   display: flex;
@@ -126,6 +128,30 @@ export default {
   margin-left: 250px;
   padding: 20px;
 }
+
+
+.p-button-text {
+  color: #000;
+  text-align: left;
+}
+
+.pv-button {
+  display: inline-block;
+  background-color: #ffcc00;
+  color: #000;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.pv-button:hover {
+  background-color: #ffdb4d;
+}
+
 
 @media (max-width: 768px) {
   .sidenav {
