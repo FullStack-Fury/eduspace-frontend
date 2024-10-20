@@ -14,6 +14,11 @@ import HomeAdminComponent from "../dashboard-admin/pages/home-admin.component.vu
 import PersonalDataComponent from "../dashboard-admin/pages/personal-data.component.vue";
 import PersonnelManagementComponent from "../dashboard-admin/pages/personnel-management.component.vue";
 import SalaryCalculationComponent from "../dashboard-admin/pages/salary-calculation.component.vue";
+import HomeTeacherComponent from "../dashboard-teacher/pages/home-teacher.component.vue";
+import NotificationsComponent from "../dashboard-teacher/pages/notifications.component.vue";
+import ReservationsComponent from "../dashboard-teacher/pages/reservations.component.vue";
+import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
+import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -37,7 +42,20 @@ const router = createRouter({
         { path: '/dashboard-admin/home-admin', name: 'home-admin', component: HomeAdminComponent, meta: {title: 'Home Admin'} },
         { path: '/dashboard-admin/personal-data', name: 'personal-data', component: PersonalDataComponent, meta: {title: 'Personal Data'} },
         { path: '/dashboard-admin/personnel-management', name: 'personnel-management', component: PersonnelManagementComponent, meta: {title: 'Personnel Management'} },
-        { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: SalaryCalculationComponent, meta: {title: 'Salary Calculation'}}
+        { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: SalaryCalculationComponent, meta: {title: 'Salary Calculation'}},
+
+
+        /**
+         *  Dashboard-teacher
+         */
+
+        { path: '/dashboard-teacher/home-teacher', name:'home-teacher', component: HomeTeacherComponent, meta: {title: 'Home Teacher'}},
+        { path: '/dashboard-teacher/notifications', name: 'notifications', component: NotificationsComponent, meta: {title: 'Notifications'}},
+        { path: '/dashboard-teacher/reservations', name: 'reservations', component: ReservationsComponent, meta: {title: 'Reservations'}},
+        { path: '/dashboard-teacher/breakdown-reports', name: 'breakdown-reports', component: BreakdownReportsComponent, meta: {title: 'Breakdown Reports'}},
+        { path: '/dashboard-teacher/wages', name: 'wages', component: WagesComponent, meta:{title: 'Wages'}},
+        { path: '/dashboard-teacher/space-availability'}
+
     ]
 });
 
