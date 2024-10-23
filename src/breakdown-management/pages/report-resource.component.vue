@@ -14,7 +14,7 @@
         <label for="created_at">Created At:</label>
         <input type="date" id="created_at" v-model="form.created_at" required />
       </div>
-      <button type="submit" class="submit-button">Create Report</button>
+      <pv-button type="submit" class="submit-button">Create Report</pv-button>
     </form>
   </div>
 </template>
@@ -103,16 +103,7 @@ textarea {
   min-height: 100px;
 }
 
-.submit-button {
-  padding: 10px;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s;
-}
+
 
 .submit-button:hover {
   background-color: #0056b3;
