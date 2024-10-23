@@ -10,10 +10,10 @@ export default {
     return {
       drawer: false,
       items: [
-        { label: 'Home', to: '/home' },
-        { label: 'Meet', to: '/events-scheduling/meet' },
-        { label: 'Reservation', to: '/reservation-scheduling'},
-        { label: 'Login', to: '/login' },
+        {label: 'Home', to: '/home'},
+        {label: 'Meet', to: '/events-scheduling/meet'},
+        {label: 'Reservation', to: '/reservation-scheduling'},
+        {label: 'Login', to: '/login'},
       ]
     }
   },
@@ -29,44 +29,42 @@ export default {
       this.clearUser();
       console.log('user cleared', this.userId, this.userRole)
 
-      this.$router.push({ name: 'login' });
+      this.$router.push({name: 'login'});
     },
     changeToolbar() {
-      if(this.userRole === 1) {
-       console.log('welcome admin')
+      if (this.userRole === 1) {
+        console.log('welcome admin')
         this.items = [
-          { label: 'Home', to: '/dashboard-admin/home-admin' },
-          { label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment'},
-          { label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings'},
-          { label: 'Personal Data', to: '/dashboard-admin/personal-data'},
-          { label: 'Personnel Management', to: '/dashboard-admin/personnel-management'},
-          { label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation'},
-          { label: 'Log out', onClick: this.handleLogOut },
+          {label: 'Home', to: '/dashboard-admin/home-admin'},
+          {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment'},
+          {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings'},
+          {label: 'Personal Data', to: '/dashboard-admin/personal-data'},
+          {label: 'Personnel Management', to: '/dashboard-admin/personnel-management'},
+          {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation'},
+          {label: 'Log out', onClick: this.handleLogOut},
         ]
 
-      }
-      else if(this.userRole === 2) {
+      } else if (this.userRole === 2) {
         console.log('welcome teacher')
 
         this.items = [
-          { label: 'Home', to: '/dashboard-teacher/home-teacher' },
-          { label: 'Notifications', to: '/dashboard-teacher/notifications'},
-          { label: 'Reservations', to: '/dashboard-teacher/reservations'},
-          { label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports'},
-          { label: 'Wages', to: '/dashboard-teacher/wages'},
-          { label: 'Space Availability', to: '/dashboard-teacher/space-availability'},
-          { label: 'Log out', onClick: this.handleLogOut },
+          {label: 'Home', to: '/dashboard-teacher/home-teacher'},
+          {label: 'Notifications', to: '/dashboard-teacher/notifications'},
+          {label: 'Reservations', to: '/dashboard-teacher/reservations'},
+          {label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports'},
+          {label: 'Wages', to: '/dashboard-teacher/wages'},
+          {label: 'Space Availability', to: '/dashboard-teacher/space-availability'},
+          {label: 'Log out', onClick: this.handleLogOut},
         ]
-      }
-      else {
+      } else {
         this.items = [
-          { label: 'Home', to: '/home' },
-          { label: 'Login', to: '/login' }
+          {label: 'Home', to: '/home'},
+          {label: 'Login', to: '/login'}
         ]
       }
     }
   },
-  created(){
+  created() {
     this.changeToolbar()
   },
   watch: {
@@ -80,7 +78,7 @@ export default {
 <template>
   <pv-toast/>
   <header>
-    <div class="sidenav">
+    <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
       <h2>EduSpace</h2>
       <div class="drawer-content">
         <div v-for="item in items" :key="item.label">
@@ -88,7 +86,7 @@ export default {
                        :to="item.to"
           >
             <pv-button class="p-button-text">
-              {{ item.label}}
+              {{ item.label }}
             </pv-button>
           </router-link>
           <pv-button class="pv-button" v-else
@@ -113,9 +111,15 @@ export default {
   left: 0;
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.13);
-  background: rgb(12,192,223);
-  background: linear-gradient(150deg, rgba(12,192,223,1) 0%, rgba(147,227,241,1) 6%, rgba(255,255,255,1) 24%, rgba(246,246,246,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(255,231,120,1) 97%, rgba(255,210,0,1) 100%);
   text-align: left;
+}
+
+.admin-sidenav {
+  background: linear-gradient(150deg, rgba(12, 192, 223, 1) 0%, rgba(147, 227, 241, 1) 6%, rgba(255, 255, 255, 1) 24%, rgba(246, 246, 246, 1) 34%, rgba(255, 255, 255, 1) 52%, rgba(255, 255, 255, 1) 71%, rgba(255, 255, 255, 1) 79%, rgba(255, 231, 120, 1) 97%, rgba(255, 210, 0, 1) 100%);
+}
+
+.teacher-sidenav {
+  background: linear-gradient(150deg, rgba(255, 231, 120, 1) 0%, rgba(255, 255, 255, 1) 6%, rgba(246, 246, 246, 1) 24%, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 1) 52%, rgba(255, 255, 255, 1) 71%, rgba(147, 227, 241, 1) 97%, rgba(12, 192, 223, 1) 100%);
 }
 
 .drawer-content {
@@ -128,7 +132,6 @@ export default {
   margin-left: 250px;
   padding: 20px;
 }
-
 
 .p-button-text {
   color: #000;
@@ -151,7 +154,6 @@ export default {
 .pv-button:hover {
   background-color: #ffdb4d;
 }
-
 
 @media (max-width: 768px) {
   .sidenav {
