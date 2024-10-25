@@ -119,7 +119,8 @@ export default {
 }
 
 .teacher-sidenav {
-  background: linear-gradient(150deg, rgba(255, 231, 120, 1) 0%, rgba(255, 255, 255, 1) 6%, rgba(246, 246, 246, 1) 24%, rgba(255, 255, 255, 1) 34%, rgba(255, 255, 255, 1) 52%, rgba(255, 255, 255, 1) 71%, rgba(147, 227, 241, 1) 97%, rgba(12, 192, 223, 1) 100%);
+  background: rgb(255,210,0);
+  background: linear-gradient(150deg, rgba(255,210,0,1) 0%, rgba(255,231,120,1) 6%, rgba(255,255,255,1) 24%, rgba(255,255,255,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(147,227,241,1) 97%, rgba(12,192,223,1) 100%);
 }
 
 .drawer-content {

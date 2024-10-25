@@ -87,23 +87,32 @@
     {
       "id": 1,
       "name": "Maria",
+      "lastName": "Iglesias",
+      "userName": "maria12",
       "email": "maria@gmail.com",
       "phone": "9381172111",
-      "location": "Peru"
+      "location": "Peru",
+      "code": "1234567"
     },
     {
       "id": 2,
       "name": "Pepe",
+      "lastName": "Velasco",
+      "userName": "pepe45",
       "email": "pepe@gmail.com",
       "phone": "938172132",
-      "location": "Peru"
+      "location": "Peru",
+      "code": "1234567"
     },
     {
       "id": 3,
       "name": "Juan",
+      "lastName": "Pez",
+      "userName": "juan93",
       "email": "juan@gmail.com",
       "phone": "938112345",
-      "location": "Peru"
+      "location": "Peru",
+      "code": "1234567"
     }
   ],
   "administrators": [
@@ -116,24 +125,34 @@
   "meet": [
     {
       "id": 1,
-      "name": "Planning Meeting",
-      "day": "2024-09-05",
-      "hour": "09:52",
-      "location": "Room 101",
+      "name": "Planning extracurricular  activities",
+      "day": "2024-09-30",
+      "hour": "3:00",
+      "location": "A104",
       "teachers": [
         {
           "id": 1,
-          "name": "Maria",
-          "email": "maria@gmail.com",
-          "phone": "9381172111",
-          "location": "Peru"
+          "name": "Laura",
+          "lastname": "Vivas",
+          "username": "laura123"
         },
         {
           "id": 2,
-          "name": "Pepe",
-          "email": "pepe@gmail.com",
-          "phone": "938172132",
-          "location": "Peru"
+          "name": "Carlos",
+          "lastname": "Pérez",
+          "username": "carlos_88"
+        },
+        {
+          "id": 3,
+          "name": "Marta",
+          "lastname": "López",
+          "username": "marta.l"
+        },
+        {
+          "id": 4,
+          "name": "Fernando",
+          "lastname": "Gómez",
+          "username": "fer.gomez"
         }
       ]
     }
