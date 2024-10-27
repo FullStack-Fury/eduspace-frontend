@@ -1,19 +1,34 @@
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
+
+// Importar los SVG desde las rutas especificadas
+import HomeIcon from "/src/assets/admin/Home.svg";
+import ClassroomIcon from "/src/assets/admin/Clasroom.svg";
+import EnviromentIcon from "/src/assets/admin/Enviroment.svg";
+import PersonalDIcon from "/src/assets/admin/Personal_Data.svg";
+import PersonalMIcon from "/src/assets/admin/Personal_Management.svg";
+import SalaryIcon from "/src/assets/admin/Salary_Calculation.svg";
+
+// Íconos específicos para la vista del "teacher"
+import BreakdownIcon from "/src/assets/teacher/Breakdown_Reports.svg";
+import NotificationIcon from "/src/assets/teacher/Notification.svg";
+import PagesIcon from "/src/assets/teacher/Pages.svg";
+import ReservationIcon from "/src/assets/teacher/Reservation.svg";
+import SpaceIcon from "/src/assets/teacher/Space_Availability.svg";
 
 export default {
   name: 'app',
-  components: {LanguageSwitcher},
+  components: { LanguageSwitcher },
   title: 'EduSpace',
   data() {
     return {
       drawer: false,
       items: [
-        {label: 'Home', to: '/home'},
-        {label: 'Meet', to: '/events-scheduling/meet'},
-        {label: 'Reservation', to: '/reservation-scheduling'},
-        {label: 'Login', to: '/login'},
+        { label: 'Home', to: '/home', svg: HomeIcon },
+        { label: 'Meet', to: '/events-scheduling/meet' },
+        { label: 'Reservation', to: '/reservation-scheduling' },
+        { label: 'Login', to: '/login' },
       ]
     }
   },
@@ -27,45 +42,42 @@ export default {
     },
     handleLogOut() {
       this.clearUser();
-      console.log('user cleared', this.userId, this.userRole)
+      console.log('user cleared', this.userId, this.userRole);
 
-      this.$router.push({name: 'login'});
+      this.$router.push({ name: 'login' });
     },
     changeToolbar() {
       if (this.userRole === 1) {
-        console.log('welcome admin')
+        console.log('welcome admin');
         this.items = [
-          {label: 'Home', to: '/dashboard-admin/home-admin'},
-          {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment'},
-          {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings'},
-          {label: 'Personal Data', to: '/dashboard-admin/personal-data'},
-          {label: 'Personnel Management', to: '/dashboard-admin/personnel-management'},
-          {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation'},
-          {label: 'Log out', onClick: this.handleLogOut},
-        ]
-
+          { label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon },
+          { label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon },
+          { label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon },
+          { label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon },
+          { label: 'Personnel Management', to: '/dashboard-admin/personnel-management', svg: PersonalMIcon },
+          { label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation', svg: SalaryIcon }
+        ];
       } else if (this.userRole === 2) {
-        console.log('welcome teacher')
+        console.log('welcome teacher');
 
         this.items = [
-          {label: 'Home', to: '/dashboard-teacher/home-teacher'},
-          {label: 'Notifications', to: '/dashboard-teacher/notifications'},
-          {label: 'Reservations', to: '/dashboard-teacher/reservations'},
-          {label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports'},
-          {label: 'Wages', to: '/dashboard-teacher/wages'},
-          {label: 'Space Availability', to: '/dashboard-teacher/space-availability'},
-          {label: 'Log out', onClick: this.handleLogOut},
-        ]
+          { label: 'Home', to: '/dashboard-teacher/home-teacher', svg: HomeIcon },
+          { label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon },
+          { label: 'Reservations', to: '/dashboard-teacher/reservations', svg: ReservationIcon },
+          { label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports', svg: BreakdownIcon },
+          { label: 'Wages', to: '/dashboard-teacher/wages', svg: PagesIcon },
+          { label: 'Space Availability', to: '/dashboard-teacher/space-availability', svg: SpaceIcon }
+        ];
       } else {
         this.items = [
-          {label: 'Home', to: '/home'},
-          {label: 'Login', to: '/login'}
-        ]
+          { label: 'Home', to: '/home', svg: HomeIcon },
+          { label: 'Login', to: '/login' }
+        ];
       }
     }
   },
   created() {
-    this.changeToolbar()
+    this.changeToolbar();
   },
   watch: {
     userRole(newRole) {
@@ -81,18 +93,33 @@ export default {
     <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
       <h2>EduSpace</h2>
       <div class="drawer-content">
-        <div v-for="item in items" :key="item.label">
-          <router-link v-if="item.to"
-                       :to="item.to"
+        <div v-for="item in items" :key="item.label" class="menu-item">
+          <router-link
+              v-if="item.to"
+              :to="item.to"
+              class="nav-link"
+              active-class="router-link-active"
+              exact-active-class="router-link-exact-active"
           >
-            <pv-button class="p-button-text">
+            <pv-button :class="['p-button-text', { 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]">
+              <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 16px; height: 16px; margin-right: 8px;" />
               {{ item.label }}
             </pv-button>
           </router-link>
           <pv-button class="pv-button" v-else
                      @click="item.onClick">
+            <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 16px; height: 16px; margin-right: 8px;" />
             {{ item.label }}
           </pv-button>
+        </div>
+      </div>
+      <div class="footer-section">
+        <pv-button class="pv-button log-out" @click="handleLogOut">
+          <i class="pi pi-sign-out" style="margin-right: 8px;"></i>
+          Log out
+        </pv-button>
+        <div class="copyright-text">
+          Copyright EduSpace team
         </div>
       </div>
     </div>
@@ -112,6 +139,9 @@ export default {
   padding: 20px;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.13);
   text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .admin-sidenav {
@@ -129,14 +159,51 @@ export default {
   align-items: start;
 }
 
-.main-content {
-  margin-left: 250px;
-  padding: 20px;
+.menu-item {
+  margin-bottom: 10px;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.log-out {
+  width: 100%;
+  background-color: transparent;
+  color: #000;
+  text-align: center;
+  font-weight: bold;
+}
+
+.copyright-text {
+  margin-top: 10px;
+  font-size: 0.8rem;
+  color: #777;
 }
 
 .p-button-text {
-  color: #000;
+  color: #000 !important;
   text-align: left;
+}
+
+/* Estilo de hover y activo específico para el admin */
+.admin-hover-active:hover,
+.router-link-active .admin-hover-active,
+.router-link-exact-active .admin-hover-active {
+  background-color: rgba(12, 192, 223, 0.28) !important; /* Color azul con mayor opacidad */
+  color: #000 !important;
+}
+
+/* Estilo de hover y activo específico para el teacher */
+.teacher-hover-active:hover,
+.router-link-active .teacher-hover-active,
+.router-link-exact-active .teacher-hover-active {
+  background-color: rgba(255, 210, 0, 0.28) !important; /* Color amarillo con mayor opacidad */
+  color: #000 !important;
 }
 
 .pv-button {
@@ -154,6 +221,12 @@ export default {
 
 .pv-button:hover {
   background-color: #ffdb4d;
+}
+
+.main-content {
+  margin-left: 250px;
+  padding: 20px;
+  overflow: auto;
 }
 
 @media (max-width: 768px) {
