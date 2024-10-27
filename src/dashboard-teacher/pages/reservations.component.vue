@@ -60,9 +60,9 @@ h2 {
 .pv-card {
   width: 100%;
   background-color: #fff;
-  border: 2px solid #e0f7fa;
+  border: 1px solid #0CC0DF;
   border-radius: 50px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 28px rgba(12, 192, 223, 0.28);
   margin-bottom: 2rem;
   padding: 1.5rem;
   transition: transform 0.2s ease-in-out;

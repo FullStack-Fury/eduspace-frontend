@@ -143,7 +143,7 @@ export default {
   top: 0;
   left: 0;
   padding: 20px;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.13);
+  box-shadow: 2px 0 25px rgba(0, 0, 0, 0.13);
   text-align: left;
   display: flex;
   flex-direction: column;
