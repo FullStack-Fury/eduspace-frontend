@@ -151,7 +151,8 @@ export default {
         :item="meet"
         :visible="createAndEditDialogIsVisible"
         v-on:cancel-requested="onCancelRequested"
-        v-on:save-requested="onSaveRequested($event)"/>
+        v-on:save-requested="onSaveRequested($event)"
+        @update:visible="value => createAndEditDialogIsVisible = value"/>
   </div>
 </template>
 

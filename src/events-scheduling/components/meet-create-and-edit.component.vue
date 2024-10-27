@@ -1,20 +1,26 @@
 <script>
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
-import {TeachersService} from "../services/teachers.service.js";
+import { TeachersService } from "../services/teachers.service.js";
 
 export default {
   name: "meet-create-and-edit-dialog",
-  components: {CreateAndEdit},
+  components: { CreateAndEdit },
   props: {
-    item: null,
-    visible: Boolean
+    item: {
+      type: Object,
+      required: true
+    },
+    visible: {
+      type: Boolean,
+      required: true
+    }
   },
   data() {
     return {
       submitted: false,
       teachers: [],
       selectedTeachers: []
-    }
+    };
   },
   created() {
     this.loadTeachers();
@@ -22,17 +28,19 @@ export default {
   methods: {
     loadTeachers() {
       const teacherService = new TeachersService();
-      teacherService.getAllTeachers().then(response => {
-        this.teachers = response.data.map(teacher => ({
-          id: teacher.id,
-          name: teacher.name,
-          lastname: teacher.lastname,
-          username: teacher.username
-        }));
-        console.log("Teachers loaded:", this.teachers);
-      }).catch(error => {
-        console.error("Error loading teachers:", error);
-      });
+      teacherService.getAllTeachers()
+          .then(response => {
+            this.teachers = response.data.map(teacher => ({
+              id: teacher.id,
+              name: teacher.name,
+              lastname: teacher.lastname,
+              username: teacher.username
+            }));
+            console.log("Teachers loaded:", this.teachers);
+          })
+          .catch(error => {
+            console.error("Error loading teachers:", error);
+          });
     },
     formatDate(date) {
       const d = new Date(date);
@@ -43,7 +51,9 @@ export default {
       return d.toTimeString().split(' ')[0].substring(0, 5);
     },
     onCancelRequested() {
-      this.$emit('cancel-requested');
+      console.log("Cancel button clicked in child component"); // Log para confirmar el clic
+      this.$emit('update:visible', false); // Emitir el evento para actualizar la visibilidad en el padre
+      this.$emit('cancel-requested'); // Emitir el evento de cancelación
     },
     onSaveRequested() {
       this.submitted = true;
@@ -66,12 +76,18 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <template>
-  <create-and-edit :entity="item" :visible="visible" entity-name="Meet"
-                   @cancelled="onCancelRequested" @saved="onSaveRequested">
+  <create-and-edit
+      :entity="item"
+      :visible="visible"
+      entity-name="Meet"
+      @update:visible="(value) => $emit('update:visible', value)"
+      @cancelled="onCancelRequested"
+      @saved="onSaveRequested"
+  >
     <template #content>
       <div class="p-fluid">
         <div class="field mt-5">
@@ -79,6 +95,7 @@ export default {
             <label for="name">Name</label>
             <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }" />
           </pv-float-label>
+
           <pv-float-label>
             <label for="day">Day</label>
             <pv-date-picker
@@ -114,22 +131,24 @@ export default {
             <pv-multi-select
                 id="invite"
                 v-model="item.teachers"
-            :options="teachers"
-            option-label="name"
-            option-value="id"
-            placeholder="Select teachers"
-            :class="{ 'p-invalid': submitted && !item.teachers }"
+                :options="teachers"
+                option-label="name"
+                option-value="id"
+                placeholder="Select teachers"
+                :class="{ 'p-invalid': submitted && !item.teachers }"
             />
           </pv-float-label>
 
           <pv-float-label>
             <label for="location">Location</label>
-            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }" />
+            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
           </pv-float-label>
         </div>
       </div>
     </template>
   </create-and-edit>
 </template>
+
 <style scoped>
+/* Estilos específicos */
 </style>
