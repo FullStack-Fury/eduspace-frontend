@@ -114,10 +114,16 @@ export default {
         </div>
       </div>
       <div class="footer-section">
-        <pv-button class="pv-button log-out" @click="handleLogOut">
-          <i class="pi pi-sign-out" style="margin-right: 8px;"></i>
-          Log out
-        </pv-button>
+        <div class="logout-container">
+          <pv-button
+              class="pv-button log-out logout-hover"
+              :class="[{ 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]"
+              @click="handleLogOut"
+          >
+            <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon" />
+            <span>Log out</span>
+          </pv-button>
+        </div>
         <div class="copyright-text">
           Copyright EduSpace team
         </div>
@@ -145,12 +151,25 @@ export default {
 }
 
 .admin-sidenav {
-  background: linear-gradient(150deg, rgba(12, 192, 223, 1) 0%, rgba(147, 227, 241, 1) 6%, rgba(255, 255, 255, 1) 24%, rgba(246, 246, 246, 1) 34%, rgba(255, 255, 255, 1) 52%, rgba(255, 255, 255, 1) 71%, rgba(255, 255, 255, 1) 79%, rgba(255, 231, 120, 1) 97%, rgba(255, 210, 0, 1) 100%);
+  background: linear-gradient(160deg,
+  rgba(147, 227, 241, 1) 0%,
+  rgba(255, 255, 255, 1) 24%,
+  rgba(246, 246, 246, 1) 34%,
+  rgba(255, 255, 255, 1) 52%,
+  rgba(255, 255, 255, 1) 71%,
+  rgba(255, 255, 255, 1) 85%,
+  rgba(255, 231, 120, 1) 100%);
 }
 
 .teacher-sidenav {
-  background: rgb(255,210,0);
-  background: linear-gradient(150deg, rgba(255,210,0,1) 0%, rgba(255,231,120,1) 6%, rgba(255,255,255,1) 24%, rgba(255,255,255,1) 34%, rgba(255,255,255,1) 52%, rgba(255,255,255,1) 71%, rgba(255,255,255,1) 79%, rgba(147,227,241,1) 97%, rgba(12,192,223,1) 100%);
+  background: linear-gradient(160deg,
+rgba(255, 231, 120, 1) 0%,
+rgba(255, 255, 255, 1) 24%,
+rgba(246, 246, 246, 1) 34%,
+rgba(255, 255, 255, 1) 52%,
+rgba(255, 255, 255, 1) 71%,
+rgba(255, 255, 255, 1) 85%,
+rgba(147, 227, 241, 1) 100%);
 }
 
 .drawer-content {
@@ -166,23 +185,84 @@ export default {
 .footer-section {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start; /* Alinea los elementos a la izquierda */
   margin-top: auto;
   padding-top: 20px;
+  width: 100%;
+}
+
+.logout-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding-left: 0px;
 }
 
 .log-out {
-  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
   background-color: transparent;
   color: #000;
-  text-align: center;
-  font-weight: bold;
+  font-weight: 300;
+  text-align: left;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
 }
+
+.logout-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+  transition: none; /* Asegura que no haya ninguna transición aplicada */
+}
+
+.log-out {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: transparent;
+  color: #000;
+  font-weight: 300;
+  text-align: left;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.sidenav .log-out:hover{
+  border: none;
+}
+
+.admin-hover-active.logout-hover:hover {
+  background-color: rgba(12, 192, 223, 0.28) !important;
+}
+
+.teacher-hover-active.logout-hover:hover {
+  background-color: rgba(255, 210, 0, 0.28) !important;
+}
+
+.router-link-active .admin-hover-active.logout-hover,
+.router-link-exact-active .admin-hover-active.logout-hover {
+  background-color: rgba(12, 192, 223, 0.28) !important;
+}
+
+.router-link-active .teacher-hover-active.logout-hover,
+.router-link-exact-active .teacher-hover-active.logout-hover {
+  background-color: rgba(255, 210, 0, 0.28) !important;
+}
+
 
 .copyright-text {
   margin-top: 10px;
   font-size: 0.8rem;
   color: #777;
+  text-align: left;
+  padding-left: 20px; /* Alinea el texto con el contenido del sidebar */
 }
 
 .p-button-text {
@@ -190,31 +270,27 @@ export default {
   text-align: left;
 }
 
-/* Estilo de hover y activo específico para el admin */
 .admin-hover-active:hover,
 .router-link-active .admin-hover-active,
 .router-link-exact-active .admin-hover-active {
-  background-color: rgba(12, 192, 223, 0.28) !important; /* Color azul con mayor opacidad */
+  background-color: rgba(12, 192, 223, 0.28) !important;
   color: #000 !important;
 }
 
-/* Estilo de hover y activo específico para el teacher */
 .teacher-hover-active:hover,
 .router-link-active .teacher-hover-active,
 .router-link-exact-active .teacher-hover-active {
-  background-color: rgba(255, 210, 0, 0.28) !important; /* Color amarillo con mayor opacidad */
+  background-color: rgba(255, 210, 0, 0.28) !important;
   color: #000 !important;
 }
 
 .pv-button {
-  display: inline-block;
-  background-color: #ffcc00;
+  display: flex;
   color: #000;
   font-size: 1rem;
-  font-weight: bold;
+  font-weight: 500;
   border: none;
-  border-radius: 50px;
-  padding: 0.5rem 1.5rem;
+  padding: 0.5rem 0.7rem;
   cursor: pointer;
   transition: background-color 0.2s ease-in-out;
 }
