@@ -40,6 +40,14 @@ export default {
       this.meet = new Meet(item);
       this.isEdit = true;
       this.submitted = false;
+
+      // Asegurarse de que item.teachers sea un array de IDs
+      if (Array.isArray(this.meet.teachers) && this.meet.teachers.length > 0) {
+        this.meet.teachers = this.meet.teachers.map(teacher => teacher.id ? teacher.id : teacher);
+      } else {
+        this.meet.teachers = [];
+      }
+
       this.createAndEditDialogIsVisible = true;
     },
     onDeleteItem(item) {

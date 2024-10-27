@@ -24,6 +24,7 @@ export default {
   },
   created() {
     this.loadTeachers();
+    this.formatTeachersForEdit();
   },
   methods: {
     loadTeachers() {
@@ -32,8 +33,7 @@ export default {
           .then(response => {
             this.teachers = response.data.map(teacher => ({
               id: teacher.id,
-              name: teacher.name,
-              lastname: teacher.lastname,
+              name: `${teacher.name} ${teacher.lastname}`,
               username: teacher.username
             }));
             console.log("Teachers loaded:", this.teachers);
@@ -41,6 +41,12 @@ export default {
           .catch(error => {
             console.error("Error loading teachers:", error);
           });
+    },
+    formatTeachersForEdit() {
+      // Convertir item.teachers a IDs si es necesario
+      if (Array.isArray(this.item.teachers) && this.item.teachers.length > 0 && typeof this.item.teachers[0] === 'object') {
+        this.item.teachers = this.item.teachers.map(teacher => teacher.id);
+      }
     },
     formatDate(date) {
       const d = new Date(date);
@@ -61,16 +67,15 @@ export default {
         this.item.day = this.formatDate(this.item.day);
         this.item.hour = this.formatTime(this.item.hour);
 
-        const selectedTeachers = this.teachers.filter(teacher =>
-            this.item.teachers.includes(teacher.id)
-        ).map(teacher => ({
-          id: teacher.id,
-          name: teacher.name,
-          lastname: teacher.lastname,
-          username: teacher.username
-        }));
-
-        this.item.teachers = selectedTeachers;
+        // Asignar directamente el resultado a this.item.teachers
+        this.item.teachers = this.teachers
+            .filter(teacher => this.item.teachers.includes(teacher.id))
+            .map(teacher => ({
+              id: teacher.id,
+              name: teacher.name,
+              lastname: teacher.lastname,
+              username: teacher.username
+            }));
 
         this.$emit('save-requested', this.item);
       }
@@ -141,7 +146,7 @@ export default {
 
           <pv-float-label>
             <label for="location">Location</label>
-            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
+            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }" />
           </pv-float-label>
         </div>
       </div>
