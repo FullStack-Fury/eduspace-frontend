@@ -79,12 +79,12 @@ h2 {
 }
 
 .pv-card {
-  width: 100%;
+  width: 60vw;
   background-color: #fff;
   border: 1px solid #0CC0DF;
   border-radius: 50px;
-  box-shadow: 0 4px 28px rgba(12, 192, 223, 0.28);
-  margin-bottom: 2rem;
+  box-shadow: 0 4px 28px rgba(12, 192, 223, 0.58);
+  margin-bottom: 4rem;
   padding: 1.5rem;
   transition: transform 0.2s ease-in-out;
 }
