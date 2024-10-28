@@ -42,7 +42,7 @@ const router = createRouter({
         { path: '/dashboard-admin/environments-equipment', name: 'environments-equipment', component: EnvironmentsEquipment, meta: {title: 'Environments and Equipment'} },
         { path: '/dashboard-admin/home-admin', name: 'home-admin', component: HomeAdminComponent, meta: {title: 'Home Admin'} },
         { path: '/dashboard-admin/personal-data', name: 'personal-data', component: PersonalDataComponent, meta: {title: 'Personal Data'} },
-        { path: '/dashboard-admin/personnel-management', name: 'personnel-management', component: PersonnelManagementComponent, meta: {title: 'Personnel Management'} },
+        { path: '/dashboard-admin/personal-management', name: 'personal-management', component: PersonnelManagementComponent, meta: {title: 'Personal Management'} },
         { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: PayrollSummaryComponent, meta: {title: 'Breakdown Reports'}},
         { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
         { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },
@@ -54,9 +54,10 @@ const router = createRouter({
         { path: '/dashboard-teacher/home-teacher', name:'home-teacher', component: HomeTeacherComponent, meta: {title: 'Home Teacher'}},
         { path: '/dashboard-teacher/notifications', name: 'notifications', component: NotificationsComponent, meta: {title: 'Notifications'}},
         { path: '/dashboard-teacher/reservations', name: 'reservations', component: ReservationsComponent, meta: {title: 'Reservations'}},
+        { path: '/dashboard-teacher/reservations/reservation-scheduling', name: 'reservation', component: ReservationManagementComponent, meta: {title: 'Reservation of spaces'} },
         { path: '/dashboard-teacher/breakdown-reports', name: 'breakdown-reports', component: BreakdownReportsComponent, meta: {title: 'Breakdown Reports'}},
         { path: '/dashboard-teacher/wages', name: 'wages', component: WagesComponent, meta:{title: 'Wages'}},
-        { path: '/dashboard-teacher/space-availability'}
+        { path: '/dashboard-teacher/space-availability', component: ReservationManagementComponent, meta: {title: 'Space Availability'} },
 
     ]
 });
