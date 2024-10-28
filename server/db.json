@@ -87,32 +87,23 @@
     {
       "id": 1,
       "name": "Maria",
-      "lastName": "Iglesias",
-      "userName": "maria12",
       "email": "maria@gmail.com",
       "phone": "9381172111",
-      "location": "Peru",
-      "code": "1234567"
+      "location": "Peru"
     },
     {
       "id": 2,
       "name": "Pepe",
-      "lastName": "Velasco",
-      "userName": "pepe45",
       "email": "pepe@gmail.com",
       "phone": "938172132",
-      "location": "Peru",
-      "code": "1234567"
+      "location": "Peru"
     },
     {
       "id": 3,
       "name": "Juan",
-      "lastName": "Pez",
-      "userName": "juan93",
       "email": "juan@gmail.com",
       "phone": "938112345",
-      "location": "Peru",
-      "code": "1234567"
+      "location": "Peru"
     }
   ],
   "administrators": [
@@ -125,34 +116,24 @@
   "meet": [
     {
       "id": 1,
-      "name": "Planning extracurricular  activities",
-      "day": "2024-09-30",
-      "hour": "3:00",
-      "location": "A104",
+      "name": "Planning Meeting",
+      "day": "2024-09-05",
+      "hour": "09:52",
+      "location": "Room 101",
       "teachers": [
         {
           "id": 1,
-          "name": "Laura",
-          "lastname": "Vivas",
-          "username": "laura123"
+          "name": "Maria",
+          "email": "maria@gmail.com",
+          "phone": "9381172111",
+          "location": "Peru"
         },
         {
           "id": 2,
-          "name": "Carlos",
-          "lastname": "Pérez",
-          "username": "carlos_88"
-        },
-        {
-          "id": 3,
-          "name": "Marta",
-          "lastname": "López",
-          "username": "marta.l"
-        },
-        {
-          "id": 4,
-          "name": "Fernando",
-          "lastname": "Gómez",
-          "username": "fer.gomez"
+          "name": "Pepe",
+          "email": "pepe@gmail.com",
+          "phone": "938172132",
+          "location": "Peru"
         }
       ]
     }
@@ -177,34 +158,18 @@
   ],
   "payroll": [
     {
-      "teacherId": 1,
-      "salaryAmount": 3000,
-      "pensionContribution": 1000,
-      "salaryBonus": 2,
-      "salaryNet": 2002,
-      "id": 4
-    },
-    {
       "teacherId": 2,
-      "salaryAmount": 1000,
-      "pensionContribution": 200,
-      "salaryBonus": 233,
-      "salaryNet": 1033,
-      "id": 5
-    },
-    {
-      "teacherId": 3,
-      "salaryAmount": 1200,
-      "pensionContribution": 30,
+      "salaryAmount": 2000,
+      "pensionContribution": 150,
       "salaryBonus": 200,
-      "salaryNet": 1370,
-      "totalDeductions": 70,
-      "otherDeductions": 40,
-      "datePayment": "2024-10-15T05:00:00.000Z",
-      "paymentMethod": "Transferencia",
-      "account": "10084512",
-      "observation": "Ninguna",
-      "id": 6
+      "salaryNet": 2050,
+      "totalDeductions": 170,
+      "datePayment": "2024-10-16T05:00:00.000Z",
+      "paymentMethod": "yape",
+      "account": "65131",
+      "observation": "ninguna",
+      "otherDeductions": 20,
+      "id": 2
     }
   ]
 }
