@@ -3,15 +3,15 @@
     <h1>Payroll Management</h1>
 
     <pv-button
-        label="Create Payroll"
+        label="Register New"
         icon="pi pi-plus"
         @click="createPayroll"
         class="create-button"
     ></pv-button>
 
-    <pv-data-table :value="payrolls" :responsiveLayout="'scroll'" class="payroll-table">
-      <pv-column field="series" header="Nº"></pv-column>
-      <pv-column field="payDate" header="Pay Date"></pv-column>
+    <pv-data-table :value="payrolls" :responsiveLayout="'scroll'" class="payroll-table" show-gridlines>
+      <pv-column field="series" header="Nº" sortable=""></pv-column>
+      <pv-column field="formattedDate" header="Pay Date"></pv-column>
       <pv-column field="teacherName" header="Employee"></pv-column>
       <pv-column field="salaryAmount" header="Devengado"></pv-column>
       <pv-column field="salaryNet" header="Liquido"></pv-column>
@@ -26,12 +26,7 @@
       <pv-column header="Actions">
         <template #body="{ data }">
           <div class="action-buttons">
-            <pv-button
-                label="Edit"
-                icon="pi pi-pencil"
-                @click="editPayroll(data)"
-                class="p-button-sm p-button-warning"
-            />
+
             <pv-button
                 label="Delete"
                 icon="pi pi-trash"
@@ -57,31 +52,57 @@ export default {
   },
   methods: {
     async loadPayrolls() {
-      const response = await http.get("/payroll");
-      this.payrolls = response.data.map((payroll) => ({
-        ...payroll,
-        teacherName: this.getTeacherName(payroll.teacherId),
-        totalCost: payroll.salaryAmount + payroll.pensionContribution,
-      }));
+      try {
+        const response = await http.get("/payroll");
+        this.payrolls = response.data.map((payroll) => ({
+          ...payroll,
+          teacherName: this.getTeacherName(payroll.teacherId),
+          totalCost: payroll.salaryAmount + payroll.pensionContribution,
+          series: `A/${payroll.teacherId}`,
+          formattedDate: this.formatDate(payroll.datePayment),
+          salaryNet: this.calculateNetSalary(payroll), // Cálculo del líquido
+        }));
+      } catch (error) {
+        console.error("Error loading payrolls:", error);
+      }
     },
     async loadTeachers() {
-      const response = await http.get("/teachers");
-      this.teachers = response.data;
+      try {
+        const response = await http.get("/teachers");
+        this.teachers = response.data;
+      } catch (error) {
+        console.error("Error loading teachers:", error);
+      }
     },
     getTeacherName(id) {
       const teacher = this.teachers.find((teacher) => teacher.id === id);
       return teacher ? teacher.name : "Unknown Teacher";
     },
+    formatDate(dateString) {
+      const date = new Date(dateString);
+      const day = String(date.getDate()).padStart(2, "0");
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const year = date.getFullYear();
+      return `${day}/${month}/${year}`;
+    },
+    calculateNetSalary(payroll) {
+      const { salaryAmount, salaryBonus, pensionContribution, otherDeductions } = payroll;
+      const totalDeductions = pensionContribution + otherDeductions;
+      return salaryAmount + salaryBonus - totalDeductions;
+    },
     createPayroll() {
-      this.$router.push({name: "create-payroll"});
+      this.$router.push({ name: "create-payroll" });
     },
     editPayroll(data) {
-      this.selectedPayroll = {...data};
-      this.showForm = true;
+      this.$router.push({ name: "edit-payroll", params: { id: data.id } });
     },
     async deletePayroll(id) {
-      await http.delete(`/payroll/${id}`);
-      this.loadPayrolls();
+      try {
+        await http.delete(`/payroll/${id}`);
+        this.loadPayrolls();
+      } catch (error) {
+        console.error("Error deleting payroll:", error);
+      }
     },
   },
   mounted() {

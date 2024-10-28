@@ -39,13 +39,13 @@ export default {
       try {
         const response = await http.post("/payroll", payroll); // Hacer la llamada POST
         console.log("Payroll saved:", response.data); // Confirmar que se guarda
-        this.$router.push("/salary-calculation"); // Redirigir después de guardar
+        this.$router.push("/dashboard-admin/salary-calculation/management"); // Redirigir después de guardar
       } catch (error) {
         console.error("Error saving payroll:", error); // Capturar errores
       }
     },
     cancel() {
-      this.$router.push("/salary-calculation"); // Redirigir al cancelar
+      this.$router.push("/dashboard-admin/salary-calculation/management"); // Redirigir al cancelar
     },
   },
 };

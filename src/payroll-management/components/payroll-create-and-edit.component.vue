@@ -6,6 +6,7 @@ export default {
       type: Object,
       required: true,
       default: () => ({
+        serie: "A", // Aquí agregamos la serie
         teacherId: null,
         salaryAmount: 0,
         pensionContribution: 0,
@@ -25,7 +26,7 @@ export default {
   },
   data() {
     return {
-      form: { ...this.payroll },
+      form: { ...this.payroll }, // Iniciamos el formulario con los valores del payroll
     };
   },
   computed: {
@@ -59,7 +60,7 @@ export default {
         return;
       }
       console.log("Saving form:", this.form); // Debugging
-      this.$emit("save", this.form);
+      this.$emit("save", this.form); // Emitimos el formulario completo al guardarlo
     },
     cancel() {
       this.$emit("cancel");
@@ -78,7 +79,7 @@ export default {
       <div class="left-column">
         <div class="form-field">
           <label>Serie Automatica:</label>
-          <pv-input-text value="A" disabled />
+          <pv-input-text v-model="form.serie" value="A" disabled /> <!-- Ahora usamos v-model -->
         </div>
 
         <div class="form-field">
