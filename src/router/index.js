@@ -19,6 +19,7 @@ import NotificationsComponent from "../dashboard-teacher/pages/notifications.com
 import ReservationsComponent from "../dashboard-teacher/pages/reservations.component.vue";
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
+import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -42,8 +43,9 @@ const router = createRouter({
         { path: '/dashboard-admin/home-admin', name: 'home-admin', component: HomeAdminComponent, meta: {title: 'Home Admin'} },
         { path: '/dashboard-admin/personal-data', name: 'personal-data', component: PersonalDataComponent, meta: {title: 'Personal Data'} },
         { path: '/dashboard-admin/personnel-management', name: 'personnel-management', component: PersonnelManagementComponent, meta: {title: 'Personnel Management'} },
-        { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: SalaryCalculationComponent, meta: {title: 'Salary Calculation'}},
-
+        { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: PayrollSummaryComponent, meta: {title: 'Breakdown Reports'}},
+        { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
+        { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },
 
         /**
          *  Dashboard-teacher
