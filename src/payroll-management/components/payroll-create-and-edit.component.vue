@@ -1,4 +1,6 @@
 <script>
+import { TeacherService } from "../services/teacher.service.js";
+
 export default {
   name: "PayrollCreateAndEdit",
   props: {
@@ -19,14 +21,11 @@ export default {
         datePayment: null,
       }),
     },
-    availableTeachers: {
-      type: Array,
-      required: true,
-    },
   },
   data() {
     return {
       form: { ...this.payroll }, // Iniciamos el formulario con los valores del payroll
+      availableTeachers: [], // Almacenará los profesores disponibles
     };
   },
   computed: {
@@ -52,6 +51,17 @@ export default {
       },
       deep: true,
     },
+  },
+  created() {
+    // Cargar los profesores disponibles al crear el componente
+    const teacherService = new TeacherService();
+    teacherService.getAll() // Cambié a getAll en lugar de getAllTeachers
+        .then(teachers => {
+          this.availableTeachers = teachers;
+        })
+        .catch(error => {
+          console.error("Error fetching teachers:", error);
+        });
   },
   methods: {
     save() {
@@ -79,7 +89,7 @@ export default {
       <div class="left-column">
         <div class="form-field">
           <label>Serie Automatica:</label>
-          <pv-input-text v-model="form.serie" value="A" disabled /> <!-- Ahora usamos v-model -->
+          <pv-input-text v-model="form.serie" value="A" disabled/>
         </div>
 
         <div class="form-field">
@@ -105,54 +115,54 @@ export default {
 
         <div class="form-field">
           <label>Forma pago:</label>
-          <pv-input-text v-model="form.paymentMethod" placeholder="Method payment" />
+          <pv-input-text v-model="form.paymentMethod" placeholder="Method payment"/>
         </div>
 
         <div class="form-field">
           <label>Cuenta:</label>
-          <pv-input-text v-model="form.account" placeholder="Cuenta" />
+          <pv-input-text v-model="form.account" placeholder="Cuenta"/>
         </div>
 
         <div class="form-field">
           <label>Observation:</label>
-          <pv-input-text v-model="form.observation" placeholder="Observation" />
+          <pv-input-text v-model="form.observation" placeholder="Observation"/>
         </div>
       </div>
 
       <div class="right-column">
         <div class="form-field">
           <label>Devengado:</label>
-          <pv-input-number v-model.number="form.salaryAmount" :min="0" />
+          <pv-input-number v-model.number="form.salaryAmount" :min="0"/>
         </div>
 
         <div class="form-field">
           <label>Aportacion al trabajador:</label>
-          <pv-input-number v-model.number="form.salaryBonus" :min="0" />
+          <pv-input-number v-model.number="form.salaryBonus" :min="0"/>
         </div>
 
         <div class="form-field">
           <label>Anticipos:</label>
-          <pv-input-number v-model.number="form.pensionContribution" :min="0" />
+          <pv-input-number v-model.number="form.pensionContribution" :min="0"/>
         </div>
 
         <div class="form-field">
           <label>Otras deducciones:</label>
-          <pv-input-number v-model.number="form.otherDeductions" :min="0" />
+          <pv-input-number v-model.number="form.otherDeductions" :min="0"/>
         </div>
 
         <div class="form-field">
           <label>Total Deducir:</label>
-          <pv-input-number :value="totalDeductions" disabled />
+          <pv-input-number :value="totalDeductions" disabled/>
         </div>
 
         <div class="form-field">
           <label>Total Pay:</label>
-          <pv-input-number :value="netSalary" disabled />
+          <pv-input-number :value="netSalary" disabled/>
         </div>
       </div>
 
       <div class="form-actions">
-        <pv-button type="submit" label="Save" class="p-button-success" />
+        <pv-button type="submit" label="Save" class="p-button-success"/>
         <pv-button
             type="button"
             label="Cancel"
