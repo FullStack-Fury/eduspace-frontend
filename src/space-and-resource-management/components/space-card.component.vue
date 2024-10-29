@@ -1,6 +1,11 @@
 <script>
 export default {
-  name: "space-card"
+  name: "space-card",
+  methods: {
+    goToAdd() {
+      this.$router.push('/dashboard-admin/environments-equipment/sport-facilities/add');
+    }
+  }
 }
 </script>
 
@@ -11,7 +16,7 @@ export default {
       <div class="surface-card border-round-xl shadow-2 p-3 h-full">
         <div class="relative">
           <div class="bg-gray-100 border-round-xl flex align-items-center justify-content-center" style="height: 200px;">
-            <i class="pi pi-plus text-4xl text-cyan-500"></i>
+            <i class="pi pi-plus text-4xl text-cyan-500"/>
           </div>
         </div>
         <div class="mt-3">
@@ -26,7 +31,7 @@ export default {
             <i class="pi pi-box text-yellow-500"></i>
             <span>Equipment</span>
           </div>
-          <pv-button label="Add" severity="warning" text raised class="w-full" />
+          <pv-button label="Add" severity="warning" text raised class="w-full" @click="goToAdd"/>
         </div>
       </div>
     </div>
