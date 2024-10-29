@@ -21,6 +21,7 @@ import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-repo
 import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
 import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
+import Add from "../space-and-resource-management/pages/add.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -48,6 +49,9 @@ const router = createRouter({
         { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
         { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },
         {path: '/dashboard-admin/environments-equipment/sport-facilities', name: 'sport-facilities', component: SportsFacilities, meta: {title: 'Sport Facilities'}},
+        {path: '/dashboard-admin/environments-equipment/sport-facilities/add', name: 'add', component: Add, meta: {title: 'Add'}},
+
+
         /**
          *  Dashboard-teacher
          */
