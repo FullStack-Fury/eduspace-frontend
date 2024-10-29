@@ -6,7 +6,7 @@ export default {
       this.$router.push('/');
     },
     goToSports() {
-      this.$router.push('/');
+      this.$router.push('/dashboard-admin/environments-equipment/sport-facilities');
     },
     goToEquipment() {
       this.$router.push('/');
