@@ -70,16 +70,19 @@
     {
       "id": 1,
       "name": "Swimming pool",
+      "capacity": 100,
       "description": "Swimming pool that is shared by all the teachers and students"
     },
     {
       "id": 2,
       "name": "Primary schoolyard",
+      "capacity": 200,
       "description": "Schoolyard that is shared by all the primary students"
     },
     {
       "id": 3,
       "name": "Secondary schoolyard",
+      "capacity": 300,
       "description": "Schoolyard that is shared by all the secondary students"
     }
   ],
