@@ -16,7 +16,6 @@ export default {
       <i class="pi pi-chevron-right text-500"></i>
       <div class="flex align-items-center">
         <h2 class="text-900 text-2xl my-0">Sports facilities</h2>
-        <i class="pi pi-heart ml-2 text-yellow-500"></i>
       </div>
     </div>
   </div>
