@@ -4,7 +4,7 @@ import ReservationManagementComponent from '../reservation-scheduling/pages/rese
 import HomeComponent from '../public/pages/home.component.vue';
 import LoginComponent from '../public/pages/login.component.vue';
 import PayrollManagementComponent from '../payroll-management/pages/payroll-management.component.vue';
-import PayrollCreateAndEdit from '../payroll-management/pages/payroll-create-wrapper.component.vue'; // Asegúrate de importar correctamente
+import PayrollCreateAndEdit from '../payroll-management/pages/payroll-create-wrapper.component.vue';
 import ClassroomManagementComponent from "../breakdown-management/pages/classroom-management.component.vue";
 import ResourceManagementComponent from "../breakdown-management/pages/resource-management.component.vue";
 import ReportResourceComponent from "../breakdown-management/pages/report-resource.component.vue";
@@ -20,6 +20,7 @@ import ReservationsComponent from "../dashboard-teacher/pages/reservations.compo
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
+import ReportsManagementComponent from "../breakdown-management/pages/reports-management.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -56,6 +57,8 @@ const router = createRouter({
         { path: '/dashboard-teacher/reservations', name: 'reservations', component: ReservationsComponent, meta: {title: 'Reservations'}},
         { path: '/dashboard-teacher/reservations/reservation-scheduling', name: 'reservation', component: ReservationManagementComponent, meta: {title: 'Reservation of spaces'} },
         { path: '/dashboard-teacher/breakdown-reports', name: 'breakdown-reports', component: BreakdownReportsComponent, meta: {title: 'Breakdown Reports'}},
+        { path: '/dashboard-teacher/breakdown-reports/classrooms', name: 'Classrooms', component: ClassroomManagementComponent, meta: {title: 'Classrooms'}},
+        { path: '/dashboard-teacher/breakdown-reports/reports', name: 'reports', component: ReportsManagementComponent, meta: {title: 'Reports'}},
         { path: '/dashboard-teacher/wages', name: 'wages', component: WagesComponent, meta:{title: 'Wages'}},
         { path: '/dashboard-teacher/space-availability', component: ReservationManagementComponent, meta: {title: 'Space Availability'} },
 

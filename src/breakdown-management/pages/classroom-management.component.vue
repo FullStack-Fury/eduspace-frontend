@@ -2,12 +2,26 @@
   <div class="classroom-management">
     <h1>Classroom Management</h1>
     <div class="classroom-cards">
-      <div v-for="classroom in filteredClassrooms" :key="classroom.id" class="classroom-card">
-        <h2>{{ classroom.name }}</h2>
-        <p>{{ classroom.description }}</p>
-        <button @click="goToClassroomResources(classroom.id)">View Resources</button>
-      </div>
+      <pv-card
+          v-for="classroom in filteredClassrooms"
+          :key="classroom.id"
+          class="classroom-card"
+          style="width: 250px; margin-bottom: 20px;"
+      >
+        <template #header>
+          <h2>{{ classroom.name || 'No name available' }}</h2>
+        </template>
+        <template #content>
+          <p>{{ classroom.description || 'No description available' }}</p>
+          <pv-button
+              label="View Resources"
+              @click="goToClassroomResources(classroom.id)"
+              class="view-resources-button"
+          />
+        </template>
+      </pv-card>
     </div>
+    <p v-if="filteredClassrooms.length === 0">No classrooms available for this teacher.</p>
   </div>
 </template>
 
@@ -37,6 +51,7 @@ export default {
       try {
         const response = await classroomService.getAll();
         this.classrooms = response.data;
+        console.log("Classrooms loaded:", this.classrooms);
       } catch (error) {
         console.error("Error loading classrooms", error);
       }
@@ -61,8 +76,6 @@ export default {
 
 .classroom-card {
   border: 1px solid #ccc;
-  padding: 15px;
   border-radius: 8px;
-  width: 200px;
 }
 </style>
