@@ -52,7 +52,7 @@ export default {
         const reports = response.data || [];
         for (let report of reports) {
           const resource = await this.resourceService.getById(report.resourceId);
-          report.resourceName = resource.data.name; // Este campo no se debe enviar al servidor al actualizar
+          report.resourceName = resource.data.name;
         }
         this.reports = reports;
       } catch (error) {
@@ -60,12 +60,12 @@ export default {
       }
     },
     async toggleStatus(report) {
-      const { resourceName, ...reportToUpdate } = report; // Excluimos resourceName
+      const { resourceName, ...reportToUpdate } = report;
       const updatedReport = { ...reportToUpdate, status: report.status === "en proceso" ? "completado" : "en proceso" };
 
       try {
         await this.reportService.update(report.id, updatedReport);
-        report.status = updatedReport.status; // Actualiza el estado en la vista
+        report.status = updatedReport.status;
       } catch (error) {
         console.error("Error updating report status:", error);
       }

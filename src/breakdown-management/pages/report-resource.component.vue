@@ -29,7 +29,7 @@
       <div class="form-group">
         <pv-date-picker
             id="created_at"
-            v-model="form.created_at"
+            v-model="formattedCreatedAt"
             dateFormat="yy-mm-dd"
             showIcon
         />
@@ -55,14 +55,14 @@ export default {
         kind_of_report: '',
         description: '',
         resourceId: null,
-        created_at: new Date().toISOString().slice(0, 10), // Verifica el formato requerido por tu API
         status: 'en proceso',
       },
+      formattedCreatedAt: new Date().toISOString().slice(0, 10),
       reportService: new ReportService(),
     };
   },
   created() {
-    this.form.resourceId = this.$route.params.resourceId; // Asegúrate de que resourceId esté presente en la ruta
+    this.form.resourceId = this.$route.params.resourceId;
   },
   methods: {
     async submitForm() {
@@ -70,20 +70,24 @@ export default {
         kind_of_report: this.form.kind_of_report,
         description: this.form.description,
         resourceId: this.form.resourceId,
-        created_at: this.form.created_at,
+        created_at: this.getDateWithoutTime(this.formattedCreatedAt),
         status: this.form.status,
       };
 
-      console.log("Datos del reporte:", reportData); // Agrega esto para depuración
+      console.log("Datos del reporte:", reportData);
 
       try {
         await this.reportService.create(reportData);
         this.$router.push('/classrooms');
       } catch (error) {
-        console.error("Error creating report:", error.response.data || error); // Asegúrate de capturar el mensaje de error
+        console.error("Error creating report:", error.response.data || error);
         alert("Error creating report. Please check the console for details.");
       }
     },
+    getDateWithoutTime(dateString) {
+      const date = new Date(dateString);
+      return date.toISOString().split('T')[0];
+    }
   },
 };
 </script>
@@ -193,4 +197,3 @@ h2::after {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
 </style>
-
