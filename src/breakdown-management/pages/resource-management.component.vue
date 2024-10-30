@@ -6,7 +6,6 @@
           v-for="resource in resources"
           :key="resource.id"
           class="resource-card"
-          style="width: 250px; margin-bottom: 20px;"
       >
         <h2 class="resource-title">{{ resource.name || 'No name available' }}</h2>
         <p class="resource-kind">Kind: {{ resource.kind_of_resource || 'No kind available' }}</p>
@@ -25,7 +24,7 @@
 
 <script>
 import { ResourceService } from "../services/resource.service.js";
-import { ClassroomService } from "../services/classroom.service.js"; // Asegúrate de importar el servicio de aulas
+import { ClassroomService } from "../services/classroom.service.js";
 
 export default {
   name: 'ResourceManagement',
@@ -33,12 +32,12 @@ export default {
     return {
       resources: [],
       classroomId: this.$route.params.classroomId,
-      classroomName: '', // Propiedad para almacenar el nombre del aula
+      classroomName: '',
     };
   },
   created() {
     this.loadResources();
-    this.loadClassroomName(); // Cargar el nombre del aula
+    this.loadClassroomName();
   },
   methods: {
     async loadResources() {
@@ -51,10 +50,10 @@ export default {
       }
     },
     async loadClassroomName() {
-      const classroomService = new ClassroomService(); // Crear instancia del servicio de aulas
+      const classroomService = new ClassroomService();
       try {
-        const response = await classroomService.getById(this.classroomId); // Obtener el aula por ID
-        this.classroomName = response.data.name; // Almacenar el nombre del aula
+        const response = await classroomService.getById(this.classroomId);
+        this.classroomName = response.data.name;
       } catch (error) {
         console.error("Error loading classroom name", error);
       }
@@ -72,43 +71,56 @@ export default {
 }
 
 .centered-title {
-  text-align: center; /* Centrar el título */
-  margin-bottom: 20px; /* Espacio inferior para separar del contenido */
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .resource-cards {
   display: flex;
   flex-wrap: wrap;
   gap: 20px;
-  justify-content: center; /* Centrar el contenido dentro del contenedor */
+  justify-content: center;
 }
 
 .resource-card {
-  border: 1px solid black;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  padding: 15px; /* Añadir padding para mejorar el espacio interno */
-  transition: transform 0.2s; /* Transición suave al pasar el mouse */
+  width: 250px; /* Ajusta el ancho según sea necesario */
+  border: 1px solid #0CC0DF; /* Color del borde */
+  border-radius: 50px; /* Esquinas muy redondeadas */
+  padding: 1.5rem;
+  box-shadow: 0 4px 28px rgba(12, 192, 223, 0.28);
+  transition: transform 0.2s;
 }
 
 .resource-card:hover {
-  transform: scale(1.05); /* Aumentar el tamaño al pasar el mouse */
+  transform: translateY(-10px); /* Efecto al pasar el mouse */
 }
 
 .resource-title {
-  color: black;
-  margin: 0;
-  text-align: center; /* Centrar el título del recurso */
+  text-align: center;
+  font-size: 1.5rem; /* Tamaño del texto */
+  margin-bottom: 0.5rem; /* Espacio inferior */
 }
 
 .resource-kind {
-  color: black;
-  text-align: center; /* Centrar el tipo de recurso */
+  text-align: center;
+  color: #333; /* Color del texto */
 }
 
 .button-container {
   display: flex;
-  justify-content: center; /* Centrar el botón */
-  margin-top: 10px; /* Espacio entre el contenido y el botón */
+  justify-content: center;
+  margin-top: 10px;
+}
+
+.report-resource-button {
+  background-color: #ffcc00; /* Color de fondo del botón */
+  color: #000; /* Color del texto del botón */
+  border-radius: 50px; /* Esquinas redondeadas del botón */
+  padding: 0.5rem 1rem; /* Espaciado interno del botón */
+  text-transform: uppercase; /* Transformar texto a mayúsculas */
+}
+
+.report-resource-button:hover {
+  background-color: #ffdb4d; /* Color al pasar el mouse sobre el botón */
 }
 </style>

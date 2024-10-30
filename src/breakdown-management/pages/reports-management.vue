@@ -1,6 +1,6 @@
 <template>
   <div class="report-table">
-    <h2>Reports</h2>
+    <h2 class="table-title">Reports</h2>
     <table>
       <thead>
       <tr>
@@ -18,7 +18,11 @@
         <td>{{ report.kind_of_report }}</td>
         <td>{{ report.description }}</td>
         <td>{{ report.created_at }}</td>
-        <td>{{ report.status }}</td>
+        <td>
+            <span :class="['status-label', report.status === 'en proceso' ? 'in-progress' : 'completed']">
+              {{ report.status }}
+            </span>
+        </td>
         <td>
           <i
               class="pi pi-refresh status-icon"
@@ -81,9 +85,16 @@ export default {
   max-width: 1000px;
   margin: 50px auto;
   padding: 20px;
-  border-radius: 8px;
-  background-color: #fff;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  border-radius: 16px; /* Esquinas más redondeadas */
+  background-color: #f9f9f9; /* Color de fondo suave */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+}
+
+.table-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #333; /* Color del título */
 }
 
 table {
@@ -91,24 +102,44 @@ table {
   border-collapse: collapse;
 }
 
-th,
-td {
+th, td {
   padding: 15px;
   text-align: left;
   border-bottom: 1px solid #ddd;
 }
 
-.status-icon {
-  font-size: 1.5rem;
-  cursor: pointer;
-  transition: color 0.3s;
+th {
+  background-color: #0CC0DF; /* Color de fondo para el encabezado */
+  color: white; /* Color del texto del encabezado */
+  font-weight: bold;
+}
+
+.status-label {
+  padding: 5px 10px;
+  border-radius: 12px; /* Esquinas redondeadas */
+  font-weight: bold;
 }
 
 .in-progress {
-  color: #28a745;
+  background-color: #28a745; /* Color de fondo para 'en proceso' */
+  color: white; /* Color del texto */
 }
 
 .completed {
-  color: #007bff;
+  background-color: #007bff; /* Color de fondo para 'completado' */
+  color: white; /* Color del texto */
+}
+
+.status-icon {
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: red; /* Color del ícono */
+  transition: color 0.3s;
+  background: none; /* Elimina cualquier fondo */
+  padding: 0; /* Elimina el padding */
+}
+
+.status-icon:hover {
+  color: #ffcc00; /* Color al pasar el mouse sobre el ícono */
 }
 </style>

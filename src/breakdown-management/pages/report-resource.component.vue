@@ -37,9 +37,9 @@
       </div>
       <pv-button
           type="submit"
-          label="Create Report"
+          label="Create report"
           icon="pi pi-check"
-          class="p-button-success"
+          class="submit-button"
       />
     </form>
   </div>
@@ -74,14 +74,12 @@ export default {
         status: this.form.status,
       };
 
-      console.log("Datos del reporte:", reportData);
-
       try {
         await this.reportService.create(reportData);
         this.$router.push('/classrooms');
       } catch (error) {
-        console.error("Error creating report:", error.response.data || error);
-        alert("Error creating report. Please check the console for details.");
+        console.error("Error al crear el reporte:", error);
+        alert("Error al crear el reporte. Por favor, revisa la consola para más detalles.");
       }
     },
     getDateWithoutTime(dateString) {
@@ -94,106 +92,127 @@ export default {
 
 <style scoped>
 .report-resource {
-  max-width: 800px;
+  max-width: 700px;
   margin: 50px auto;
   padding: 40px;
-  border-radius: 12px;
-  background-color: #fff;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f0f8ff, #ffffff);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 h2 {
   text-align: center;
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: bold;
-  color: #333;
+  color: #2c3e50;
   margin-bottom: 30px;
   position: relative;
 }
 
 h2::after {
   content: '';
+  display: block;
   width: 80px;
   height: 4px;
-  background-color: #28a745;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: -10px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
+  margin: 15px auto;
   border-radius: 4px;
 }
 
 .report-form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 25px;
 }
 
 .form-group {
   position: relative;
 }
 
-.pv-input-text,
-.pv-textarea,
-.pv-date-picker {
-  width: calc(100% - 20px);
-  max-width: 800px;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+:deep(.p-inputtext),
+:deep(.p-textarea),
+:deep(.p-datepicker) {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  background-color: #fff;
 }
 
-.pv-input-text:focus,
-.pv-textarea:focus,
-.pv-date-picker:focus {
-  border-color: #28a745;
-  box-shadow: 0 0 8px rgba(40, 167, 69, 0.5);
+:deep(.p-inputtext:focus),
+:deep(.p-textarea:focus),
+:deep(.p-datepicker:focus) {
+  border-color: #3498db;
+  box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.2);
 }
 
 .float-label {
   position: absolute;
-  left: 12px;
-  top: 12px;
-  font-size: 18px;
-  color: #555;
+  left: 14px;
+  top: 14px;
+  font-size: 1.1rem;
+  color: #7f8c8d;
   transition: 0.2s ease all;
   pointer-events: none;
 }
 
-.pv-input-text:focus + .float-label,
-.pv-input-text:not(:placeholder-shown) + .float-label,
-.pv-textarea:focus + .float-label,
-.pv-textarea:not(:placeholder-shown) + .float-label {
+:deep(.p-inputtext:focus) + .float-label,
+:deep(.p-inputtext:not(:placeholder-shown)) + .float-label,
+:deep(.p-textarea:focus) + .float-label,
+:deep(.p-textarea:not(:placeholder-shown)) + .float-label {
   top: -10px;
   font-size: 0.9rem;
-  color: #28a745;
+  color: #3498db;
+  background-color: #fff;
+  padding: 0 5px;
 }
 
 .fixed-label {
   position: absolute;
-  top: -20px;
-  left: 12px;
-  font-size: 1.2rem;
-  color: #28a745;
+  top: -25px;
+  left: 14px;
+  font-size: 1.1rem;
+  color: #3498db;
 }
 
-.p-button-success {
-  width: 100%;
-  padding: 12px;
+:deep(.submit-button) {
+  padding: 14px;
   font-size: 1.2rem;
   font-weight: bold;
-  border-radius: 8px;
-  background-color: #28a745;
+  border-radius: 12px;
+  background: linear-gradient(90deg, #3498db, #2ecc71);
   border: none;
   color: #fff;
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  transition: all 0.3s ease;
+  cursor: pointer;
 }
 
-.p-button-success:hover {
-  background-color: #218838;
-  transform: scale(1.03);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+:deep(.submit-button:hover) {
+  background: linear-gradient(90deg, #2980b9, #27ae60);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 20px rgba(0, 0, 0, 0.2);
+}
+
+:deep(.p-datepicker) {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+:deep(.p-datepicker-trigger) {
+  border-top-right-radius: 12px;
+  border-bottom-right-radius: 12px;
+}
+
+@media (max-width: 768px) {
+  .report-resource {
+    padding: 30px;
+    margin: 30px auto;
+  }
+
+  h2 {
+    font-size: 2.2rem;
+  }
 }
 </style>
