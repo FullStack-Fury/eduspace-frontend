@@ -1,59 +1,87 @@
 <template>
-  <div class="reports-management">
-    <h2>Reports Management</h2>
-    <pv-data-table :value="reports" :paginator="true" :rows="10">
-      <pv-column field="kind_of_report" header="Kind of Report"></pv-column>
-      <pv-column field="description" header="Description"></pv-column>
-      <pv-column field="resourceId" header="Resource ID"></pv-column>
-      <pv-column field="created_at" header="Created At"></pv-column>
-      <pv-column header="Actions">
-        <template v-slot:body="{ data }">
-          <button @click="deleteReport(data.id)">Delete</button>
-        </template>
-      </pv-column>
-    </pv-data-table>
+  <div class="report-table">
+    <h2>Reports</h2>
+    <table>
+      <thead>
+      <tr>
+        <th>Kind of Report</th>
+        <th>Description</th>
+        <th>Created At</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr v-for="report in reports" :key="report.id">
+        <td>{{ report.kind_of_report }}</td>
+        <td>{{ report.description }}</td>
+        <td>{{ report.created_at }}</td>
+        <td>{{ report.status }}</td>
+        <td>
+          <i
+              class="pi pi-refresh status-icon"
+              @click="toggleStatus(report)"
+              :class="{'in-progress': report.status === 'en proceso', 'completed': report.status === 'completado'}"
+          ></i>
+        </td>
+      </tr>
+      </tbody>
+    </table>
   </div>
 </template>
 
 <script>
 import { ReportService } from "../services/report.service.js";
+import { ResourceService } from "../services/resource.service.js";
 
 export default {
-  name: "ReportsManagement",
   data() {
     return {
-      reports: []
+      reports: [],
+      reportService: new ReportService(),
+      resourceService: new ResourceService(),
     };
   },
   created() {
-    this.loadReports();
+    this.fetchReports();
   },
   methods: {
-    async loadReports() {
-      const reportService = new ReportService();
+    async fetchReports() {
       try {
-        const response = await reportService.getAll();
-        this.reports = response.data; // Asume que los datos están en response.data
+        const response = await this.reportService.getAll();
+        const reports = response.data || [];
+        for (let report of reports) {
+          const resource = await this.resourceService.getById(report.resourceId);
+          report.resourceName = resource.data.name; // Este campo no se debe enviar al servidor al actualizar
+        }
+        this.reports = reports;
       } catch (error) {
-        console.error("Error loading reports:", error);
+        console.error("Error fetching reports:", error);
       }
     },
-    async deleteReport(id) {
-      const reportService = new ReportService();
+    async toggleStatus(report) {
+      const { resourceName, ...reportToUpdate } = report; // Excluimos resourceName
+      const updatedReport = { ...reportToUpdate, status: report.status === "en proceso" ? "completado" : "en proceso" };
+
       try {
-        await reportService.delete(id);
-        this.reports = this.reports.filter(report => report.id !== id); // Actualiza la lista de informes
+        await this.reportService.update(report.id, updatedReport);
+        report.status = updatedReport.status; // Actualiza el estado en la vista
       } catch (error) {
-        console.error("Error deleting report:", error);
+        console.error("Error updating report status:", error);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style scoped>
-.reports-management {
+.report-table {
+  max-width: 1000px;
+  margin: 50px auto;
   padding: 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 table {
@@ -61,24 +89,24 @@ table {
   border-collapse: collapse;
 }
 
-th, td {
-  border: 1px solid #ddd;
-  padding: 8px;
+th,
+td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
 }
 
-th {
-  background-color: #f2f2f2;
-}
-
-button {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 5px 10px;
+.status-icon {
+  font-size: 1.5rem;
   cursor: pointer;
+  transition: color 0.3s;
 }
 
-button:hover {
-  opacity: 0.8;
+.in-progress {
+  color: #28a745;
+}
+
+.completed {
+  color: #007bff;
 }
 </style>

@@ -1,7 +1,5 @@
 import http from "../../shared/services/http-common.js";
 
-let currentId = 2;
-
 export class ReportService {
     resourceEndpoint = '/reports';
 
@@ -14,10 +12,7 @@ export class ReportService {
     }
 
     create(reportResource) {
-
-        reportResource.id = ++currentId;
-
-
+        // Deja que json-server maneje el id automáticamente
         return http.post(this.resourceEndpoint, reportResource).then(response => response.data);
     }
 
