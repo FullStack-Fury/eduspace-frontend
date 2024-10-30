@@ -4,6 +4,7 @@
     <table>
       <thead>
       <tr>
+        <th>Resource Name</th>
         <th>Kind of Report</th>
         <th>Description</th>
         <th>Created At</th>
@@ -13,6 +14,7 @@
       </thead>
       <tbody>
       <tr v-for="report in reports" :key="report.id">
+        <td>{{ report.resourceName || 'Unknown Resource' }}</td>
         <td>{{ report.kind_of_report }}</td>
         <td>{{ report.description }}</td>
         <td>{{ report.created_at }}</td>
@@ -52,7 +54,7 @@ export default {
         const reports = response.data || [];
         for (let report of reports) {
           const resource = await this.resourceService.getById(report.resourceId);
-          report.resourceName = resource.data.name;
+          report.resourceName = resource.data.name; // Add resource name to report
         }
         this.reports = reports;
       } catch (error) {
