@@ -67,7 +67,7 @@ app.use(router);
 
 // Use PrimeVue
 
-app.use(PrimeVue, { theme: { preset: Aura }, ripple: true })
+app.use(PrimeVue, { theme: { preset: Aura,options: {darkModeSelector: 'none'} }, ripple: true })
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService);
