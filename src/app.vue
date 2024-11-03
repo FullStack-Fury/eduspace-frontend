@@ -1,81 +1,45 @@
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
-import {mapActions, mapGetters} from "vuex";
-
-// Importar los SVG desde las rutas especificadas
-import HomeIcon from "/src/assets/admin/Home.svg";
-import ClassroomIcon from "/src/assets/admin/Clasroom.svg";
-import EnviromentIcon from "/src/assets/admin/Enviroment.svg";
-import PersonalDIcon from "/src/assets/admin/Personal_Data.svg";
-import PersonalMIcon from "/src/assets/admin/Personal_Management.svg";
-import SalaryIcon from "/src/assets/admin/Salary_Calculation.svg";
-
-// Íconos específicos para la vista del "teacher"
-import BreakdownIcon from "/src/assets/teacher/Breakdown_Reports.svg";
-import NotificationIcon from "/src/assets/teacher/Notification.svg";
-import PagesIcon from "/src/assets/teacher/Pages.svg";
-import ReservationIcon from "/src/assets/teacher/Reservation.svg";
-import SpaceIcon from "/src/assets/teacher/Space_Availability.svg";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   name: 'app',
-  components: {LanguageSwitcher},
-  title: 'EduSpace',
-  data() {
-    return {
-      drawer: false,
-      items: [
-        {label: 'Home', to: '/home', svg: HomeIcon},
-        {label: 'Meet', to: '/events-scheduling/meet'},
-        {label: 'Reservation', to: '/reservation-scheduling'},
-        {label: 'Login', to: '/login'},
-      ]
-    }
-  },
+  components: { LanguageSwitcher },
   computed: {
-    ...mapGetters('user', ['userId', 'userRole'])
+    ...mapGetters(['userId', 'userRole']), // Obtén el rol y el ID desde Vuex
   },
   methods: {
-    ...mapActions('user', ['setUser', 'clearUser']),
+    ...mapActions(['clearUser']),
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
     handleLogOut() {
-      this.clearUser();
-      console.log('user cleared', this.userId, this.userRole);
-
-      this.$router.push({name: 'login'});
+      this.clearUser(); // Limpia el estado del usuario en Vuex
+      this.$router.push({ name: 'login' });
     },
     changeToolbar() {
       if (this.userRole === 1) {
-        console.log('welcome admin');
         this.items = [
-          {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
-          {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
-          {
-            label: 'Classroom Changes and Meetings',
-            to: '/dashboard-admin/classroom-changes-meetings',
-            svg: ClassroomIcon
-          },
-          {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
-          {label: 'Personnel Management', to: '/dashboard-admin/personnel-management', svg: PersonalMIcon},
-          {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation', svg: SalaryIcon}
+          { label: 'Home', to: '/dashboard-admin/home-admin' },
+          { label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment' },
+          { label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings' },
+          { label: 'Personal Data', to: '/dashboard-admin/personal-data' },
+          { label: 'Personnel Management', to: '/dashboard-admin/personnel-management' },
+          { label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation' }
         ];
       } else if (this.userRole === 2) {
-        console.log('welcome teacher');
-
         this.items = [
-          {label: 'Home', to: '/dashboard-teacher/home-teacher', svg: HomeIcon},
-          {label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon},
-          {label: 'Reservations', to: '/dashboard-teacher/reservations', svg: ReservationIcon},
-          {label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports', svg: BreakdownIcon},
-          {label: 'Wages', to: '/dashboard-teacher/wages', svg: PagesIcon},
-          {label: 'Space Availability', to: '/dashboard-teacher/space-availability', svg: SpaceIcon}
+          { label: 'Home', to: '/dashboard-teacher/home-teacher' },
+          { label: 'Notifications', to: '/dashboard-teacher/notifications' },
+          { label: 'Reservations', to: '/dashboard-teacher/reservations' },
+          { label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports' },
+          { label: 'Wages', to: '/dashboard-teacher/wages' },
+          { label: 'Space Availability', to: '/dashboard-teacher/space-availability' }
         ];
       } else {
         this.items = [
-          {label: 'Home', to: '/home', svg: HomeIcon},
-          {label: 'Login', to: '/login'}
+          { label: 'Home', to: '/home' },
+          { label: 'Login', to: '/login' }
         ];
       }
     }
@@ -85,15 +49,17 @@ export default {
   },
   watch: {
     userRole(newRole) {
-      this.changeToolbar();
+      this.changeToolbar(); // Actualiza el toolbar cuando userRole cambia
     }
   }
-}
+};
 </script>
 
+
 <template>
-  <pv-toast/>
-  <div class="app-container"> <!-- Contenedor principal flex -->
+  <pv-toast />
+  <div class="app-container">
+    <!-- Contenedor principal flex -->
     <header class="sidenav-wrapper">
       <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
         <h2>EduSpace</h2>
@@ -107,14 +73,17 @@ export default {
                 exact-active-class="router-link-exact-active"
             >
               <pv-button
-                  :class="['p-button-text', { 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]">
-                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;"/>
+                  :class="[
+                  'p-button-text',
+                  { 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 },
+                ]"
+              >
+                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;" />
                 {{ item.label }}
               </pv-button>
             </router-link>
-            <pv-button class="pv-button" v-else
-                       @click="item.onClick">
-              <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;"/>
+            <pv-button class="pv-button" v-else @click="item.onClick">
+              <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;" />
               {{ item.label }}
             </pv-button>
           </div>
@@ -126,21 +95,20 @@ export default {
                 :class="[{ 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]"
                 @click="handleLogOut"
             >
-              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon"/>
+              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon" />
               <span>Log out</span>
             </pv-button>
           </div>
-          <div class="copyright-text">
-            Copyright EduSpace team
-          </div>
+          <div class="copyright-text">Copyright EduSpace team</div>
         </div>
       </div>
     </header>
     <main class="main-content">
-      <router-view/>
+      <router-view />
     </main>
   </div>
 </template>
+
 
 <style scoped>
 .app-container {
