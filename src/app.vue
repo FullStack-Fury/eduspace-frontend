@@ -46,7 +46,7 @@ export default {
           {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
           {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
-          {label: 'Personnel Management', to: '/dashboard-admin/personnel-management', svg: PersonalMIcon},
+          {label: 'Personal Management', to: '/dashboard-admin/personal-management', svg: PersonalMIcon},
           {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation', svg: SalaryIcon}
         ];
       } else if (this.userRole === 2) { // Si es profesor
