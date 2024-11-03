@@ -98,6 +98,18 @@
       "administratorId": 3,
       "password": "123456789",
       "id": 1
+    },
+    {
+      "firstName": "Luis",
+      "lastName": "gonzales",
+      "email": "luis@school.com",
+      "dni": "11122",
+      "phone": "1521345",
+      "workingDays": "Saturday - Sunday",
+      "field": "Math",
+      "administratorId": 8,
+      "password": "11122",
+      "id": 2
     }
   ],
   "administrators": [
@@ -165,6 +177,16 @@
       "phone": "21312312",
       "password": "1231das",
       "id": 7
+    },
+    {
+      "firstName": "oscar",
+      "lastName": "gonzales",
+      "email": "admin@gmail.com",
+      "dni": "123156431",
+      "address": "asdasd",
+      "phone": "48462135",
+      "password": "123456789",
+      "id": 8
     }
   ],
   "meet": [
@@ -205,6 +227,19 @@
         {
           "id": 2,
           "name": "Pepe undefined"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "reunion",
+      "day": "2024-11-05",
+      "hour": "07:34",
+      "location": "salon 15",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "maria fernanda rosas alvarado"
         }
       ]
     }
