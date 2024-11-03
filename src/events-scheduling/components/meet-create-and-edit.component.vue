@@ -23,24 +23,24 @@ export default {
     };
   },
   created() {
-    this.loadTeachers();
-    this.formatTeachersForEdit();
+    this.loadTeachers().then(() => {
+      this.formatTeachersForEdit();
+    });
   },
   methods: {
-    loadTeachers() {
-      const teacherService = new TeachersService();
-      teacherService.getAllTeachers()
-          .then(response => {
-            this.teachers = response.data.map(teacher => ({
-              id: teacher.id,
-              name: `${teacher.name} ${teacher.lastname}`,
-              username: teacher.username
-            }));
-            console.log("Teachers loaded:", this.teachers);
-          })
-          .catch(error => {
-            console.error("Error loading teachers:", error);
-          });
+    async loadTeachers() {
+      try {
+        const teacherService = new TeachersService();
+        const response = await teacherService.getAllTeachers(); // Asegúrate de que esto retorne datos correctamente
+        this.teachers = response.data.map(teacher => ({
+          id: teacher.id,
+          name: `${teacher.firstName} ${teacher.lastName}`,
+          username: teacher.username
+        }));
+        console.log("Teachers loaded:", this.teachers); // Confirma que los teachers se cargan y formatean correctamente
+      } catch (error) {
+        console.error("Error loading teachers:", error);
+      }
     },
     formatTeachersForEdit() {
       // Convertir item.teachers a IDs si es necesario
@@ -67,19 +67,19 @@ export default {
         this.item.day = this.formatDate(this.item.day);
         this.item.hour = this.formatTime(this.item.hour);
 
-        // Asignar directamente el resultado a this.item.teachers
+        // Asegúrate de que item.teachers esté en el formato correcto
         this.item.teachers = this.teachers
-            .filter(teacher => this.item.teachers.includes(teacher.id))
+            .filter(teacher => this.item.teachers.includes(teacher.id)) // Solo los seleccionados
             .map(teacher => ({
               id: teacher.id,
-              name: teacher.name,
-              lastname: teacher.lastname,
+              name: teacher.name, // Utilizar el nombre completo si es necesario
               username: teacher.username
             }));
 
         this.$emit('save-requested', this.item);
       }
     }
+
   }
 };
 </script>
