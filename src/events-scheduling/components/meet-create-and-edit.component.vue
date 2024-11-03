@@ -1,38 +1,52 @@
 <script>
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
-import {TeachersService} from "../services/teachers.service.js";
+import { TeachersService } from "../services/teachers.service.js";
 
 export default {
   name: "meet-create-and-edit-dialog",
-  components: {CreateAndEdit},
+  components: { CreateAndEdit },
   props: {
-    item: null,
-    visible: Boolean
+    item: {
+      type: Object,
+      required: true
+    },
+    visible: {
+      type: Boolean,
+      required: true
+    }
   },
   data() {
     return {
       submitted: false,
       teachers: [],
       selectedTeachers: []
-    }
+    };
   },
   created() {
-    this.loadTeachers();
+    this.loadTeachers().then(() => {
+      this.formatTeachersForEdit();
+    });
   },
   methods: {
-    loadTeachers() {
-      const teacherService = new TeachersService();
-      teacherService.getAllTeachers().then(response => {
+    async loadTeachers() {
+      try {
+        const teacherService = new TeachersService();
+        const response = await teacherService.getAllTeachers(); // Asegúrate de que esto retorne datos correctamente
         this.teachers = response.data.map(teacher => ({
           id: teacher.id,
-          name: teacher.name,
-          lastname: teacher.lastname,
+          name: `${teacher.firstName} ${teacher.lastName}`,
           username: teacher.username
         }));
-        console.log("Teachers loaded:", this.teachers);
-      }).catch(error => {
+        console.log("Teachers loaded:", this.teachers); // Confirma que los teachers se cargan y formatean correctamente
+      } catch (error) {
         console.error("Error loading teachers:", error);
-      });
+      }
+    },
+    formatTeachersForEdit() {
+      // Convertir item.teachers a IDs si es necesario
+      if (Array.isArray(this.item.teachers) && this.item.teachers.length > 0 && typeof this.item.teachers[0] === 'object') {
+        this.item.teachers = this.item.teachers.map(teacher => teacher.id);
+      }
     },
     formatDate(date) {
       const d = new Date(date);
@@ -43,7 +57,9 @@ export default {
       return d.toTimeString().split(' ')[0].substring(0, 5);
     },
     onCancelRequested() {
-      this.$emit('cancel-requested');
+      console.log("Cancel button clicked in child component"); // Log para confirmar el clic
+      this.$emit('update:visible', false); // Emitir el evento para actualizar la visibilidad en el padre
+      this.$emit('cancel-requested'); // Emitir el evento de cancelación
     },
     onSaveRequested() {
       this.submitted = true;
@@ -51,27 +67,32 @@ export default {
         this.item.day = this.formatDate(this.item.day);
         this.item.hour = this.formatTime(this.item.hour);
 
-        const selectedTeachers = this.teachers.filter(teacher =>
-            this.item.teachers.includes(teacher.id)
-        ).map(teacher => ({
-          id: teacher.id,
-          name: teacher.name,
-          lastname: teacher.lastname,
-          username: teacher.username
-        }));
-
-        this.item.teachers = selectedTeachers;
+        // Asegúrate de que item.teachers esté en el formato correcto
+        this.item.teachers = this.teachers
+            .filter(teacher => this.item.teachers.includes(teacher.id)) // Solo los seleccionados
+            .map(teacher => ({
+              id: teacher.id,
+              name: teacher.name, // Utilizar el nombre completo si es necesario
+              username: teacher.username
+            }));
 
         this.$emit('save-requested', this.item);
       }
     }
+
   }
-}
+};
 </script>
 
 <template>
-  <create-and-edit :entity="item" :visible="visible" entity-name="Meet"
-                   @cancelled="onCancelRequested" @saved="onSaveRequested">
+  <create-and-edit
+      :entity="item"
+      :visible="visible"
+      entity-name="Meet"
+      @update:visible="(value) => $emit('update:visible', value)"
+      @cancelled="onCancelRequested"
+      @saved="onSaveRequested"
+  >
     <template #content>
       <div class="p-fluid">
         <div class="field mt-5">
@@ -79,6 +100,7 @@ export default {
             <label for="name">Name</label>
             <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }" />
           </pv-float-label>
+
           <pv-float-label>
             <label for="day">Day</label>
             <pv-date-picker
@@ -114,11 +136,11 @@ export default {
             <pv-multi-select
                 id="invite"
                 v-model="item.teachers"
-            :options="teachers"
-            option-label="name"
-            option-value="id"
-            placeholder="Select teachers"
-            :class="{ 'p-invalid': submitted && !item.teachers }"
+                :options="teachers"
+                option-label="name"
+                option-value="id"
+                placeholder="Select teachers"
+                :class="{ 'p-invalid': submitted && !item.teachers }"
             />
           </pv-float-label>
 
@@ -131,5 +153,7 @@ export default {
     </template>
   </create-and-edit>
 </template>
+
 <style scoped>
+/* Estilos específicos */
 </style>

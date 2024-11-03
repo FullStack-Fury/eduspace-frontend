@@ -40,6 +40,14 @@ export default {
       this.meet = new Meet(item);
       this.isEdit = true;
       this.submitted = false;
+
+      // Asegurarse de que item.teachers sea un array de IDs
+      if (Array.isArray(this.meet.teachers) && this.meet.teachers.length > 0) {
+        this.meet.teachers = this.meet.teachers.map(teacher => teacher.id ? teacher.id : teacher);
+      } else {
+        this.meet.teachers = [];
+      }
+
       this.createAndEditDialogIsVisible = true;
     },
     onDeleteItem(item) {
@@ -100,11 +108,13 @@ export default {
       this.notifySuccessfulAction('Meetings Deleted');
     },
     getTeacherNames(teacherIds) {
+      if (!this.teachers || this.teachers.length === 0) return ''; // Si teachers no está disponible, retornar vacío
       return teacherIds.map(id => {
         const teacher = this.teachers.find(t => t.id === id);
-        return teacher ? `${teacher.name} ${teacher.lastname}` : '';
+        return teacher ? `${teacher.firstName} ${teacher.lastName}` : ''; // Usar firstName y lastName según la estructura
       }).join(', ');
     },
+
     //#endregion
   },
   //#region Lifecycle Hooks
@@ -151,7 +161,8 @@ export default {
         :item="meet"
         :visible="createAndEditDialogIsVisible"
         v-on:cancel-requested="onCancelRequested"
-        v-on:save-requested="onSaveRequested($event)"/>
+        v-on:save-requested="onSaveRequested($event)"
+        @update:visible="value => createAndEditDialogIsVisible = value"/>
   </div>
 </template>
 

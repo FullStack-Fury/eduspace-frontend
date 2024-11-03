@@ -3,13 +3,19 @@
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import {SpaceReservationService} from "../services/space-reservation.service.js";
-
 
 export default {
   name: "weekly-calendar",
   props: {
     events: {type: Array, required: true},
+    areaId: {
+      type: Number,
+      required:true
+    },
+    userId: {
+      type: Number,
+      required:true
+    }
   },
   computed: {
     calendarOptions() {
@@ -44,7 +50,7 @@ export default {
         */
 
       }
-    },
+    }
   },
   data() {
     return {
@@ -52,8 +58,6 @@ export default {
     }
   },
   methods: {
-
-
     handleWeekendsToggle() {
       this.calendarOptions.weekends = !this.calendarOptions.weekends // update a property
     },
@@ -69,7 +73,9 @@ export default {
           title,
           start: selectInfo.startStr,
           end: selectInfo.endStr,
-          allDay: selectInfo.allDay
+          allDay: selectInfo.allDay,
+          areaId: this.areaId,
+          teacherId: this.userId
         })
       }
     },
