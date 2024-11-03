@@ -7,24 +7,25 @@ export default {
   components: { PayrollCreateAndEdit },
   data() {
     return {
-      availableTeachers: [], // Lista de profesores
+      availableTeachers: [], // Asegúrate de que sea un array vacío al inicializar
       payroll: {
         teacherId: null,
         salaryAmount: 0,
         pensionContribution: 0,
         salaryBonus: 0,
-        salaryNet: 0, // Calculamos este valor antes de enviar
+        salaryNet: 0,
       },
     };
   },
   async created() {
-    await this.loadTeachers(); // Cargar los profesores
+    await this.loadTeachers(); // Cargar los profesores al montar el componente
   },
   methods: {
     async loadTeachers() {
       try {
         const response = await http.get("/teachers");
-        this.availableTeachers = response.data;
+        this.availableTeachers = response.data || []; // Asigna un array vacío si la respuesta es indefinida
+        console.log("Teachers loaded:", this.availableTeachers); // Para depurar y confirmar que se cargaron los datos
       } catch (error) {
         console.error("Error fetching teachers:", error);
       }
@@ -34,21 +35,22 @@ export default {
       return salaryAmount + salaryBonus - pensionContribution;
     },
     async savePayroll(payroll) {
-      payroll.salaryNet = this.calculateNetSalary(payroll); // Calcular el salario neto
+      payroll.salaryNet = this.calculateNetSalary(payroll);
 
       try {
-        const response = await http.post("/payroll", payroll); // Hacer la llamada POST
-        console.log("Payroll saved:", response.data); // Confirmar que se guarda
-        this.$router.push("/dashboard-admin/salary-calculation/management"); // Redirigir después de guardar
+        const response = await http.post("/payroll", payroll);
+        console.log("Payroll saved:", response.data);
+        this.$router.push("/dashboard-admin/salary-calculation/management");
       } catch (error) {
-        console.error("Error saving payroll:", error); // Capturar errores
+        console.error("Error saving payroll:", error);
       }
     },
     cancel() {
-      this.$router.push("/dashboard-admin/salary-calculation/management"); // Redirigir al cancelar
+      this.$router.push("/dashboard-admin/salary-calculation/management");
     },
   },
 };
+
 </script>
 
 <template>

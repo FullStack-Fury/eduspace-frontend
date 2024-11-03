@@ -1,84 +1,3 @@
-<script>
-import { TeacherService } from "../services/teacher.service.js";
-
-export default {
-  name: "PayrollCreateAndEdit",
-  props: {
-    payroll: {
-      type: Object,
-      required: true,
-      default: () => ({
-        serie: "A", // Aquí agregamos la serie
-        teacherId: null,
-        salaryAmount: 0,
-        pensionContribution: 0,
-        salaryBonus: 0,
-        otherDeductions: 0,
-        paymentMethod: "",
-        account: "",
-        observation: "",
-        salaryNet: 0,
-        datePayment: null,
-      }),
-    },
-  },
-  data() {
-    return {
-      form: { ...this.payroll }, // Iniciamos el formulario con los valores del payroll
-      availableTeachers: [], // Almacenará los profesores disponibles
-    };
-  },
-  computed: {
-    totalDeductions() {
-      return (
-          (this.form.pensionContribution || 0) +
-          (this.form.otherDeductions || 0)
-      );
-    },
-    netSalary() {
-      return (
-          (this.form.salaryAmount || 0) +
-          (this.form.salaryBonus || 0) -
-          this.totalDeductions
-      );
-    },
-  },
-  watch: {
-    form: {
-      handler() {
-        this.form.salaryNet = this.netSalary;
-        this.form.totalDeductions = this.totalDeductions;
-      },
-      deep: true,
-    },
-  },
-  created() {
-    // Cargar los profesores disponibles al crear el componente
-    const teacherService = new TeacherService();
-    teacherService.getAll() // Cambié a getAll en lugar de getAllTeachers
-        .then(teachers => {
-          this.availableTeachers = teachers;
-        })
-        .catch(error => {
-          console.error("Error fetching teachers:", error);
-        });
-  },
-  methods: {
-    save() {
-      if (!this.form.teacherId) {
-        alert("Please select a teacher.");
-        return;
-      }
-      console.log("Saving form:", this.form); // Debugging
-      this.$emit("save", this.form); // Emitimos el formulario completo al guardarlo
-    },
-    cancel() {
-      this.$emit("cancel");
-    },
-  },
-};
-</script>
-
 <template>
   <div class="payroll-create-form">
     <div class="form-header">
@@ -95,37 +14,14 @@ export default {
         <div class="form-field">
           <label>Employee:</label>
           <pv-select
+              v-if="availableTeachers && availableTeachers.length > 0"
               v-model="form.teacherId"
               :options="availableTeachers"
               option-label="name"
               option-value="id"
               placeholder="Select a teacher"
           />
-        </div>
-
-        <div class="form-field">
-          <label>Date Payment:</label>
-          <pv-date-picker
-              v-model="form.datePayment"
-              :show-icon="true"
-              date-format="dd/mm/yy"
-              placeholder="Select a date"
-          />
-        </div>
-
-        <div class="form-field">
-          <label>Forma pago:</label>
-          <pv-input-text v-model="form.paymentMethod" placeholder="Method payment"/>
-        </div>
-
-        <div class="form-field">
-          <label>Cuenta:</label>
-          <pv-input-text v-model="form.account" placeholder="Cuenta"/>
-        </div>
-
-        <div class="form-field">
-          <label>Observation:</label>
-          <pv-input-text v-model="form.observation" placeholder="Observation"/>
+          <p v-else>No teachers available</p>
         </div>
       </div>
 
@@ -146,16 +42,6 @@ export default {
         </div>
 
         <div class="form-field">
-          <label>Otras deducciones:</label>
-          <pv-input-number v-model.number="form.otherDeductions" :min="0"/>
-        </div>
-
-        <div class="form-field">
-          <label>Total Deducir:</label>
-          <pv-input-number :value="totalDeductions" disabled/>
-        </div>
-
-        <div class="form-field">
           <label>Total Pay:</label>
           <pv-input-number :value="netSalary" disabled/>
         </div>
@@ -173,6 +59,70 @@ export default {
     </form>
   </div>
 </template>
+
+<script>
+import { TeacherService } from "../services/teacher.service.js";
+
+export default {
+  name: "PayrollCreateAndEdit",
+  props: {
+    payroll: {
+      type: Object,
+      required: true,
+      default: () => ({
+        serie: "A",
+        teacherId: null,
+        salaryAmount: 0,
+        pensionContribution: 0,
+        salaryBonus: 0,
+        salaryNet: 0,
+      }),
+    },
+  },
+  data() {
+    return {
+      form: { ...this.payroll },
+      availableTeachers: [], // Lista inicializada para los profesores
+    };
+  },
+  computed: {
+    netSalary() {
+      return (this.form.salaryAmount || 0) + (this.form.salaryBonus || 0) - (this.form.pensionContribution || 0);
+    },
+  },
+  watch: {
+    form: {
+      handler() {
+        this.form.salaryNet = this.netSalary;
+      },
+      deep: true,
+    },
+  },
+  mounted() {
+    this.loadTeachers();
+  },
+  methods: {
+    async loadTeachers() {
+      try {
+        const teacherService = new TeacherService();
+        this.availableTeachers = await teacherService.getAll();
+      } catch (error) {
+        console.error("Error fetching teachers:", error);
+      }
+    },
+    save() {
+      if (!this.form.teacherId) {
+        alert("Please select a teacher.");
+        return;
+      }
+      this.$emit("save", this.form);
+    },
+    cancel() {
+      this.$emit("cancel");
+    },
+  },
+};
+</script>
 
 <style scoped>
 .payroll-create-form {
