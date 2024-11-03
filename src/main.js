@@ -49,6 +49,7 @@ import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
 import DatePicker from "primevue/datepicker";
 import MultiSelect from "primevue/multiselect";
+import Password from "primevue/password";
 
 // Create app instance
 
@@ -107,7 +108,8 @@ app.component('pv-button', Button)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
     .component('fc-calendar', FullCalendar)
-    .component('pv-iftalabel', IftaLabel);
+    .component('pv-iftalabel', IftaLabel)
+.component('pv-password', Password);
 
 
 
