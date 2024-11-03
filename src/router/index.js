@@ -4,7 +4,7 @@ import ReservationManagementComponent from '../reservation-scheduling/pages/rese
 import HomeComponent from '../public/pages/home.component.vue';
 import LoginComponent from '../login/pages/login.component.vue';
 import PayrollManagementComponent from '../payroll-management/pages/payroll-management.component.vue';
-import PayrollCreateAndEdit from '../payroll-management/pages/payroll-create-wrapper.component.vue'; // Asegúrate de importar correctamente
+import PayrollCreateAndEdit from '../payroll-management/pages/payroll-create-wrapper.component.vue';
 import ClassroomManagementComponent from "../breakdown-management/pages/classroom-management.component.vue";
 import ResourceManagementComponent from "../breakdown-management/pages/resource-management.component.vue";
 import ReportResourceComponent from "../breakdown-management/pages/report-resource.component.vue";
@@ -23,6 +23,7 @@ import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary
 import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
 import Add from "../space-and-resource-management/pages/add.vue";
 import RegisterComponent from "../register/pages/register.component.vue";
+import ReportsManagementComponent from "../breakdown-management/pages/reports-management.vue";
 
 const router = createRouter({
     history: createWebHistory(),
