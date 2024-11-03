@@ -3,13 +3,13 @@ export default {
   name: "environments-equipment",
   methods: {
     goToEnvironments() {
-      this.$router.push('/');
+      this.$router.push('/dashboard-admin/environments-equipment/environments');
     },
     goToSports() {
       this.$router.push('/dashboard-admin/environments-equipment/sport-facilities');
     },
     goToEquipment() {
-      this.$router.push('/');
+      this.$router.push('//dashboard-admin/environments-equipment/equipment');
     }
   }
 }
