@@ -58,6 +58,7 @@ export default {
   height: 100vh;
   align-items: center;
   justify-content: center;
+  border: none;
 }
 
 .left-side, .right-side {
@@ -114,7 +115,7 @@ p {
   text-decoration: none;
 }
 
-.sign-in-button, .sign-up-button {
+ .sign-up-button {
   margin-top: 20px;
   background: linear-gradient(to right, #34a7c1, #4ad4d4);
   color: white;
@@ -127,20 +128,12 @@ p {
   text-align: center;
 }
 
-.sign-up-button {
-  background-color: #ffffff;
-  color: #ffffff;
-  font-weight: bold;
-  box-shadow: none;
-  transition: background-color 0.3s ease, color 0.3s ease;
-}
 
-.sign-up-button:hover {
-  background-color: #00bcd4;
-  color: white;
-}
 
-.sign-in-button:hover {
+.login-container .sign-up-button:hover {
   background: linear-gradient(to right, #2fa1b4, #41b8b8);
+  color: white;
+  border: none;
 }
+
 </style>

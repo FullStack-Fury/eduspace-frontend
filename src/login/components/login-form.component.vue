@@ -7,7 +7,7 @@
       <pv-password v-model="password" placeholder="Password" toggleMask required />
 
       <div class="role-selection">
-        <label for="role">Sign in as:</label>
+        <label for="role">Sign in as: </label>
         <pv-select :options="roles" v-model="role" placeholder="Select Role" option-label="label" option-value="value" required />
       </div>
 
