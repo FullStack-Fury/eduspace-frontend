@@ -20,8 +20,10 @@ import ReservationsComponent from "../dashboard-teacher/pages/reservations.compo
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
-import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
-import Add from "../space-and-resource-management/pages/add.vue";
+import EnvironmentsComponent from "../space-and-resource-management/pages/classrooms/environments.component.vue";
+import AddEnvironmentsComponent from "../space-and-resource-management/pages/classrooms/add-environments.component.vue";
+import SportsFacilitiesComponent from "../space-and-resource-management/pages/shared-spaces/sports-facilities.component.vue";
+import addSportsFacilitiesComponent from "../space-and-resource-management/pages/shared-spaces/add-sports-facilities.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -48,8 +50,10 @@ const router = createRouter({
         { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: PayrollSummaryComponent, meta: {title: 'Breakdown Reports'}},
         { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
         { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },
-        {path: '/dashboard-admin/environments-equipment/sport-facilities', name: 'sport-facilities', component: SportsFacilities, meta: {title: 'Sport Facilities'}},
-        {path: '/dashboard-admin/environments-equipment/sport-facilities/add', name: 'add', component: Add, meta: {title: 'Add'}},
+        {path: '/dashboard-admin/environments-equipment/sport-facilities', name: 'sport-facilities', component: SportsFacilitiesComponent, meta: {title: 'Sport Facilities'}},
+        {path: '/dashboard-admin/environments-equipment/sport-facilities/add', name: 'add-sports-facilities', component: addSportsFacilitiesComponent, meta: {title: 'Add Sports Facilities'}},
+        {path: '/dashboard-admin/environments-equipment/environments', name: 'environments', component: EnvironmentsComponent, meta: {title: 'Environments'}},
+        {path: '/dashboard-admin/environments-equipment/environments/add', name: 'add-environments', component: AddEnvironmentsComponent, meta: {title: 'Add Environments'}},
 
 
         /**
