@@ -6,7 +6,9 @@ export class Meet {
                     hour = '',
                     location = '',
                     teachers = [],
-                    invite = []
+                    invite = [],
+                    administrators = [],
+                    accountable = []
                 }) {
         this.id = id;
         this.name = name;
@@ -14,6 +16,6 @@ export class Meet {
         this.hour = hour;
         this.location = location;
         this.teachers = teachers.length ? teachers : invite;
+        this.administrators = administrators.length ? administrators : accountable;
     }
 }
-

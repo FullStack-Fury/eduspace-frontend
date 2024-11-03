@@ -41,11 +41,16 @@ export default {
       this.isEdit = true;
       this.submitted = false;
 
-      // Asegurarse de que item.teachers sea un array de IDs
       if (Array.isArray(this.meet.teachers) && this.meet.teachers.length > 0) {
         this.meet.teachers = this.meet.teachers.map(teacher => teacher.id ? teacher.id : teacher);
       } else {
         this.meet.teachers = [];
+      }
+
+      if (Array.isArray(this.meet.administrators) && this.meet.administrators.length > 0) {
+        this.meet.administrators = this.meet.administrators.map(administrator => administrator.id ? administrator.id : administrator);
+      } else {
+        this.meet.administrators = [];
       }
 
       this.createAndEditDialogIsVisible = true;
@@ -130,26 +135,36 @@ export default {
 
 <template>
   <div class="w-full">
-    <data-manager :title="title"
+    <data-manager class="data-manager" :title="title"
                   v-bind:items="meetings"
                   v-on:new-item-requested="onNewItem"
                   v-on:edit-item-requested="onEditItem($event)"
                   v-on:delete-item-requested="onDeleteItem($event)"
                   v-on:delete-selected-items-requested="onDeleteSelectedItems($event)">
       <template #custom-columns>
-        <pv-column :sortable="true" field="id" header="Id" style="min-width: 12rem"/>
-        <pv-column :sortable="true" field="name" header="Name" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="day" header="Day" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="hour" header="Hour" style="min-width: 24rem"/>
-        <pv-column :sortable="true" field="location" header="Location" style="min-width: 24rem"/>
-        <pv-column header="Invite" style="min-width: 24rem">
+        <pv-column class="pv-column" :sortable="true" field="id" header="Id" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="name" header="Name" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="day" header="Day" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="hour" header="Hour" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="location" header="Location" style="min-width: 5rem"/>
+        <pv-column class="pv-column" header="Invite" style="min-width: 5rem">
           <template #body="slotProps">
-    <span v-if="slotProps.data.teachers && slotProps.data.teachers.length">
-      {{ slotProps.data.teachers.map(teacher => teacher.name + ' ' + teacher.lastname).join(', ') }}
-    </span>
+            <span v-if="slotProps.data.teachers && slotProps.data.teachers.length">
+              {{ slotProps.data.teachers.map(teacher => teacher.name + ' ' + teacher.lastname).join(', ') }}
+            </span>
             <span v-else>
-      No teachers invited
-    </span>
+              No teachers invited
+            </span>
+          </template>
+        </pv-column>
+        <pv-column class="pv-column" header="Persons in charge" style="min-width: 5rem">
+          <template #body="slotProps">
+            <span v-if="slotProps.data.administrators && slotProps.data.administrators.length">
+              {{ slotProps.data.administrators.map(administrator => administrator.name + ' ' + administrator.lastname).join(', ') }}
+            </span>
+            <span v-else>
+              No administrators invited
+            </span>
           </template>
         </pv-column>
       </template>
@@ -166,4 +181,14 @@ export default {
 
 <style scoped>
 
+.data-manager {
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #ffffff;
+}
+
+.pv-column {
+  padding: 0.5rem;
+}
 </style>
