@@ -66,6 +66,8 @@ const router = createRouter({
         { path: '/dashboard-teacher/reservations', name: 'reservations', component: ReservationsComponent, meta: {title: 'Reservations'}},
         { path: '/dashboard-teacher/reservations/reservation-scheduling', name: 'reservation', component: ReservationManagementComponent, meta: {title: 'Reservation of spaces'} },
         { path: '/dashboard-teacher/breakdown-reports', name: 'breakdown-reports', component: BreakdownReportsComponent, meta: {title: 'Breakdown Reports'}},
+        { path: '/dashboard-teacher/breakdown-reports/classrooms', name: 'Classrooms', component: ClassroomManagementComponent, meta: {title: 'Classrooms'}},
+        { path: '/dashboard-teacher/breakdown-reports/reports', name: 'reports', component: ReportsManagementComponent, meta: {title: 'Reports'}},
         { path: '/dashboard-teacher/wages', name: 'wages', component: WagesComponent, meta:{title: 'Wages'}},
         { path: '/dashboard-teacher/space-availability', component: ReservationManagementComponent, meta: {title: 'Space Availability'} },
 
