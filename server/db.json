@@ -91,6 +91,7 @@
       "id": 1,
       "name": "Maria",
       "email": "maria@gmail.com",
+      "password": "oscar2",
       "phone": "9381172111",
       "location": "Peru"
     },
@@ -114,6 +115,46 @@
       "id": 1,
       "name": "Admin1",
       "email": "admin1@school.com"
+    },
+    {
+      "firstName": "Oscar",
+      "lastName": "Antayhua",
+      "email": "asdasda",
+      "dni": "21312321",
+      "address": "asdaasd",
+      "phone": "12312312",
+      "password": "",
+      "id": 2
+    },
+    {
+      "firstName": "Oscar",
+      "lastName": "Antayhua",
+      "email": "oscar@gmail.com",
+      "dni": "54513251",
+      "address": "asdasdas",
+      "phone": "960204077",
+      "password": "oscarjac",
+      "id": 3
+    },
+    {
+      "firstName": "oscar",
+      "lastName": "antayhua",
+      "email": "oscar2@gmail.com",
+      "dni": "2345321",
+      "address": "3521351",
+      "phone": "6854351",
+      "password": "oscarjac",
+      "id": 4
+    },
+    {
+      "id": "50fb",
+      "firstName": "andres",
+      "lastName": "torres",
+      "email": "andres@gmail.com",
+      "dni": "123456789",
+      "address": "casa",
+      "phone": "123456789",
+      "password": "123456789"
     }
   ],
   "meet": [
