@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import MeetManagementComponent from '../events-scheduling/pages/meet-management.component.vue';
 import ReservationManagementComponent from '../reservation-scheduling/pages/reservation-management.component.vue';
 import HomeComponent from '../public/pages/home.component.vue';
-import LoginComponent from '../public/pages/login.component.vue';
+import LoginComponent from '../login/pages/login.component.vue';
 import PayrollManagementComponent from '../payroll-management/pages/payroll-management.component.vue';
 import PayrollCreateAndEdit from '../payroll-management/pages/payroll-create-wrapper.component.vue'; // Asegúrate de importar correctamente
 import ClassroomManagementComponent from "../breakdown-management/pages/classroom-management.component.vue";
@@ -22,10 +22,15 @@ import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
 import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
 import Add from "../space-and-resource-management/pages/add.vue";
+import RegisterComponent from "../register/pages/register.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+
+        {path: '/register', name: 'register', component: RegisterComponent, meta: {title: 'Register'}},
+        {path: '/login', name: 'login', component: LoginComponent, meta: {title: 'Login'}},
+
         { path: '/dashboard-admin/classroom-changes-meetings/meeting-management', name: 'meet', component: MeetManagementComponent, meta: {title: 'Meeting Management'} },
         { path: '/reservation-scheduling', name: 'reservation', component: ReservationManagementComponent, meta: {title: 'Reservation Management'} },
         { path: '/salary-calculation', name: 'salary-calculation', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } },
