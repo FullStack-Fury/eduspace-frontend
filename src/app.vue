@@ -1,6 +1,6 @@
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
-import {mapActions, mapGetters} from "vuex";
+import { mapActions, mapGetters } from "vuex";
 
 // Importar los SVG desde las rutas especificadas
 import HomeIcon from "/src/assets/admin/Home.svg";
@@ -18,52 +18,38 @@ import ReservationIcon from "/src/assets/teacher/Reservation.svg";
 import SpaceIcon from "/src/assets/teacher/Space_Availability.svg";
 
 export default {
-  name: 'app',
-  components: {LanguageSwitcher},
-  title: 'EduSpace',
+  name: "app",
+  components: { LanguageSwitcher },
   data() {
     return {
       drawer: false,
-      items: [
-        {label: 'Home', to: '/home', svg: HomeIcon},
-        {label: 'Meet', to: '/events-scheduling/meet'},
-        {label: 'Reservation', to: '/reservation-scheduling'},
-        {label: 'Login', to: '/login'},
-      ]
-    }
+      items: [] // Inicializa vacío, se actualizará en changeToolbar según el rol
+    };
   },
   computed: {
-    ...mapGetters('user', ['userId', 'userRole'])
+    ...mapGetters(['userId', 'userRole']) // Obtén el rol y el ID desde Vuex
   },
   methods: {
-    ...mapActions('user', ['setUser', 'clearUser']),
+    ...mapActions(['clearUser']),
     toggleDrawer() {
       this.drawer = !this.drawer;
     },
     handleLogOut() {
-      this.clearUser();
-      console.log('user cleared', this.userId, this.userRole);
-
-      this.$router.push({name: 'login'});
+      this.clearUser(); // Limpia el estado del usuario en Vuex
+      this.$router.push({ name: 'login' });
     },
     changeToolbar() {
-      if (this.userRole === 1) {
-        console.log('welcome admin');
+      // Configura los ítems de la barra lateral según el rol
+      if (this.userRole === 1) { // Si es administrador
         this.items = [
           {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
           {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
-          {
-            label: 'Classroom Changes and Meetings',
-            to: '/dashboard-admin/classroom-changes-meetings',
-            svg: ClassroomIcon
-          },
+          {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
-          {label: 'Personnel Management', to: '/dashboard-admin/personnel-management', svg: PersonalMIcon},
+          {label: 'Personal Management', to: '/dashboard-admin/personal-management', svg: PersonalMIcon},
           {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation', svg: SalaryIcon}
         ];
-      } else if (this.userRole === 2) {
-        console.log('welcome teacher');
-
+      } else if (this.userRole === 2) { // Si es profesor
         this.items = [
           {label: 'Home', to: '/dashboard-teacher/home-teacher', svg: HomeIcon},
           {label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon},
@@ -73,28 +59,37 @@ export default {
           {label: 'Space Availability', to: '/dashboard-teacher/space-availability', svg: SpaceIcon}
         ];
       } else {
+        // Opciones disponibles cuando no está autenticado
         this.items = [
-          {label: 'Home', to: '/home', svg: HomeIcon},
-          {label: 'Login', to: '/login'}
+          { label: 'Home', to: '/home' },
+          { label: 'Login', to: '/login' }
         ];
       }
     }
   },
   created() {
-    this.changeToolbar();
+    // Redirige a la página de login si no está autenticado
+    if (!this.userRole) {
+      this.$router.push({ name: 'login' });
+    } else {
+      this.changeToolbar(); // Actualiza el toolbar si ya está autenticado
+    }
   },
   watch: {
+    // Observa cambios en el rol de usuario y actualiza el toolbar
     userRole(newRole) {
       this.changeToolbar();
     }
   }
-}
+};
 </script>
 
+
+
 <template>
-  <pv-toast/>
-  <div class="app-container"> <!-- Contenedor principal flex -->
-    <header class="sidenav-wrapper">
+  <pv-toast />
+  <div class="app-container">
+    <header v-if="userRole" class="sidenav-wrapper">
       <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
         <h2>EduSpace</h2>
         <div class="drawer-content">
@@ -108,15 +103,10 @@ export default {
             >
               <pv-button
                   :class="['p-button-text', { 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]">
-                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;"/>
+                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;" />
                 {{ item.label }}
               </pv-button>
             </router-link>
-            <pv-button class="pv-button" v-else
-                       @click="item.onClick">
-              <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;"/>
-              {{ item.label }}
-            </pv-button>
           </div>
         </div>
         <div class="footer-section">
@@ -126,21 +116,21 @@ export default {
                 :class="[{ 'admin-hover-active': userRole === 1, 'teacher-hover-active': userRole === 2 }]"
                 @click="handleLogOut"
             >
-              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon"/>
+              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon" />
               <span>Log out</span>
             </pv-button>
           </div>
-          <div class="copyright-text">
-            Copyright EduSpace team
-          </div>
+          <div class="copyright-text">Copyright EduSpace team</div>
         </div>
       </div>
     </header>
     <main class="main-content">
-      <router-view/>
+      <router-view />
     </main>
   </div>
 </template>
+
+
 
 <style scoped>
 .app-container {

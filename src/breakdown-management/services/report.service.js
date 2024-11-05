@@ -12,7 +12,8 @@ export class ReportService {
     }
 
     create(reportResource) {
-        return http.post(this.resourceEndpoint, reportResource);
+        // Deja que json-server maneje el id automáticamente
+        return http.post(this.resourceEndpoint, reportResource).then(response => response.data);
     }
 
     update(id, reportResource) {

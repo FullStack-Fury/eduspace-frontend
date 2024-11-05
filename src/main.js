@@ -49,6 +49,8 @@ import InputMask from "primevue/inputmask";
 import Calendar from "primevue/calendar";
 import DatePicker from "primevue/datepicker";
 import MultiSelect from "primevue/multiselect";
+import Password from "primevue/password";
+import Dropdown from "primevue/dropdown";
 
 // Create app instance
 
@@ -67,7 +69,12 @@ app.use(router);
 
 // Use PrimeVue
 
-app.use(PrimeVue, { theme: { preset: Aura }, ripple: true })
+app.use(PrimeVue, { theme: {
+        preset: Aura,
+        options: {
+            darkModeSelector: 'none'
+        }
+    }, ripple: true })
     .use(ConfirmationService)
     .use(DialogService)
     .use(ToastService);
@@ -102,7 +109,9 @@ app.component('pv-button', Button)
     .component('pv-toolbar', Toolbar)
     .component('pv-toast', Toast)
     .component('fc-calendar', FullCalendar)
-    .component('pv-iftalabel', IftaLabel);
+    .component('pv-iftalabel', IftaLabel)
+    .component('pv-password', Password)
+    .component('pv-dropdown', Dropdown)
 
 
 
