@@ -34,7 +34,7 @@ export default {
   <div class="login-container">
     <pv-card style="width: 25rem; overflow: hidden">
       <template #header>
-        <img alt="admin" src="./../../assets/admin.jpeg" class="card-image" />
+        <p> Hello Admin </p>
       </template>
       <template #title>Admin</template>
       <template #content>
@@ -51,7 +51,7 @@ export default {
 
     <pv-card style="width: 25rem; overflow: hidden">
       <template #header>
-        <img alt="teacher" src="./../../assets/teacher.jpeg" class="card-image" />
+        <p> Hello Teacher </p>
       </template>
       <template #title>Teacher</template>
       <template #content>
