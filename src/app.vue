@@ -27,7 +27,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['userId', 'userRole']) // Obtén el rol y el ID desde Vuex
+    ...mapGetters(['userId', 'userRole', 'userName']) // Obtén el rol y el ID desde Vuex
   },
   methods: {
     ...mapActions(['clearUser']),
@@ -36,6 +36,7 @@ export default {
     },
     handleLogOut() {
       this.clearUser(); // Limpia el estado del usuario en Vuex
+      this.$store.dispatch('clearUser');
       this.$router.push({ name: 'login' });
     },
     changeToolbar() {
@@ -92,6 +93,14 @@ export default {
     <header v-if="userRole" class="sidenav-wrapper">
       <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
         <h2>EduSpace</h2>
+
+        <!-- Información del usuario autenticado -->
+        <div class="user-info" >
+          <p :style="{ color: userRole === 1 ? '#064C58' : '#584F06' }">{{ userRole === 1 ? 'Administrator' : 'Teacher' }}</p> <!-- Mostrar el rol del usuario con color condicional -->
+          <p>{{ userName }}</p> <!-- Mostrar el nombre del usuario -->
+        </div>
+
+
         <div class="drawer-content">
           <div v-for="item in items" :key="item.label" class="menu-item">
             <router-link
@@ -109,6 +118,7 @@ export default {
             </router-link>
           </div>
         </div>
+
         <div class="footer-section">
           <div class="logout-container">
             <pv-button
@@ -124,6 +134,7 @@ export default {
         </div>
       </div>
     </header>
+
     <main class="main-content">
       <router-view />
     </main>
@@ -132,7 +143,20 @@ export default {
 
 
 
+
 <style scoped>
+.user-info {
+  padding: 15px 0;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+}
+
+.user-info p {
+  margin: 0;
+  font-weight: 500;
+}
+
 .app-container {
   display: flex; /* Hace que el contenedor principal sea flex para alinear los elementos en fila */
 
