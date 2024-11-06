@@ -11,20 +11,21 @@ export default {
 
     async handleLogin({ email, password, role }) {
       try {
-        // Llama al servicio de login para autenticar
         const user = await LoginService.login(email, password, role);
 
-        // Almacena el usuario en Vuex con la acción setUser
-        this.setUser({ id: user.id, role: user.role });
+        // Verifica que `user.name` exista en este punto
+        console.log("User data:", user);
 
-        // Redirige según el rol
+        // Asegúrate de pasar `name` a Vuex
+        this.setUser({id: user.id, role: user.role, name: user.name});
+
         if (user.role === 1) {
           this.$router.push('/dashboard-admin/home-admin');
         } else if (user.role === 2) {
           this.$router.push('/dashboard-teacher/home-teacher');
         }
       } catch (error) {
-        alert(error.message); // Muestra un mensaje de error
+        alert(error.message);
       }
     },
     goToRegister() {
@@ -33,6 +34,7 @@ export default {
   }
 };
 </script>
+
 
 <template>
   <div class="login-container">

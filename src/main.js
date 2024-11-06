@@ -51,6 +51,7 @@ import DatePicker from "primevue/datepicker";
 import MultiSelect from "primevue/multiselect";
 import Password from "primevue/password";
 import Dropdown from "primevue/dropdown";
+import Avatar from "primevue/avatar";
 
 // Create app instance
 
@@ -112,7 +113,8 @@ app.component('pv-button', Button)
     .component('pv-iftalabel', IftaLabel)
     .component('pv-password', Password)
     .component('pv-dropdown', Dropdown)
-    .component('pv-input', InputText);
+    .component('pv-input', InputText)
+    .component('pv-avatar', Avatar)
 
 
 

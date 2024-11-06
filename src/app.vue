@@ -27,7 +27,7 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['userId', 'userRole']) // Obtén el rol y el ID desde Vuex
+    ...mapGetters(['userId', 'userRole', 'userName']) // Obtén el rol y el ID desde Vuex
   },
   methods: {
     ...mapActions(['clearUser']),
@@ -36,13 +36,14 @@ export default {
     },
     handleLogOut() {
       this.clearUser(); // Limpia el estado del usuario en Vuex
+      this.$store.dispatch('clearUser');
       this.$router.push({ name: 'login' });
     },
     changeToolbar() {
       // Configura los ítems de la barra lateral según el rol
       if (this.userRole === 1) { // Si es administrador
         this.items = [
-          {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
+          {label: 'Home', to: '/dashboard-admin/home', svg: HomeIcon},
           {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
           {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
@@ -51,7 +52,7 @@ export default {
         ];
       } else if (this.userRole === 2) { // Si es profesor
         this.items = [
-          {label: 'Home', to: '/dashboard-teacher/home-teacher', svg: HomeIcon},
+          {label: 'Home', to: '/dashboard-teacher/home', svg: HomeIcon},
           {label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon},
           {label: 'Reservations', to: '/dashboard-teacher/reservations', svg: ReservationIcon},
           {label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports', svg: BreakdownIcon},
@@ -91,7 +92,20 @@ export default {
   <div class="app-container">
     <header v-if="userRole" class="sidenav-wrapper">
       <div :class="['sidenav', { 'admin-sidenav': userRole === 1, 'teacher-sidenav': userRole === 2 }]">
-        <h2>EduSpace</h2>
+<!--        <h2>EduSpace</h2> >-->
+
+        <!-- Información del usuario autenticado -->
+        <div class="user-info" >
+          <pv-avatar image="/src/assets/default-avatar.png" class="mr-2" size="xlarge" shape="circle"></pv-avatar>
+          <div class="info">
+            <p class="info" :style="{ color: userRole === 1 ? '#064C58' : '#584F06' }">{{ userRole === 1 ? 'Administrator' : 'Teacher' }}</p> <!-- Mostrar el rol del usuario con color condicional -->
+            <p class="info">{{ userName }}</p> <!-- Mostrar el nombre del usuario -->
+
+          </div>
+
+        </div>
+
+
         <div class="drawer-content">
           <div v-for="item in items" :key="item.label" class="menu-item">
             <router-link
@@ -109,6 +123,7 @@ export default {
             </router-link>
           </div>
         </div>
+
         <div class="footer-section">
           <div class="logout-container">
             <pv-button
@@ -124,6 +139,7 @@ export default {
         </div>
       </div>
     </header>
+
     <main class="main-content">
       <router-view />
     </main>
@@ -132,7 +148,25 @@ export default {
 
 
 
+
 <style scoped>
+.user-info {
+  padding: 15px 0;
+  font-size: 1rem;
+  color: #333;
+  text-align: left;
+  display: flex;
+}
+
+.user-info p {
+  margin: 0;
+  font-weight: 550;
+}
+
+.info{
+  margin: auto 0;
+}
+
 .app-container {
   display: flex; /* Hace que el contenedor principal sea flex para alinear los elementos en fila */
 
