@@ -1,8 +1,8 @@
 <template>
   <div>
-    <h2 class="title">Personnel Management</h2>
+    <h2 class="title">Personal Management</h2>
     <div class="search-container">
-      <input
+      <pv-input
           type="text"
           v-model="searchQuery"
           @input="filterTeachers"

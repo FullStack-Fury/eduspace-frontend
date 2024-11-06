@@ -112,6 +112,7 @@ app.component('pv-button', Button)
     .component('pv-iftalabel', IftaLabel)
     .component('pv-password', Password)
     .component('pv-dropdown', Dropdown)
+    .component('pv-input', InputText);
 
 
 
