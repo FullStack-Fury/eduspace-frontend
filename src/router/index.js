@@ -12,7 +12,7 @@ import ClassroomChangesMeetingsComponent from "../dashboard-admin/pages/classroo
 import EnvironmentsEquipment from "../dashboard-admin/pages/environments-equipment.vue";
 import HomeAdminComponent from "../dashboard-admin/pages/home-admin.component.vue";
 import PersonalDataComponent from "../dashboard-admin/pages/personal-data.component.vue";
-import PersonnelManagementComponent from "../dashboard-admin/pages/personnel-management.component.vue";
+
 import SalaryCalculationComponent from "../dashboard-admin/pages/salary-calculation.component.vue";
 import HomeTeacherComponent from "../dashboard-teacher/pages/home-teacher.component.vue";
 import NotificationsComponent from "../dashboard-teacher/pages/notifications.component.vue";
@@ -23,6 +23,7 @@ import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary
 import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
 import Add from "../space-and-resource-management/pages/add.vue";
 import RegisterComponent from "../register/pages/register.component.vue";
+import PersonalManagementComponent from "../personal-management/pages/personal-managment.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -49,7 +50,7 @@ const router = createRouter({
         { path: '/dashboard-admin/environments-equipment', name: 'environments-equipment', component: EnvironmentsEquipment, meta: {title: 'Environments and Equipment'} },
         { path: '/dashboard-admin/home-admin', name: 'home-admin', component: HomeAdminComponent, meta: {title: 'Home Admin'} },
         { path: '/dashboard-admin/personal-data', name: 'personal-data', component: PersonalDataComponent, meta: {title: 'Personal Data'} },
-        { path: '/dashboard-admin/personal-management', name: 'personal-management', component: PersonnelManagementComponent, meta: {title: 'Personal Management'} },
+        { path: '/dashboard-admin/personal-management', name: 'personal-management', component: PersonalManagementComponent, meta: {title: 'Personal Management'} },
         { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: PayrollSummaryComponent, meta: {title: 'Breakdown Reports'}},
         { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
         { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },
