@@ -1,6 +1,8 @@
 <script>
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
 import { TeachersService } from "../services/teachers.service.js";
+import {NotificationMService} from "../services/notificationM.service.js";
+ // Importar el servicio de notificación
 
 export default {
   name: "meet-create-and-edit-dialog",
@@ -61,7 +63,7 @@ export default {
       this.$emit('update:visible', false); // Emitir el evento para actualizar la visibilidad en el padre
       this.$emit('cancel-requested'); // Emitir el evento de cancelación
     },
-    onSaveRequested() {
+    async onSaveRequested() {
       this.submitted = true;
       if (this.item.day && this.item.hour) {
         this.item.day = this.formatDate(this.item.day);
@@ -76,10 +78,39 @@ export default {
               username: teacher.username
             }));
 
+        // Emitir el evento para guardar
         this.$emit('save-requested', this.item);
+
+        // Enviar las notificaciones después de guardar la reunión
+        await this.sendNotifications();
+      }
+    },
+
+    async sendNotifications() {
+      const notificationService = new NotificationMService();
+
+
+      const adminId = this.$store.getters.userId;
+
+
+      for (const teacher of this.item.teachers) {
+        const notification = {
+          title: "Aviso de Meeting",
+          description: `Fue invitado a una reunión: ${this.item.name} el ${this.item.day} a las ${this.item.hour}.`,
+          type: 3,
+          adminId: adminId,
+          teacherId: teacher.id,
+          teacherName: teacher.name,
+        };
+
+        try {
+          await notificationService.createNotification(notification);  // Enviar la notificación
+          console.log(`Notificación enviada a: ${teacher.name}`);
+        } catch (error) {
+          console.error("Error al enviar notificación:", error);
+        }
       }
     }
-
   }
 };
 </script>
@@ -98,7 +129,7 @@ export default {
         <div class="field mt-5">
           <pv-float-label>
             <label for="name">Name</label>
-            <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }" />
+            <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }"/>
           </pv-float-label>
 
           <pv-float-label>
@@ -126,7 +157,7 @@ export default {
                 placeholder="Select a time"
             >
               <template #inputicon="slotProps">
-                <i class="pi pi-clock" @click="slotProps.clickCallback" />
+                <i class="pi pi-clock" @click="slotProps.clickCallback"/>
               </template>
             </pv-date-picker>
           </pv-float-label>
@@ -146,7 +177,7 @@ export default {
 
           <pv-float-label>
             <label for="location">Location</label>
-            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }" />
+            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
           </pv-float-label>
         </div>
       </div>

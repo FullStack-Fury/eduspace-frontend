@@ -15,7 +15,7 @@ import PersonalDataComponent from "../dashboard-admin/pages/personal-data.compon
 
 import SalaryCalculationComponent from "../dashboard-admin/pages/salary-calculation.component.vue";
 import HomeTeacherComponent from "../dashboard-teacher/pages/home-teacher.component.vue";
-import NotificationsComponent from "../dashboard-teacher/pages/notifications.component.vue";
+import NotificationsComponent from "../notifications/pages/notification-management.component.vue";
 import ReservationsComponent from "../dashboard-teacher/pages/reservations.component.vue";
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../dashboard-teacher/pages/wages.component.vue";

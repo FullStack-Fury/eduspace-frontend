@@ -19,7 +19,9 @@ export class TeacherService {
         return http.get(`${this.resourceEndpoint}?field=${field}`).then(response => response.data);
     }
 
-
+    async getUpdatedTeachers() {
+        return http.get(this.resourceEndpoint).then(response => response.data);
+    }
     async swapWorkingDays(teacherId1, teacherId2) {
         // Obtener ambos profesores
         const teacher1 = await this.getById(teacherId1);
