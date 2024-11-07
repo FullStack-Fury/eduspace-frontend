@@ -155,11 +155,35 @@
       "email": "luis@school.com",
       "dni": "11122",
       "phone": "1521345",
-      "workingDays": "Saturday - Sunday",
+      "workingDays": "Monday - Friday",
       "field": "Math",
       "administratorId": 8,
       "password": "11122",
       "id": 2
+    },
+    {
+      "firstName": "Faker",
+      "lastName": "Fak",
+      "email": "FFA",
+      "dni": "584125",
+      "phone": "19523565",
+      "workingDays": "Saturday - Sunday",
+      "field": "Math",
+      "administratorId": 9,
+      "password": "584125",
+      "id": 3
+    },
+    {
+      "firstName": "nexxuz",
+      "lastName": "assd",
+      "email": "dsd",
+      "dni": "4464",
+      "phone": "4546",
+      "workingDays": "Monday - Friday",
+      "field": "Math",
+      "administratorId": 9,
+      "password": "4464",
+      "id": 4
     }
   ],
   "administrators": [
@@ -181,11 +205,11 @@
     {
       "firstName": "Oscar",
       "lastName": "Antayhua",
-      "email": "oscar@gmail.com",
+      "email": "hola",
       "dni": "54513251",
       "address": "asdasdas",
       "phone": "960204077",
-      "password": "oscarjac",
+      "password": "hola",
       "id": 3
     },
     {
@@ -249,6 +273,71 @@
       "id": 9
     }
   ],
+  "notifications": [
+    {
+      "title": "Cambio de días de trabajo",
+      "description": "Se ha intercambiado los días de trabajo con Faker Fak. Ahora trabajará Saturday - Sunday.",
+      "type": 1,
+      "adminId": 9,
+      "teacherId": 3,
+      "teacherName": "Faker Fak",
+      "id": 1
+    },
+    {
+      "title": "Cambio de días de trabajo",
+      "description": "Se ha intercambiado los días de trabajo con Luis gonzales. Ahora trabajará Monday - Friday.",
+      "type": 1,
+      "adminId": 9,
+      "teacherId": 2,
+      "teacherName": "Luis gonzales",
+      "id": 2
+    },
+    {
+      "title": "Aviso de Salario",
+      "description": "Su pago de este mes es 8500.",
+      "type": 2,
+      "adminId": 9,
+      "teacherId": 2,
+      "teacherName": "Luis gonzales",
+      "id": 3
+    },
+    {
+      "title": "Aviso de Meeting",
+      "description": "Fue invitado a una reunión: Vamos a jugar LOL el 2024-11-08 a las 03:25.",
+      "type": 3,
+      "adminId": 9,
+      "teacherId": 1,
+      "teacherName": "maria fernanda rosas alvarado",
+      "id": 4
+    },
+    {
+      "title": "Aviso de Meeting",
+      "description": "Fue invitado a una reunión: Vamos a jugar LOL el 2024-11-08 a las 03:25.",
+      "type": 3,
+      "adminId": 9,
+      "teacherId": 2,
+      "teacherName": "Luis gonzales",
+      "id": 5
+    },
+    {
+      "title": "Aviso de Meeting",
+      "description": "Fue invitado a una reunión: Vamos a jugar LOL el 2024-11-08 a las 03:25.",
+      "type": 3,
+      "adminId": 9,
+      "teacherId": 3,
+      "teacherName": "Faker Fak",
+      "id": 6
+    },
+    {
+      "title": "Aviso de Meeting",
+      "description": "Fue invitado a una reunión: Vamos a jugar LOL el 2024-11-08 a las 03:25.",
+      "type": 3,
+      "adminId": 9,
+      "teacherId": 4,
+      "teacherName": "nexxuz assd",
+      "id": 7
+    }
+  ],
   "meet": [
     {
       "id": 1,
@@ -302,6 +391,32 @@
           "name": "maria fernanda rosas alvarado"
         }
       ]
+    },
+    {
+      "id": 4,
+      "name": "Vamos a jugar LOL",
+      "day": "2024-11-08",
+      "hour": "03:25",
+      "location": "En Cuzco",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "maria fernanda rosas alvarado"
+        },
+        {
+          "id": 2,
+          "name": "Luis gonzales"
+        },
+        {
+          "id": 3,
+          "name": "Faker Fak"
+        },
+        {
+          "id": 4,
+          "name": "nexxuz assd"
+        }
+      ],
+      "administrators": []
     }
   ],
   "shared-area-reservation": [
@@ -322,6 +437,14 @@
       "salaryBonus": 200,
       "salaryNet": 2150,
       "id": 5
+    },
+    {
+      "teacherId": 2,
+      "salaryAmount": 7000,
+      "pensionContribution": 4500,
+      "salaryBonus": 6000,
+      "salaryNet": 8500,
+      "id": 6
     }
   ]
 }
