@@ -43,7 +43,7 @@ export default {
       if (this.userRole === 1) { // Si es administrador
         this.items = [
           {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
-          {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
+          {label: 'Classrooms and Shared Spaces', to: '/dashboard-admin/classrooms-shared-spaces', svg: EnviromentIcon},
           {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
           {label: 'Personnel Management', to: '/dashboard-admin/personnel-management', svg: PersonalMIcon},
