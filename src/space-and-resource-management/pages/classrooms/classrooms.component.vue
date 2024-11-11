@@ -1,40 +1,40 @@
 <script>
-import EnvironmentCard from "../../components/classrooms/environment-card.component.vue";
+import EnvironmentCard from "../../components/classrooms/classroom-card.component.vue";
 import http from "../../../shared/services/http-common.js";
 
 export default {
-  name: "environment-facilities",
+  name: "classroom-facilities",
   components: {EnvironmentCard},
   data() {
     return {
-      environments: []
+      classrooms: []
     };
   },
   mounted() {
-    this.loadEnvironment();
+    this.loadClassroom();
   },
   methods: {
-    async loadEnvironment() {
+    async loadClassroom() {
       try {
         const response = await http.get("/shared-area");
-        this.environments = response.data;
+        this.classrooms = response.data;
       } catch (error) {
-        console.error("Error loading environments:", error);
+        console.error("Error loading classrooms:", error);
       }
     },
-    async deleteEnvironment(id) {
+    async deleteClassroom(id) {
       try {
         await http.delete(`/classrooms/${id}`);
-        this.environments = this.environments.filter(environment => environment.id !== id);
+        this.classrooms = this.classrooms.filter(classroom => classroom.id !== id);
       } catch (error) {
-        console.error("Error deleting environment:", error);
+        console.error("Error deleting classroom:", error);
       }
     },
-    editEnvironment(id) {
-      this.$router.push({name: "edit-environment", params: {id}});
+    editClassroom(id) {
+      this.$router.push({name: "edit classroom", params: {id}});
     },
     goToAdd() {
-      this.$router.push('/dashboard-admin/environments-equipment/environment/add');
+      this.$router.push('/dashboard-admin/classrooms-shared-spaces/classroom/add');
     }
   }
 }
@@ -42,9 +42,9 @@ export default {
 
 <template>
   <div style="display: flex; align-items: center">
-    <h4 style="margin-right: 20px">Environments and Equipment</h4>
+    <h4 style="margin-right: 20px">Classrooms and Shared Spaces</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">Environment</h4>
+    <h4 style="margin-left: 20px">Classrooms</h4>
   </div>
 
   <div class="container">
@@ -62,7 +62,7 @@ export default {
     </div>
 
     <div class="cards-container">
-      <environment-card v-for="environment in environments" :key="environment.id" :space="environment" @delete="deleteEnvironment" @edit="editEnvironment"/>
+      <environment-card v-for="classroom in classrooms" :key="classroom.id" :space="classroom" @delete="deleteClassroom" @edit="editClassroom"/>
     </div>
   </div>
 </template>
