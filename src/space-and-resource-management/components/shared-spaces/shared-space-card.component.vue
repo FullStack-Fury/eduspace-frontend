@@ -1,18 +1,18 @@
 <script>
 export default {
-  name: "space-card",
+  name: "shared-space-card",
   props: {
-    space: {
+    shared_space: {
       type: Object,
       required: true
     }
   },
   methods: {
-    async deleteSpace() {
+    async deleteSharedSpace() {
       try {
-        await this.$emit('delete', this.space.id);
+        await this.$emit('delete', this.shared_space.id);
       } catch (error) {
-        console.error("Error deleting space:", error);
+        console.error("Error deleting shared space:", error);
       }
     }
   }
@@ -22,21 +22,21 @@ export default {
 <template>
   <div class="container">
     <div class="card border-round-xl shadow-2 p-3 h-full">
-      <div class="text-xl font-semibold mb-2">{{ space.name }}</div>
+      <div class="text-xl font-semibold mb-2">{{ shared_space.name }}</div>
       <div class="mb-2">
-        <span class="font-medium text-600">Capacity: {{ space.capacity }}</span>
+        <span class="font-medium text-600">Capacity: {{ shared_space.capacity }}</span>
       </div>
       <div class="mb-2">
-        <span class="font-medium text-600">Description: {{ space.description }}</span>
+        <span class="font-medium text-600">Description: {{ shared_space.description }}</span>
       </div>
       <div class="mb-3">
-        <span class="font-medium text-600">Location: {{ space.location }}</span>
+        <span class="font-medium text-600">Location: {{ shared_space.location }}</span>
       </div>
       <div class="flex align-items-center gap-2 mb-3">
         <i class="pi pi-box text-yellow-500"></i>
         <span>equipment</span>
       </div>
-        <pv-button label="Delete" severity="danger" text raised class="w-full" @click="deleteSpace"/>
+        <pv-button label="Delete" severity="danger" text raised class="w-full" @click="deleteSharedSpace"/>
     </div>
   </div>
 </template>
