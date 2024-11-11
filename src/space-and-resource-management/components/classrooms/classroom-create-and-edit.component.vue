@@ -1,8 +1,8 @@
 <script>
 export default {
-  name: "environment-create-and-edit",
+  name: "classroom-create-and-edit",
   props: {
-    environment: {
+    classroom: {
       type: Object,
       required: true,
       default: () => ({
@@ -17,7 +17,7 @@ export default {
   },
   data() {
     return {
-      form: { ...this.environment }
+      form: { ...this.classroom }
     };
   },
   methods: {
@@ -37,16 +37,16 @@ export default {
 
 <template>
   <div class="breadcrumb" style="display: flex; align-items: center">
-    <h4 style="margin-right: 20px">Environments and Equipment</h4>
+    <h4 style="margin-right: 20px">Classrooms and Shared Spaces</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">Environments</h4>
+    <h4 style="margin-left: 20px">Classrooms</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">{{ isCreateMode ? 'Add Environment' : 'Edit Environment' }}</h4>
+    <h4 style="margin-left: 20px">{{ isCreateMode ? 'Add Classroom' : 'Edit Classroom' }}</h4>
   </div>
 
-  <div class="environment-create-form">
+  <div class="classroom-create-form">
     <div class="form-header">
-      <h2>{{ isCreateMode ? 'Create Environment' : 'Edit Environment' }}</h2>
+      <h2>{{ isCreateMode ? 'Create Classroom' : 'Edit Classroom' }}</h2>
     </div>
     <form @submit.prevent="save" class="form-grid">
       <div class="form-field">
@@ -73,7 +73,7 @@ export default {
 </template>
 
 <style scoped>
-.environment-create-form {
+.classroom-create-form {
   display: flex;
   flex-direction: column;
   padding: 30px;
