@@ -4,7 +4,7 @@ import ClassroomCreateAndEdit from "../../components/classrooms/classroom-create
 
 export default {
   name: "add-classroom",
-  components: {ClassroomCrewateAndEdit},
+  components: {ClassroomCreateAndEdit},
   data() {
     return {
       classroom: {
@@ -31,8 +31,8 @@ export default {
 </script>
 
 <template>
-  <classroom-create-and-edit
-      :environment="classroom"
+  <classroom-create-and-edit 
+      :classroom="classroom"
       :isCreateMode="true"
       @save="saveClassroom"
       @cancel="cancel"/>

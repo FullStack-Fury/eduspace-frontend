@@ -1,10 +1,10 @@
 <script>
-import EnvironmentCard from "../../components/classrooms/classroom-card.component.vue";
 import http from "../../../shared/services/http-common.js";
+import ClassroomCard from "../../components/classrooms/classroom-card.component.vue";
 
 export default {
-  name: "classroom-facilities",
-  components: {EnvironmentCard},
+  name: "classroom",
+  components: {ClassroomCard},
   data() {
     return {
       classrooms: []
@@ -16,7 +16,7 @@ export default {
   methods: {
     async loadClassroom() {
       try {
-        const response = await http.get("/shared-area");
+        const response = await http.get("/classrooms");
         this.classrooms = response.data;
       } catch (error) {
         console.error("Error loading classrooms:", error);
@@ -62,7 +62,7 @@ export default {
     </div>
 
     <div class="cards-container">
-      <environment-card v-for="classroom in classrooms" :key="classroom.id" :space="classroom" @delete="deleteClassroom" @edit="editClassroom"/>
+      <classroom-card v-for="classroom in classrooms" :key="classroom.id" :classroom="classroom" @delete="deleteClassroom" @edit="editClassroom"/>
     </div>
   </div>
 </template>

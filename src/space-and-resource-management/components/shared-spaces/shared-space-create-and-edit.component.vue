@@ -85,7 +85,7 @@ export default {
 </template>
 
 <style scoped>
-.shared-area-create-form {
+.shared-space-create-form {
   display: flex;
   flex-direction: column;
   padding: 30px;

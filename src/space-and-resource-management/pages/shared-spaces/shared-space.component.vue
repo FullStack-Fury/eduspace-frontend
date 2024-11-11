@@ -7,7 +7,7 @@ export default {
   components: {SharedSpaceCard},
   data() {
     return {
-      areas: []
+      shared_spaces: []
     };
   },
   mounted() {
@@ -17,24 +17,24 @@ export default {
     async loadArea() {
       try {
         const response = await http.get("/shared-area");
-        this.areas = response.data;
+        this.shared_spaces = response.data;
       } catch (error) {
-        console.error("Error loading areas:", error);
+        console.error("Error loading spaces:", error);
       }
     },
-    async deleteArea(id) {
+    async deleteSharedSpaces(id) {
       try {
         await http.delete(`/shared-area/${id}`);
-        this.areas = this.areas.filter(area => area.id !== id);
+        this.shared_spaces = this.areas.filter(shared_area => shared_area.id !== id);
       } catch (error) {
-        console.error("Error deleting area:", error);
+        console.error("Error deleting space:", error);
       }
     },
-    editArea(id) {
-      this.$router.push({ name: "edit-area", params: { id } });
+    editSharedSpace(id) {
+      this.$router.push({ name: "edit-space", params: { id } });
     },
     goToAdd() {
-      this.$router.push('/dashboard-admin/environments-equipment/sport-facilities/add');
+      this.$router.push('/dashboard-admin/classrooms-shared-spaces/shared-spaces/add');
     }
   }
 }
@@ -42,9 +42,9 @@ export default {
 
 <template>
   <div style="display: flex; align-items: center">
-    <h4 style="margin-right: 20px">Environments and Equipment</h4>
+    <h4 style="margin-right: 20px">Classrooms and Shared Spaces</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">Sports facilities</h4>
+    <h4 style="margin-left: 20px">Shared Spaces</h4>
   </div>
 
   <div class="container">
@@ -68,7 +68,7 @@ export default {
     </div>
 
     <div class="cards-container">
-      <shared-space-card v-for="area in areas" :key="area.id" :space="area" @delete="deleteArea" @edit="editArea"/>
+      <shared-space-card v-for="shared_space in shared_spaces" :key="shared_space.id" :shared_space="shared_space" @delete="deleteSharedSpaces" @edit="editSharedSpace" />
     </div>
   </div>
 </template>

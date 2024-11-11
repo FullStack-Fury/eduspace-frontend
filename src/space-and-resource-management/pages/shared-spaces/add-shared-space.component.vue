@@ -34,7 +34,7 @@ export default {
 
 <template>
     <shared-space-create-and-edit
-        :sharedArea="shared_space"
+        :shared_space="shared_space"
         :isCreateMode="true"
         @save="saveSharedSpace"
         @cancel="cancel"
