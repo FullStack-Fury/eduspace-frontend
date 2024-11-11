@@ -1,8 +1,8 @@
 <script>
 export default {
-  name: "shared-area-create-and-edit",
+  name: "shared-space-create-and-edit",
   props: {
-    sharedArea: {
+    shared_space: {
       type: Object,
       required: true,
       default: () => ({
@@ -19,7 +19,7 @@ export default {
   },
   data() {
     return {
-      form: { ...this.sharedArea }
+      form: { ...this.shared_space }
     };
   },
   methods: {
@@ -39,16 +39,16 @@ export default {
 
 <template>
   <div class="breadcrumb" style="display: flex; align-items: center">
-    <h4 style="margin-right: 20px">Environments and Equipment</h4>
+    <h4 style="margin-right: 20px">Classrooms and Shared Spaces</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">Sports facilities</h4>
+    <h4 style="margin-left: 20px">Shared Spaces</h4>
     <i class="pi pi-chevron-right"></i>
-    <h4 style="margin-left: 20px">{{ isCreateMode ? 'Add Shared Area' : 'Edit Shared Area' }}</h4>
+    <h4 style="margin-left: 20px">{{ isCreateMode ? 'Add Shared Space' : 'Edit Shared Space' }}</h4>
   </div>
 
-  <div class="shared-area-create-form">
+  <div class="shared-space-create-form">
     <div class="form-header">
-      <h2>{{ isCreateMode ? 'Create Shared Area' : 'Edit Shared Area' }}</h2>
+      <h2>{{ isCreateMode ? 'Create Shared Space' : 'Edit Shared Space' }}</h2>
     </div>
     <form @submit.prevent="save" class="form-grid">
       <div class="form-field">
