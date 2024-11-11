@@ -1,10 +1,10 @@
 <script>
-import SpaceCard from "../../components/shared-spaces/space-card.component.vue";
 import http from "../../../shared/services/http-common.js";
+import SharedSpaceCard from "../../components/shared-spaces/shared-space-card.component.vue";
 
 export default {
   name: "sports-facilities",
-  components: { SpaceCard },
+  components: {SharedSpaceCard},
   data() {
     return {
       areas: []
@@ -68,7 +68,7 @@ export default {
     </div>
 
     <div class="cards-container">
-      <space-card v-for="area in areas" :key="area.id" :space="area" @delete="deleteArea" @edit="editArea"/>
+      <shared-space-card v-for="area in areas" :key="area.id" :space="area" @delete="deleteArea" @edit="editArea"/>
     </div>
   </div>
 </template>
