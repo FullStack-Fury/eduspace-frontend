@@ -1,4 +1,4 @@
-export class SpaceArea {
+export class SharedSpace {
     constructor(id, name, capacity, description) {
         this.id = id;
         this.name = name;

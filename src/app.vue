@@ -43,8 +43,8 @@ export default {
       // Configura los ítems de la barra lateral según el rol
       if (this.userRole === 1) { // Si es administrador
         this.items = [
-          {label: 'Home', to: '/dashboard-admin/home', svg: HomeIcon},
-          {label: 'Environments and Equipment', to: '/dashboard-admin/environments-equipment', svg: EnviromentIcon},
+          {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
+          {label: 'Classrooms and Shared Spaces', to: '/dashboard-admin/classrooms-shared-spaces', svg: EnviromentIcon},
           {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           {label: 'Personal Data', to: '/dashboard-admin/personal-data', svg: PersonalDIcon},
           {label: 'Personal Management', to: '/dashboard-admin/personal-management', svg: PersonalMIcon},

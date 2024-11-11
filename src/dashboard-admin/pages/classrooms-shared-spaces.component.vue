@@ -1,15 +1,12 @@
 <script>
 export default {
-  name: "environments-equipment",
+  name: "classrooms-shared-spaces",
   methods: {
-    goToEnvironments() {
-      this.$router.push('/');
+    goToClassrooms() {
+      this.$router.push('/dashboard-admin/classrooms-shared-spaces/classrooms');
     },
-    goToSports() {
-      this.$router.push('/dashboard-admin/environments-equipment/sport-facilities');
-    },
-    goToEquipment() {
-      this.$router.push('/');
+    goToSpaceShared() {
+      this.$router.push('/dashboard-admin/classrooms-shared-spaces/shared-spaces');
     }
   }
 }
@@ -17,30 +14,29 @@ export default {
 
 <template>
 
-  <h2>Environments and Equipment</h2>
+  <h2>Classrooms and Shared Spaces</h2>
 
   <div class="p-grid p-align-center p-justify-center">
-    <!-- Card 1: Environments -->
+    <!-- Card 1: Classrooms -->
     <div class="p-col-12 p-md-6">
       <pv-card class="pv-card">
         <template #header>
-          <h3>Environments</h3>
+          <h3>Classrooms</h3>
           <p>
-            Management and registration of the different educational environments available within the infrastructure.
-            These environments include classrooms, laboratories, and any other space used for teaching or school activities.
+            Management and registration of the classrooms with resources environment available with the infrastructure.
           </p>
         </template>
         <template #footer>
-          <pv-button  class = "pv-button" label="Go" @click="goToEnvironments" />
+          <pv-button  class = "pv-button" label="Go" @click="goToClassrooms" />
         </template>
       </pv-card>
     </div>
 
-    <!-- Card 2: Sports facilities -->
+    <!-- Card 2: Shared Spaces -->
     <div class="p-col-12 p-md-6">
       <pv-card class="pv-card">
         <template #header>
-          <h3>Sports facilities</h3>
+          <h3>Shared Spaces</h3>
           <p>
             Management and registration of spaces designated for sports activities within the institution.
             This includes gyms, courts, and other spaces dedicated to sports.
@@ -48,22 +44,7 @@ export default {
         </template>
 
         <template #footer>
-          <pv-button  class = "pv-button" label="Go" @click="goToSports" />
-        </template>
-      </pv-card>
-    </div>
-
-    <!-- Card 3: Equipment -->
-    <div class="p-col-12 p-md-6">
-      <pv-card class="pv-card">
-        <template #header>
-          <h3>Equipment</h3>
-          <p>
-            Detailed record of the equipment available in each environment and sports space.
-          </p>
-        </template>
-        <template #footer>
-          <pv-button class = "pv-button" label="Go" @click="goToEquipment" />
+          <pv-button  class = "pv-button" label="Go" @click="goToSpaceShared" />
         </template>
       </pv-card>
     </div>
