@@ -1,18 +1,18 @@
 <script>
 export default {
-  name: "environment-card",
+  name: "classroom-card",
   props: {
-    environment: {
+    classroom: {
       type: Object,
       required: true
     }
   },
   methods: {
-    async deleteEnvironment() {
+    async deleteClassroom() {
       try {
-        await this.$emit('delete', this.environment.id);
+        await this.$emit('delete', this.classroom.id);
       } catch (error) {
-        console.error("Error deleting environment:", error);
+        console.error("Error deleting classroom:", error);
       }
     }
   }
@@ -22,15 +22,15 @@ export default {
 <template>
   <div class="container">
     <div class="card border-round-xl shadow-2 p-3 h-full">
-      <div class="text-xl font-semibold mb-2">{{ environment.name }}</div>
+      <div class="text-xl font-semibold mb-2">{{ classroom.name }}</div>
       <div class="mb-2">
-        <span class="font-medium text-600">Description: {{ environment.description }}</span>
+        <span class="font-medium text-600">Description: {{ classroom.description }}</span>
       </div>
       <div class="flex align-items-center gap-2 mb-3">
         <i class="pi pi-box text-yellow-500"></i>
-        <span>Environment</span>
+        <span>Classroom</span>
       </div>
-      <pv-button label="Delete" severity="danger" text raised class="w-full" @click="deleteEnvironment"/>
+      <pv-button label="Delete" severity="danger" text raised class="w-full" @click="deleteClassroom"/>
     </div>
   </div>
 </template>
