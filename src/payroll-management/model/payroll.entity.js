@@ -5,9 +5,6 @@ export class Payroll {
                     salaryAmount = 0,
                     pensionContribution = 0,
                     salaryBonus = 0,
-                    paymentMethod = "",
-                    account = "",
-                    observation = "",
                     datePayment = null,
                     otherDeductions = 0,
                     serie = "A",  // Campo Serie Automática
@@ -18,9 +15,6 @@ export class Payroll {
         this.pensionContribution = pensionContribution;
         this.salaryBonus = salaryBonus;
         this.otherDeductions = otherDeductions;
-        this.paymentMethod = paymentMethod;
-        this.account = account;
-        this.observation = observation;
         this.datePayment = datePayment;
         this.serie = serie; // Guardamos la serie automática
 

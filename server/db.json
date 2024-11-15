@@ -342,6 +342,14 @@
       "salaryBonus": 200,
       "salaryNet": 2150,
       "id": 5
+    },
+    {
+      "teacherId": 2,
+      "salaryAmount": 2333,
+      "pensionContribution": 43,
+      "salaryBonus": 2,
+      "salaryNet": 2292,
+      "id": 6
     }
   ]
 }
