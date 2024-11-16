@@ -247,6 +247,26 @@
       "phone": "45121325",
       "password": "123",
       "id": 9
+    },
+    {
+      "id": "50fb",
+      "firstName": "andres",
+      "lastName": "torres",
+      "email": "andres@gmail.com",
+      "dni": "123456789",
+      "address": "casa",
+      "phone": "123456789",
+      "password": "123456789"
+    },
+    {
+      "id": "7bf2",
+      "firstName": "a",
+      "lastName": "a",
+      "email": "a",
+      "dni": "a",
+      "address": "a",
+      "phone": "a",
+      "password": "a"
     }
   ],
   "meet": [
@@ -260,16 +280,45 @@
         {
           "id": 1,
           "name": "Maria",
-          "email": "maria@gmail.com",
-          "phone": "9381172111",
-          "location": "Peru"
+          "lastname": "Espinoza"
         },
         {
           "id": 2,
           "name": "Pepe",
-          "email": "pepe@gmail.com",
-          "phone": "938172132",
-          "location": "Peru"
+          "lastname": "Espinoza"
+        }
+      ],
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Program",
+      "day": "2024-11-01",
+      "hour": "23:59",
+      "location": "Casa",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria",
+          "lastname": "Espinoza"
+        },
+        {
+          "id": 2,
+          "name": "Pepe",
+          "lastname": "Espinoza"
+        }
+      ],
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
         }
       ]
     },
@@ -322,6 +371,14 @@
       "salaryBonus": 200,
       "salaryNet": 2150,
       "id": 5
+    },
+    {
+      "teacherId": 2,
+      "salaryAmount": 2333,
+      "pensionContribution": 43,
+      "salaryBonus": 2,
+      "salaryNet": 2292,
+      "id": 6
     }
   ]
 }
