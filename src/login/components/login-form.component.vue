@@ -34,7 +34,7 @@ export default {
   },
   methods: {
     submitLogin() {
-      this.$emit("onLogin", { email: this.email, password: this.password, role: this.role });
+      this.$emit("onLogin", { email: this.email, password: this.password});
     }
   }
 };

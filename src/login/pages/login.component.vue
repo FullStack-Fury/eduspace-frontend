@@ -1,29 +1,61 @@
 <script>
 import LoginForm from '../components/login-form.component.vue';
 import { LoginService } from '../services/login.services.js';
-import { mapActions } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
+import {SignInRequest} from "../model/sign-in.request.js";
+import {SignInResponse} from "../model/sign-in.response.js";
 
 export default {
   name: "login",
   components: { LoginForm },
+  data() {
+    return {
+      loginService: new LoginService(),
+      signInRequest: new SignInRequest({}),
+      signInResponseObject: new SignInResponse({})
+    }
+  },
+  computed: {
+    ...mapGetters('user', ['userId', 'userRole', 'userToken'])
+  },
   methods: {
-    ...mapActions(['setUser']), // Acción de Vuex para guardar el usuario
+    ...mapActions('user', ['setUser']),
 
-    async handleLogin({ email, password, role }) {
+    async handleLogin({ email, password }) {
       try {
-        const user = await LoginService.login(email, password, role);
 
-        // Verifica que `user.name` exista en este punto
-        console.log("User data:", user);
+        let user = { username: email, password: password }
 
-        // Asegúrate de pasar `name` a Vuex
-        this.setUser({id: user.id, role: user.role, name: user.name});
+        this.signInRequest = new SignInRequest(user);
+        console.log('Request:', this.signInRequest);
 
-        if (user.role === 1) {
+        const signInResponse = await this.loginService.signIn(this.signInRequest);
+        this.signInResponseObject =
+            new SignInResponse({ ...signInResponse.data });
+
+        console.log('role:', this.signInResponseObject.role);
+
+        //storing in vuex
+        this.setUser({
+          id: this.signInResponseObject.id,
+          role: this.signInResponseObject.role,
+          token: this.signInResponseObject.token
+        })
+
+
+        if (this.signInResponseObject.role === 'RoleAdmin') {
+          console.log('is an admin');
           this.$router.push('/dashboard-admin/home-admin');
-        } else if (user.role === 2) {
+        }
+        else if (this.signInResponseObject.role === 'RoleTeacher') {
+          console.log('is a teacher');
           this.$router.push('/dashboard-teacher/home-teacher');
         }
+
+        console.log('token', this.userToken);
+        console.log('role', this.userRole);
+        console.log('id', this.userId);
+
       } catch (error) {
         alert(error.message);
       }
