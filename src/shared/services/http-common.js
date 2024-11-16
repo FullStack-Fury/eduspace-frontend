@@ -8,4 +8,5 @@ const http = axios.create({
 
 http.defaults.headers.common['Content-Type'] = 'application/json';
 
+
 export default http;
