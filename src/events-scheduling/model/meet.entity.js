@@ -1,21 +1,23 @@
 export class Meet {
     constructor({
                     id = 0,
-                    name = '',
+                    title = '',
+                    description = '',
                     day = '',
-                    hour = '',
-                    location = '',
+                    start = '',
+                    end = '',
+                    classroom = '',
                     teachers = [],
-                    invite = [],
-                    administrators = [],
-                    accountable = []
+                    administrators = []
                 }) {
         this.id = id;
-        this.name = name;
+        this.title = title;
+        this.description = description;
         this.day = day;
-        this.hour = hour;
-        this.location = location;
-        this.teachers = teachers.length ? teachers : invite;
-        this.administrators = administrators.length ? administrators : accountable;
+        this.start = start;
+        this.end = end;
+        this.classroom = classroom;
+        this.teachers = teachers;
+        this.administrators = administrators;
     }
 }

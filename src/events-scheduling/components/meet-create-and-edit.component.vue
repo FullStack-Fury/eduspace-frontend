@@ -1,7 +1,7 @@
 <script>
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
-import { TeachersService } from "../services/teachers.service.js";
 import {AdministratorsService} from "../services/administrators.service.js";
+import {TeachersService} from "../services/teachers.service.js";
 
 export default {
   name: "meet-create-and-edit-dialog",
@@ -38,7 +38,7 @@ export default {
           .then(response => {
             this.teachers = response.data.map(teacher => ({
               id: teacher.id,
-              name: `${teacher.name} ${teacher.lastname}`
+              name: `${teacher.firstName} ${teacher.lastName}`
             }));
             console.log("Teachers loaded:", this.teachers);
           })
@@ -52,7 +52,7 @@ export default {
           .then(response => {
             this.administrators = response.data.map(administrator => ({
               id: administrator.id,
-              name: `${administrator.name} ${administrator.lastname}`
+              name: `${administrator.firstName} ${administrator.lastName}`
             }));
             console.log("Administrators loaded:", this.administrators);
           })
@@ -91,29 +91,30 @@ export default {
       this.$emit('cancel-requested');
     },
     onSaveRequested() {
+      console.log('Save button clicked');
+      console.log('Start Time:', this.item.start);
+      console.log('End Time:', this.item.end);
       this.submitted = true;
-      if (this.item.day && this.item.hour) {
+      if (this.item.day && this.item.start && this.item.end) {
         this.item.day = this.formatDate(this.item.day);
-        this.item.hour = this.formatTime(this.item.hour);
+        this.item.start = this.formatTime(this.item.start);
+        this.item.end = this.formatTime(this.item.end);
 
         this.item.teachers = this.teachers
             .filter(teacher => this.item.teachers.includes(teacher.id))
             .map(teacher => ({
               id: teacher.id,
-              name: teacher.name.split(" ")[0],
-              lastname: teacher.name.split(" ")[1]
+              firstName: teacher.firstName ? teacher.firstName.split(" ")[0] : '',
+              lastName: teacher.lastName ? teacher.lastName.split(" ")[1] : ''
             }));
 
         this.item.administrators = this.administrators
             .filter(administrator => this.item.administrators.includes(administrator.id))
             .map(administrator => ({
               id: administrator.id,
-              name: administrator.name.split(" ")[0],
-              lastname: administrator.name.split(" ")[1]
+              firstName: administrator.firstName.split(" ")[0],
+              lastName: administrator.lastName.split(" ")[1]
             }));
-
-
-
         this.$emit('save-requested', this.item);
       }
     }
@@ -134,8 +135,13 @@ export default {
       <div class="p-fluid">
         <div class="field mt-5">
           <pv-float-label  class="p-float-label">
-            <label for="name">Name</label>
-            <pv-input-text class="p-inputtext" id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }"/>
+            <label for="tile">Title</label>
+            <pv-input-text class="p-inputtext" id="name" v-model="item.title" :class="{ 'p-invalid': submitted && !item.title }"/>
+          </pv-float-label>
+
+          <pv-float-label  class="p-float-label">
+            <label for="description">Description</label>
+            <pv-input-text class="p-inputtext" id="name" v-model="item.description" :class="{ 'p-invalid': submitted && !item.description }"/>
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
@@ -151,14 +157,14 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="hour">Hour</label>
+            <label for="start">Start Time</label>
             <pv-date-picker class="p-datapicker"
-                            v-model="item.hour"
+                            v-model="item.start"
                             showIcon
                             fluid
                             timeOnly
                             iconDisplay="input"
-                            :class="{ 'p-invalid': submitted && !item.hour }"
+                            :class="{ 'p-invalid': submitted && !item.start }"
                             placeholder="Select a time"
             >
               <template #inputicon="slotProps">
@@ -168,7 +174,24 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="invite">Invite</label>
+            <label for="end">End Time</label>
+            <pv-date-picker class="p-datapicker"
+                            v-model="item.end"
+                            showIcon
+                            fluid
+                            timeOnly
+                            iconDisplay="input"
+                            :class="{ 'p-invalid': submitted && !item.end }"
+                            placeholder="Select a time"
+            >
+              <template #inputicon="slotProps">
+                <i class="pi pi-clock" @click="slotProps.clickCallback"/>
+              </template>
+            </pv-date-picker>
+          </pv-float-label>
+
+          <pv-float-label class="p-float-label">
+            <label for="invite">Participants</label>
             <pv-multi-select class="p-multiselect"
                              id="invite"
                              v-model="item.teachers"
@@ -194,8 +217,8 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="location">Location</label>
-            <pv-input-text class="p-inputtext" id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
+            <label for="classroom">Classroom</label>
+            <pv-input-text class="p-inputtext" id="location" v-model="item.classroom" :class="{ 'p-invalid': submitted && !item.classroom }"/>
           </pv-float-label>
         </div>
       </div>
