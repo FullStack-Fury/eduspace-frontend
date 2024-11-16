@@ -71,7 +71,7 @@ export default {
     },
     onSaveRequested(item) {
       this.submitted = true;
-      if (this.meet.name.trim()) {
+      if (this.meet.title.trim()) {
         if (item.id) {
           this.updateMeet();
         } else {
@@ -153,10 +153,12 @@ export default {
                   v-on:delete-selected-items-requested="onDeleteSelectedItems($event)">
       <template #custom-columns>
         <pv-column class="pv-column" :sortable="true" field="id" header="Id" style="min-width: 5rem"/>
-        <pv-column class="pv-column" :sortable="true" field="name" header="Name" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="title" header="Title" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="description" header="Description" style="min-width: 5rem"/>
         <pv-column class="pv-column" :sortable="true" field="day" header="Day" style="min-width: 5rem"/>
-        <pv-column class="pv-column" :sortable="true" field="hour" header="Hour" style="min-width: 5rem"/>
-        <pv-column class="pv-column" :sortable="true" field="location" header="Location" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="start" header="Start Time" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="end" header="End Time" style="min-width: 5rem"/>
+        <pv-column class="pv-column" :sortable="true" field="classroom" header="Classroom" style="min-width: 5rem"/>
         <pv-column class="pv-column" header="Invite" style="min-width: 5rem">
           <template #body="slotProps">
             <span v-if="slotProps.data.teachers && slotProps.data.teachers.length">
