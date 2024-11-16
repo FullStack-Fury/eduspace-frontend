@@ -115,7 +115,7 @@ export default {
     getTeacherNames(teacherIds) {
       return teacherIds.map(id => {
         const teacher = this.teachers.find(t => t.id === id);
-        return teacher ? `${teacher.name} ${teacher.lastname}` : '';
+        return teacher ? `${teacher.firstName} ${teacher.lastName}` : '';
       }).join(', ');
     },
     //#endregion
@@ -150,7 +150,7 @@ export default {
         <pv-column class="pv-column" header="Invite" style="min-width: 5rem">
           <template #body="slotProps">
             <span v-if="slotProps.data.teachers && slotProps.data.teachers.length">
-              {{ slotProps.data.teachers.map(teacher => teacher.name + ' ' + teacher.lastname).join(', ') }}
+              {{ slotProps.data.teachers.map(teacher => teacher.firstName + ' ' + teacher.lastName).join(', ') }}
             </span>
             <span v-else>
               No teachers invited
@@ -160,7 +160,7 @@ export default {
         <pv-column class="pv-column" header="Persons in charge" style="min-width: 5rem">
           <template #body="slotProps">
             <span v-if="slotProps.data.administrators && slotProps.data.administrators.length">
-              {{ slotProps.data.administrators.map(administrator => administrator.name + ' ' + administrator.lastname).join(', ') }}
+              {{ slotProps.data.administrators.map(administrator => administrator.firstName + ' ' + administrator.lastName).join(', ') }}
             </span>
             <span v-else>
               No administrators invited
