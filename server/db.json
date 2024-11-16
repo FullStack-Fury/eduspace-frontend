@@ -280,16 +280,45 @@
         {
           "id": 1,
           "name": "Maria",
-          "email": "maria@gmail.com",
-          "phone": "9381172111",
-          "location": "Peru"
+          "lastname": "Espinoza"
         },
         {
           "id": 2,
           "name": "Pepe",
-          "email": "pepe@gmail.com",
-          "phone": "938172132",
-          "location": "Peru"
+          "lastname": "Espinoza"
+        }
+      ],
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Program",
+      "day": "2024-11-01",
+      "hour": "23:59",
+      "location": "Casa",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria",
+          "lastname": "Espinoza"
+        },
+        {
+          "id": 2,
+          "name": "Pepe",
+          "lastname": "Espinoza"
+        }
+      ],
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
         }
       ]
     },
