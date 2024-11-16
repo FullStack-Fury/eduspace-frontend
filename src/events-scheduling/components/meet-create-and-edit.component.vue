@@ -72,9 +72,10 @@ export default {
     },
     onSaveRequested() {
       this.submitted = true;
-      if (this.item.day && this.item.hour) {
+      if (this.item.day && this.item.start && this.item.end) {
         this.item.day = this.formatDate(this.item.day);
-        this.item.hour = this.formatTime(this.item.hour);
+        this.item.start = this.formatTime(this.item.start);
+        this.item.end = this.formatTime(this.item.end);
 
         // Formatear los teachers seleccionados
         this.item.teachers = this.teachers
@@ -125,12 +126,22 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="name">Name</label>
+            <label for="title">Title</label>
             <pv-input-text
                 class="p-inputtext"
-                id="name"
-                v-model="item.name"
-                :class="{ 'p-invalid': submitted && !item.name }"
+                id="title"
+                v-model="item.title"
+                :class="{ 'p-invalid': submitted && !item.title }"
+            />
+          </pv-float-label>
+
+          <pv-float-label class="p-float-label">
+            <label for="description">Description</label>
+            <pv-input-text
+                class="p-inputtext"
+                id="description"
+                v-model="item.description"
+                :class="{ 'p-invalid': submitted && !item.description }"
             />
           </pv-float-label>
 
@@ -147,16 +158,34 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="hour">Hour</label>
+            <label for="start">Start Time</label>
             <pv-date-picker
                 class="p-datapicker"
-                v-model="item.hour"
+                v-model="item.start"
                 showIcon
                 fluid
                 timeOnly
                 iconDisplay="input"
-                :class="{ 'p-invalid': submitted && !item.hour }"
-                placeholder="Select a time"
+                :class="{ 'p-invalid': submitted && !item.start }"
+                placeholder="Select a start time"
+            >
+              <template #inputicon="slotProps">
+                <i class="pi pi-clock" @click="slotProps.clickCallback" />
+              </template>
+            </pv-date-picker>
+          </pv-float-label>
+
+          <pv-float-label class="p-float-label">
+            <label for="end">End Time</label>
+            <pv-date-picker
+                class="p-datapicker"
+                v-model="item.end"
+                showIcon
+                fluid
+                timeOnly
+                iconDisplay="input"
+                :class="{ 'p-invalid': submitted && !item.end }"
+                placeholder="Select a end time"
             >
               <template #inputicon="slotProps">
                 <i class="pi pi-clock" @click="slotProps.clickCallback" />
@@ -179,12 +208,12 @@ export default {
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
-            <label for="location">Location</label>
+            <label for="classroom">Classroom</label>
             <pv-input-text
                 class="p-inputtext"
-                id="location"
-                v-model="item.location"
-                :class="{ 'p-invalid': submitted && !item.location }"
+                id="classroom"
+                v-model="item.classroom"
+                :class="{ 'p-invalid': submitted && !item.classroom }"
             />
           </pv-float-label>
         </div>
