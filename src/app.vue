@@ -41,7 +41,7 @@ export default {
     },
     changeToolbar() {
       // Configura los ítems de la barra lateral según el rol
-      if (this.userRole === 1) { // Si es administrador
+      if (this.userRole === 'RoleAdmin') { // Si es administrador
         this.items = [
           {label: 'Home', to: '/dashboard-admin/home-admin', svg: HomeIcon},
           {label: 'Classrooms and Shared Spaces', to: '/dashboard-admin/classrooms-shared-spaces', svg: EnviromentIcon},
@@ -50,7 +50,7 @@ export default {
           {label: 'Personal Management', to: '/dashboard-admin/personal-management', svg: PersonalMIcon},
           {label: 'Salary Calculation', to: '/dashboard-admin/salary-calculation', svg: SalaryIcon}
         ];
-      } else if (this.userRole === 2) { // Si es profesor
+      } else if (this.userRole === 'RoleTeacher') { // Si es profesor
         this.items = [
           {label: 'Home', to: '/dashboard-teacher/home', svg: HomeIcon},
           {label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon},
