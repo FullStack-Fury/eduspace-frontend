@@ -2,6 +2,7 @@
 import CreateAndEdit from "../../shared/components/create-and-edit.component.vue";
 import { TeachersService } from "../services/teachers.service.js";
 import { mapGetters } from "vuex";
+import {ClassroomsService} from "../services/classroom.service.js";
 
 export default {
   name: "meet-create-and-edit-dialog",
@@ -20,7 +21,9 @@ export default {
     return {
       submitted: false,
       teachers: [],
-      selectedTeachers: []
+      classrooms: [],
+      selectedTeachers: [],
+      selectedClassroom: null
     };
   },
   computed: {
@@ -29,6 +32,7 @@ export default {
   },
   created() {
     this.loadTeachers();
+    this.loadClassrooms();
     this.formatTeachersForEdit();
   },
   methods: {
@@ -44,6 +48,20 @@ export default {
           })
           .catch(error => {
             console.error("Error loading teachers:", error);
+          });
+    },
+    loadClassrooms() {
+      const classroomsService = new ClassroomsService();
+      classroomsService.getAllClassrooms()
+          .then(response => {
+            this.classrooms = response.data.map(classroom => ({
+              id: classroom.id,
+              name: classroom.name
+            }));
+            console.log("Classrooms loaded:", this.classrooms);
+          })
+          .catch(error => {
+            console.error("Error loading classrooms:", error);
           });
     },
     formatTeachersForEdit() {
@@ -90,6 +108,14 @@ export default {
         this.item.administrator = {
           name: this.userName
         };
+
+        const selectedClassroom = this.classrooms.find(
+            classroom => classroom.id === this.selectedClassroom
+        );
+        if (selectedClassroom) {
+          this.item.classroom = selectedClassroom.name;
+        }
+
 
         // Eliminar `administrators` para evitar que se guarde un arreglo vacío
         delete this.item.administrators;
@@ -209,11 +235,14 @@ export default {
 
           <pv-float-label class="p-float-label">
             <label for="classroom">Classroom</label>
-            <pv-input-text
-                class="p-inputtext"
+            <pv-dropdown
                 id="classroom"
-                v-model="item.classroom"
-                :class="{ 'p-invalid': submitted && !item.classroom }"
+                v-model="selectedClassroom"
+                :options="classrooms"
+                option-label="name"
+                option-value="id"
+                placeholder="Select a classroom"
+                :class="{ 'p-invalid': submitted && !selectedClassroom }"
             />
           </pv-float-label>
         </div>
