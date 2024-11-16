@@ -8,7 +8,8 @@ export class Meet {
                     teachers = [],
                     invite = [],
                     administrators = [],
-                    accountable = []
+                    accountable = [],
+                    administrator = { name: "No person in charge" } // Agregar administrador principal
                 }) {
         this.id = id;
         this.name = name;
@@ -17,5 +18,6 @@ export class Meet {
         this.location = location;
         this.teachers = teachers.length ? teachers : invite;
         this.administrators = administrators.length ? administrators : accountable;
+        this.administrator = administrator; // Incluir el campo `administrator`
     }
 }

@@ -3,12 +3,13 @@ import {Meet} from "../model/meet.entity.js";
 import DataManager from "../../shared/components/data-meet.component.vue";
 import MeetCreateAndEditDialog from "../components/meet-create-and-edit.component.vue";
 import {MeetService} from "../services/meet.service.js";
+
 export default {
   name: "meet-management",
   components: {MeetCreateAndEditDialog, DataManager},
   data() {
     return {
-      title: { singular: 'Meet', plural: 'Meetings' },
+      title: {singular: 'Meet', plural: 'Meetings'},
       meetings: [],
       meet: new Meet({}),
       selectedMeetings: [],
@@ -124,8 +125,17 @@ export default {
   created() {
     this.meetService = new MeetService();
     this.meetService.getAll().then(response => {
-      this.meetings = response.data.map(meet => new Meet(meet));
-      console.log(this.meetings);
+      console.log("Raw API Response:", response.data); // Verificar los datos originales
+
+      this.meetings = response.data.map(meet => {
+        // Instanciar correctamente `Meet` preservando `administrator`
+        return new Meet({
+          ...meet,
+          administrator: meet.administrator || { name: "No person in charge" }
+        });
+      });
+
+      console.log("Processed Meetings:", this.meetings); // Verificar los datos procesados
     }).catch(error => console.error(error));
   }
 
@@ -159,14 +169,17 @@ export default {
         </pv-column>
         <pv-column class="pv-column" header="Persons in charge" style="min-width: 5rem">
           <template #body="slotProps">
-            <span v-if="slotProps.data.administrators && slotProps.data.administrators.length">
-              {{ slotProps.data.administrators.map(administrator => administrator.firstName + ' ' + administrator.lastName).join(', ') }}
-            </span>
+    <span v-if="slotProps.data.administrator && slotProps.data.administrator.name">
+      {{ slotProps.data.administrator.name }}
+    </span>
             <span v-else>
-              No administrators invited
-            </span>
+      No person in charge
+    </span>
           </template>
         </pv-column>
+
+
+
       </template>
     </data-manager>
     <meet-create-and-edit-dialog
