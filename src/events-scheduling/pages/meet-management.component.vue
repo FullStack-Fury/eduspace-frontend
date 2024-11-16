@@ -113,13 +113,11 @@ export default {
       this.notifySuccessfulAction('Meetings Deleted');
     },
     getTeacherNames(teacherIds) {
-      if (!this.teachers || this.teachers.length === 0) return ''; // Si teachers no está disponible, retornar vacío
       return teacherIds.map(id => {
         const teacher = this.teachers.find(t => t.id === id);
-        return teacher ? `${teacher.firstName} ${teacher.lastName}` : ''; // Usar firstName y lastName según la estructura
+        return teacher ? `${teacher.name} ${teacher.lastname}` : '';
       }).join(', ');
     },
-
     //#endregion
   },
   //#region Lifecycle Hooks
