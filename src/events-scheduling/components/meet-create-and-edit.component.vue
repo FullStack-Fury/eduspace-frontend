@@ -38,7 +38,7 @@ export default {
           .then(response => {
             this.teachers = response.data.map(teacher => ({
               id: teacher.id,
-              name: `${teacher.name} ${teacher.lastname}`
+              name: `${teacher.firstName} ${teacher.lastName}`
             }));
             console.log("Teachers loaded:", this.teachers);
           })
@@ -52,7 +52,7 @@ export default {
           .then(response => {
             this.administrators = response.data.map(administrator => ({
               id: administrator.id,
-              name: `${administrator.name} ${administrator.lastname}`
+              name: `${administrator.firstName} ${administrator.lastName}`
             }));
             console.log("Administrators loaded:", this.administrators);
           })
@@ -100,20 +100,17 @@ export default {
             .filter(teacher => this.item.teachers.includes(teacher.id))
             .map(teacher => ({
               id: teacher.id,
-              name: teacher.name.split(" ")[0],
-              lastname: teacher.name.split(" ")[1]
+              firstName: teacher.name.split(" ")[0],
+              lastName: teacher.name.split(" ")[1]
             }));
 
         this.item.administrators = this.administrators
             .filter(administrator => this.item.administrators.includes(administrator.id))
             .map(administrator => ({
               id: administrator.id,
-              name: administrator.name.split(" ")[0],
-              lastname: administrator.name.split(" ")[1]
+              firstName: administrator.name.split(" ")[0],
+              lastName: administrator.name.split(" ")[1]
             }));
-
-
-
         this.$emit('save-requested', this.item);
       }
     }
