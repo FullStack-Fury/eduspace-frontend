@@ -162,9 +162,9 @@ export default {
 
 .admin-info {
   grid-column: span 3;
-  background-color: #fff176; /* Fondo amarillo */
+  background-color: rgba(255, 210, 0, 0.35); /* Fondo amarillo */
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 50px;
   display: grid;
   grid-template-columns: auto 1fr auto; /* Avatar, información y botón */
   align-items: center;
