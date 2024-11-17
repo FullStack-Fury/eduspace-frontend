@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="report in reports" :key="report.id">
+      <tr v-for="report in filteredReports" :key="report.id">
         <td>{{ report.resourceName || 'Unknown Resource' }}</td>
         <td>{{ report.kind_of_report }}</td>
         <td>{{ report.description }}</td>
@@ -39,17 +39,28 @@
 <script>
 import { ReportService } from "../services/report.service.js";
 import { ResourceService } from "../services/resource.service.js";
+import { mapGetters } from "vuex";
 
 export default {
   data() {
     return {
-      reports: [],
+      reports: [], // Todos los reportes obtenidos del servicio
       reportService: new ReportService(),
       resourceService: new ResourceService(),
     };
   },
   created() {
     this.fetchReports();
+  },
+  computed: {
+    ...mapGetters(['userId', 'userRole']),
+    idTeacher() {
+      console.log("ID del usuario desde Vuex:", this.userId); // Verificar que userId esté presente
+      return this.userId; // ID del teacher conectado
+    },
+    filteredReports() {
+      return this.reports.filter((report) => String(report.idTeacher) === String(this.idTeacher));
+    },
   },
   methods: {
     async fetchReports() {
@@ -58,7 +69,7 @@ export default {
         const reports = response.data || [];
         for (let report of reports) {
           const resource = await this.resourceService.getById(report.resourceId);
-          report.resourceName = resource.data.name; // Add resource name to report
+          report.resourceName = resource.data.name; // Agregar el nombre del recurso
         }
         this.reports = reports;
       } catch (error) {
@@ -79,6 +90,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .report-table {
