@@ -128,19 +128,18 @@ export default {
 .payroll-create-form {
   display: flex;
   flex-direction: column;
-  background-color: #1e1e1e;
   padding: 30px;
   border-radius: 8px;
   max-width: 900px;
   margin: auto;
-  color: white;
+  border: solid rgb(226, 232, 240) 1px;
 }
 
 .form-header {
   display: flex;
   justify-content: space-between;
   margin-bottom: 20px;
-  color: #00bcd4;
+  color: #000000;
   font-weight: bold;
 }
 
