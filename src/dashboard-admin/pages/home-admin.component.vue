@@ -10,24 +10,17 @@
         ></pv-avatar>
       </div>
       <div class="admin-details">
-        <div class="admin-row">
-          <p><strong>Name:</strong> {{ admin.firstName }}</p>
-          <p><strong>Last Name:</strong> {{ admin.lastName }}</p>
-        </div>
-        <div class="admin-row">
-          <p><strong>Birthdate:</strong> 03-03-1956</p>
-          <p><strong>Cell Phone:</strong> {{ admin.phone }}</p>
-        </div>
-        <div class="admin-row">
-          <p><strong>Status:</strong> Admin</p>
-          <p><strong>Email:</strong> {{ admin.email }}</p>
-        </div>
+        <p><strong>Name:</strong> {{ admin.firstName }}</p>
+        <p><strong>Last Name:</strong> {{ admin.lastName }}</p>
+        <p><strong>Birthdate:</strong> 03-03-1956</p>
+        <p><strong>Cell Phone:</strong> {{ admin.phone }}</p>
+        <p><strong>Status:</strong> Admin</p>
+        <p><strong>Email:</strong> {{ admin.email }}</p>
       </div>
-      <button class="edit-button">Edit</button>
     </div>
 
     <!-- Tarjeta de Profesores -->
-    <pv-card class="teachers-card">
+    <pv-card class="teachers-card scrollable-card">
       <template #header>
         <h3 class="teachers-title">Teachers Created</h3>
       </template>
@@ -52,7 +45,7 @@
     </pv-card>
 
     <!-- Tarjeta de Reuniones -->
-    <pv-card class="meet-card">
+    <pv-card class="meet-card scrollable-card">
       <template #header>
         <h3 class="meet-title">Meetings in Charge</h3>
       </template>
@@ -81,6 +74,30 @@
         </div>
       </template>
     </pv-card>
+
+    <!-- Tarjeta de Reports -->
+    <pv-card class="reports-card scrollable-card">
+      <template #header>
+        <h3 class="reports-title">Reports</h3>
+      </template>
+      <template #content>
+        <div v-if="reports.length">
+          <ul class="reports-list">
+            <li v-for="(report, index) in reports" :key="index">
+              <p><strong>Type:</strong> {{ report.kind_of_report }}</p>
+              <p><strong>Description:</strong> {{ report.description }}</p>
+              <p><strong>Resource ID:</strong> {{ report.resourceId }}</p>
+              <p><strong>Created At:</strong> {{ report.created_at }}</p>
+              <p><strong>Status:</strong> {{ report.status }}</p>
+              <hr v-if="index < reports.length - 1" />
+            </li>
+          </ul>
+        </div>
+        <div v-else>
+          <p>No reports have been created.</p>
+        </div>
+      </template>
+    </pv-card>
   </div>
 </template>
 
@@ -92,16 +109,14 @@ export default {
   name: "AdminDashboard",
   data() {
     return {
-      admin: null, // Datos del administrador
-      meetings: [], // Datos de las reuniones asignadas
-      teachers: [], // Datos de los profesores creados por este administrador
+      admin: null,
+      meetings: [],
+      teachers: [],
+      reports: [],
     };
   },
   computed: {
     ...mapGetters(["userId"]),
-    fullName() {
-      return `${this.admin?.firstName || ""} ${this.admin?.lastName || ""}`;
-    },
     initials() {
       const [firstName, lastName] = [
         this.admin?.firstName || "",
@@ -112,51 +127,24 @@ export default {
   },
   async mounted() {
     try {
-      console.log("User ID desde Vuex:", this.userId);
+      if (!this.userId) return;
 
-      // Verificación de existencia de userId
-      if (!this.userId) {
-        console.error("El userId no está definido.");
-        return;
-      }
-
-      // Obtener datos del administrador
       const adminResponse = await http.get("/administrators");
-      const admins = adminResponse.data;
-      console.log("Datos de Administradores:", admins);
+      this.admin = adminResponse.data.find((a) => String(a.id) === String(this.userId));
 
-      // Encontrar al administrador logueado
-      this.admin = admins.find((a) => String(a.id) === String(this.userId));
-      console.log("Administrador encontrado:", this.admin);
-
-      if (!this.admin) {
-        console.warn("No se encontró información del administrador logueado.");
-        return;
-      }
-
-      // Obtener reuniones asignadas
       const meetingsResponse = await http.get("/meet");
-      const allMeetings = meetingsResponse.data;
-      console.log("Datos de Meetings:", allMeetings);
-
-      // Filtrar reuniones asignadas al administrador logueado
-      this.meetings = allMeetings.filter(
+      this.meetings = meetingsResponse.data.filter(
           (meeting) =>
-              meeting.administrator?.name &&
-              meeting.administrator.name === `${this.admin.firstName} ${this.admin.lastName}`
+              meeting.administrator?.name === `${this.admin.firstName} ${this.admin.lastName}`
       );
-      console.log("Reuniones asignadas:", this.meetings);
 
-      // Obtener profesores creados por el administrador
       const teachersResponse = await http.get("/teachers");
-      const allTeachers = teachersResponse.data;
-      console.log("Datos de Profesores:", allTeachers);
-
-      // Filtrar profesores creados por el administrador logueado
-      this.teachers = allTeachers.filter(
+      this.teachers = teachersResponse.data.filter(
           (teacher) => String(teacher.administratorId) === String(this.userId)
       );
-      console.log("Profesores creados por este administrador:", this.teachers);
+
+      const reportsResponse = await http.get("/reports");
+      this.reports = reportsResponse.data;
     } catch (error) {
       console.error("Error al cargar datos:", error);
     }
@@ -165,18 +153,15 @@ export default {
 </script>
 
 <style scoped>
-/* Layout Principal */
 .dashboard-layout {
   display: grid;
-  grid-template-columns: 1fr 2fr; /* Dos columnas */
-  grid-template-rows: auto auto; /* Filas automáticas */
+  grid-template-columns: repeat(3, 1fr); /* Tres columnas */
   gap: 20px;
   padding: 20px;
 }
 
-/* Información del Administrador */
 .admin-info {
-  grid-column: 1 / 3; /* Ocupa todo el ancho */
+  grid-column:span 3; /* Ocupa todo el ancho */
   background-color: #fff176; /* Fondo amarillo */
   padding: 20px;
   border-radius: 8px;
@@ -197,53 +182,29 @@ export default {
   gap: 10px;
 }
 
-.admin-row {
-  display: flex;
-  justify-content: space-between;
+
+.scrollable-card {
+  height: 400px; /* Altura fija */
+  overflow-y: auto; /* Scroll interno */
 }
 
-.edit-button {
-  grid-column: 3 / 4;
-  align-self: end;
-  background-color: #fdd835;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  color: #000;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.edit-button:hover {
-  background-color: #fbc02d;
-}
-
-/* Tarjeta de Profesores */
 .teachers-card {
-  grid-column: 1 / 2; /* Primera columna */
-  grid-row: 2 / 3; /* Segunda fila */
   background-color: #e3f2fd;
-  padding: 20px;
-  border-radius: 8px;
 }
 
-.teachers-title {
+.meet-card {
+  background-color: #e8f5e9;
+}
+
+.reports-card {
+  background-color: #f3e5f5;
+}
+
+.teachers-title,
+.meet-title,
+.reports-title {
   text-align: center;
   font-size: 18px;
   font-weight: bold;
-  color: #333;
-}
-
-.teachers-list {
-  list-style: none;
-  padding: 0;
-}
-
-/* Tarjeta de Reuniones */
-.meet-card {
-  grid-column: 2 / 3; /* Segunda columna */
-  grid-row: 2 / 3; /* Segunda fila */
-  padding: 20px;
-  border-radius: 8px;
 }
 </style>

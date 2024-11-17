@@ -114,6 +114,15 @@
       "created_at": "2024-10-30",
       "status": "completado",
       "id": 10
+    },
+    {
+      "kind_of_report": "213",
+      "description": "asd",
+      "resourceId": "5",
+      "created_at": "2024-11-17",
+      "status": "en proceso",
+      "idTeacher": "2",
+      "id": 11
     }
   ],
   "shared-area": [
