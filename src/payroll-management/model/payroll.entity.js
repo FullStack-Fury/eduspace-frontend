@@ -5,7 +5,6 @@ export class Payroll {
                     salaryAmount = 0,
                     pensionContribution = 0,
                     salaryBonus = 0,
-                    datePayment = null,
                     otherDeductions = 0,
                     serie = "A",  // Campo Serie Automática
                 }) {
@@ -15,7 +14,6 @@ export class Payroll {
         this.pensionContribution = pensionContribution;
         this.salaryBonus = salaryBonus;
         this.otherDeductions = otherDeductions;
-        this.datePayment = datePayment;
         this.serie = serie; // Guardamos la serie automática
 
         // Calculamos el salario neto al crear la instancia
