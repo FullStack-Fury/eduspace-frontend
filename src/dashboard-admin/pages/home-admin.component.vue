@@ -161,7 +161,7 @@ export default {
 }
 
 .admin-info {
-  grid-column:span 3; /* Ocupa todo el ancho */
+  grid-column: span 3;
   background-color: #fff176; /* Fondo amarillo */
   padding: 20px;
   border-radius: 8px;
