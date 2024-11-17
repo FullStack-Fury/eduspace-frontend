@@ -35,6 +35,8 @@
         />
         <label for="created_at" class="fixed-label">Created At</label>
       </div>
+      <!-- Campo oculto para el idTeacher, que obtiene el userId desde Vuex -->
+      <input type="hidden" v-model="idTeacher" />
       <pv-button
           type="submit"
           label="Create report"
@@ -46,6 +48,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { ReportService } from "../services/report.service.js";
 
 export default {
@@ -63,6 +66,14 @@ export default {
   },
   created() {
     this.form.resourceId = this.$route.params.resourceId;
+    this.setUserId();  // Inicializa el idTeacher desde Vuex
+  },
+  computed: {
+    ...mapGetters(['userId', 'userRole']),
+    idTeacher() {
+      console.log("ID del usuario desde Vuex:", this.userId); // Verificar que userId esté presente
+      return this.userId;
+    },
   },
   methods: {
     async submitForm() {
@@ -72,11 +83,12 @@ export default {
         resourceId: this.form.resourceId,
         created_at: this.getDateWithoutTime(this.formattedCreatedAt),
         status: this.form.status,
+        idTeacher: String(this.idTeacher),  // Usamos el idTeacher desde el computed
       };
 
       try {
         await this.reportService.create(reportData);
-        this.$router.push('/classrooms');
+        this.$router.push('/dashboard-teacher/breakdown-reports/classrooms');
       } catch (error) {
         console.error("Error al crear el reporte:", error);
         alert("Error al crear el reporte. Por favor, revisa la consola para más detalles.");
@@ -85,6 +97,10 @@ export default {
     getDateWithoutTime(dateString) {
       const date = new Date(dateString);
       return date.toISOString().split('T')[0];
+    },
+    setUserId() {
+      // Aquí puedes agregar lógica si deseas hacer algo más con el userId cuando se inicializa
+      console.log('User ID from Vuex:', this.idTeacher);
     }
   },
 };
