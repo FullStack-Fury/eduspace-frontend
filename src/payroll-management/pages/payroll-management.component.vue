@@ -15,11 +15,6 @@
       <pv-column field="salaryAmount" header="Devengado"></pv-column>
       <pv-column field="pensionContribution" header="SS Empresa"></pv-column>
       <pv-column field="totalCost" header="Coste Salarial"></pv-column>
-      <pv-column field="isPayed" header="Payed">
-        <template #body="{ data }">
-          <span :class="['status-indicator', data.isPayed ? 'green' : 'red']"></span>
-        </template>
-      </pv-column>
       <pv-column header="Actions">
         <template #body="{ data }">
           <div class="action-buttons">
