@@ -52,7 +52,7 @@ export default {
         ];
       } else if (this.userRole === 2) { // Si es profesor
         this.items = [
-          {label: 'Home', to: '/dashboard-teacher/home', svg: HomeIcon},
+          {label: 'Home', to: '/dashboard-teacher/home-teacher', svg: HomeIcon},
           {label: 'Notifications', to: '/dashboard-teacher/notifications', svg: NotificationIcon},
           {label: 'Reservations', to: '/dashboard-teacher/reservations', svg: ReservationIcon},
           {label: 'Breakdown Reports', to: '/dashboard-teacher/breakdown-reports', svg: BreakdownIcon},
