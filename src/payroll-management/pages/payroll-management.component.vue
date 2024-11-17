@@ -12,9 +12,9 @@
     <pv-data-table :value="payrolls" :responsiveLayout="'scroll'" class="payroll-table" show-gridlines>
       <pv-column field="series" header="Nº" sortable=""></pv-column>
       <pv-column field="teacherName" header="Employee"></pv-column> <!-- Mostrar nombre del teacher -->
-      <pv-column field="salaryAmount" header="Devengado"></pv-column>
-      <pv-column field="pensionContribution" header="SS Empresa"></pv-column>
-      <pv-column field="totalCost" header="Coste Salarial"></pv-column>
+      <pv-column field="salaryAmount" header="Received"></pv-column>
+      <pv-column field="pensionContribution" header="SS Company"></pv-column>
+      <pv-column field="totalCost" header="Salary Cost"></pv-column>
       <pv-column header="Actions">
         <template #body="{ data }">
           <div class="action-buttons">
