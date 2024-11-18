@@ -9,18 +9,19 @@ export default {
     return {
       classroom: {
         name: '',
-        description: ''
+        description: '',
+        teacherId: null
       }
     };
   },
   methods: {
     async saveClassroom(classroom) {
       try {
-        const response = await http.post("/classrooms", classroom);
-        console.log("Classroom saved:", response.data);
+        await http.post("/classrooms", classroom);
+        alert("Classroom created successfully");
         this.$router.push("/dashboard-admin/classrooms-shared-spaces/classrooms");
       } catch (error) {
-        console.error("Error saving classrooms:", error);
+        console.error("Error creating classroom:", error);
       }
     },
     cancel() {
