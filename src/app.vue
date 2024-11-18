@@ -96,7 +96,7 @@ export default {
 
         <!-- Información del usuario autenticado -->
         <div class="user-info" >
-          <pv-avatar image="/src/assets/default-avatar.png" class="mr-2" size="xlarge" shape="circle"></pv-avatar>
+          <pv-avatar image="../src/assets/default-avatar.png" class="mr-2" size="xlarge" shape="circle"></pv-avatar>
           <div class="info">
             <p class="info" :style="{ color: userRole === 1 ? '#064C58' : '#584F06' }">{{ userRole === 1 ? 'Administrator' : 'Teacher' }}</p> <!-- Mostrar el rol del usuario con color condicional -->
             <p class="info">{{ userName }}</p> <!-- Mostrar el nombre del usuario -->
