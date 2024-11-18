@@ -1,59 +1,102 @@
+import AuthenticationService from "../../iam/services/authentication.service.js";
+
 export default {
     namespaced: true,
     state: {
         id: null,
         role: null,
-        token: localStorage.getItem('token') || null, // Inicializa el token desde localStorage
+        token: localStorage.getItem("token") || null, // Cargar el token desde localStorage si existe
+        isAuthenticated: false,
+        user: null, // Objeto completo del usuario
     },
     mutations: {
-        SET_USER_ID(state, id) {
-            console.log("Set user ID:", id); // Log para verificar ID
-            state.id = id;
+        SET_USER(state, user) {
+            console.log("Set user mutation called with:", user);
+            state.id = user?.id || null;
+            state.role = user?.role || null;
+            state.user = user;
+            console.log("State after SET_USER:", state);
         },
-        SET_USER_ROLE(state, role) {
-            console.log("Set user role:", role); // Log para verificar role
-            state.role = role;
-        },
-        SET_USER_TOKEN(state, token) {
-            console.log("Set user token:", token); // Log para verificar token
+        SET_TOKEN(state, token) {
+            console.log("Set token mutation called with:", token);
             state.token = token;
+            console.log("State after SET_TOKEN:", state);
         },
         CLEAR_USER(state) {
-            console.log("Clearing user data"); // Log para depuración
+            console.log("Clearing user data...");
             state.id = null;
             state.role = null;
             state.token = null;
+            state.isAuthenticated = false;
+            state.user = null;
         },
     },
     actions: {
-        setUser({ commit }, { id, role, token }) {
-            console.log("Action setUser called with:", { id, role, token }); // Log para verificar los datos
-            commit("SET_USER_ID", id);
-            commit("SET_USER_ROLE", role);
-            commit("SET_USER_TOKEN", token);
+        async signIn({ commit }, payload) {
+            console.log("Action signIn called with:", payload);
+            try {
+                const response = await AuthenticationService.signIn(payload);
 
-            // Guardar el token en localStorage para persistencia
-            localStorage.setItem("token", token);
+                // Asegúrate de que los datos de respuesta están correctos
+                const { id, role, token, username } = response.data;
+                if (!id || !role || !token) {
+                    throw new Error("Datos de usuario incompletos en la respuesta del servidor.");
+                }
+
+
+                // Actualiza el estado Vuex
+                commit("SET_USER", { id, role, username });
+                commit("SET_TOKEN", token);
+
+                // Guarda el token en localStorage
+                localStorage.setItem("token", token);
+                console.log("User and token stored successfully");
+            } catch (error) {
+                console.error("Error during signIn:", error.message);
+                throw error;
+            }
+        }
+        ,
+        async signUp(_, payload) {
+            console.log("Action signUp called with:", payload);
+            try {
+                await AuthenticationService.signUp(payload);
+            } catch (error) {
+                console.error("Error during signUp:", error);
+                throw error;
+            }
         },
-        clearUser({ commit }) {
-            console.log("Action clearUser called"); // Log para verificar cuando se limpia el usuario
+        signOut({ commit }) {
+            console.log("Action signOut called");
             commit("CLEAR_USER");
 
-            // Eliminar el token de localStorage al cerrar sesión
+            // Limpia el token de localStorage
             localStorage.removeItem("token");
+        },
+        clearAuth({ commit }) {
+            commit("CLEAR_USER");
         },
     },
     getters: {
-        userId: (state) => {
-            console.log("Getter userId:", state.id); // Log para verificar el getter
+        isAuthenticated(state) {
+            return state.isAuthenticated;
+        },
+        currentUser(state) {
+            return state.user;
+        },
+        currentUsername(state) {
+            return state.user?.username || "Guest";
+        },
+        userId(state) {
+            console.log("Getter userId called, returning:", state.id);
             return state.id;
         },
-        userRole: (state) => {
-            console.log("Getter userRole:", state.role); // Log para verificar el getter
+        userRole(state) {
+            console.log("Getter userRole called, returning:", state.role);
             return state.role;
         },
-        userToken: (state) => {
-            console.log("Getter userToken:", state.token); // Log para verificar el getter
+        userToken(state) {
+            console.log("Getter userToken called, returning:", state.token);
             return state.token;
         },
     },

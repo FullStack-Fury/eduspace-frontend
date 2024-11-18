@@ -1,64 +1,53 @@
 <script>
 import LoginForm from '../components/login-form.component.vue';
-import { LoginService } from '../services/login.services.js';
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapState } from 'vuex';
 import { SignInRequest } from "../../iam/model/sign-in.request.js";
-import { SignInResponse } from "../../iam/model/sign-in.response.js";
 
 export default {
   name: "login",
   components: { LoginForm },
   data() {
     return {
-      loginService: new LoginService(),
       signInRequest: new SignInRequest({}),
-      signInResponseObject: new SignInResponse({})
     };
   },
   computed: {
-    ...mapGetters('user', ['userId', 'userRole', 'userToken'])
+    // Correcta ubicación para mapState
+    ...mapState("user", {
+      userId: "id",
+      userRole: "role",
+      userToken: "token",
+    }),
   },
   methods: {
-    ...mapActions('user', ['setUser']),
+    ...mapActions("user", ["signIn"]),
 
     async handleLogin({ email, password }) {
       try {
         console.log("Login initiated");
 
-        const user = { username: email, password: password };
+        // Crear el objeto de solicitud
+        const userPayload = { username: email, password: password };
+        this.signInRequest = new SignInRequest(userPayload);
+        console.log("Request:", this.signInRequest);
 
-        // Crear la solicitud de inicio de sesión
-        this.signInRequest = new SignInRequest(user);
-        console.log('Request:', this.signInRequest);
+        // Llamada al método Vuex para iniciar sesión
+        await this.signIn(this.signInRequest);
 
-        // Realizar la solicitud de inicio de sesión
-        const signInResponse = await this.loginService.signIn(this.signInRequest);
-        console.log('Response:', signInResponse);
-
-        // Procesar la respuesta
-        this.signInResponseObject = new SignInResponse({ ...signInResponse.data });
-        console.log('Processed Response Object:', this.signInResponseObject);
-
-        // Guardar los datos del usuario en Vuex (token, id y rol)
-        await this.setUser({
-          id: this.signInResponseObject.id,
-          role: this.signInResponseObject.role,
-          token: this.signInResponseObject.token
-        });
-
-        console.log("User stored in Vuex:", {
+        // Confirmar valores después de Vuex
+        console.log("User stored in Vuex after login:", {
           id: this.userId,
           role: this.userRole,
-          token: this.userToken
+          token: this.userToken,
         });
 
-        // Redireccionar según el rol del usuario
-        if (this.userRole === 'RoleAdmin') {
+        // Redirigir basado en el rol
+        if (this.userRole === "RoleAdmin") {
           console.log("Redirecting to Admin Dashboard");
-          this.$router.push('/dashboard-admin/home-admin');
-        } else if (this.userRole === 'RoleTeacher') {
+          this.$router.push("/dashboard-admin/home-admin");
+        } else if (this.userRole === "RoleTeacher") {
           console.log("Redirecting to Teacher Dashboard");
-          this.$router.push('/dashboard-teacher/home-teacher');
+          this.$router.push("/dashboard-teacher/home-teacher");
         } else {
           console.warn("Unrecognized role:", this.userRole);
         }
@@ -67,12 +56,15 @@ export default {
         alert("Error during login. Please check your credentials.");
       }
     },
+
     goToRegister() {
-      this.$router.push({ name: 'register' });
-    }
-  }
+      this.$router.push({ name: 'register' }); // Asegúrate de que la ruta "register" está definida en tu configuración de rutas
+    },
+  },
 };
 </script>
+
+
 
 <template>
   <div class="login-container">
@@ -88,8 +80,6 @@ export default {
     </div>
   </div>
 </template>
-
-
 
 <style scoped>
 .login-container {
@@ -155,7 +145,7 @@ p {
   text-decoration: none;
 }
 
- .sign-up-button {
+.sign-up-button {
   margin-top: 20px;
   background: linear-gradient(to right, #34a7c1, #4ad4d4);
   color: white;
@@ -168,12 +158,9 @@ p {
   text-align: center;
 }
 
-
-
 .login-container .sign-up-button:hover {
   background: linear-gradient(to right, #2fa1b4, #41b8b8);
   color: white;
   border: none;
 }
-
 </style>

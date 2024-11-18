@@ -116,12 +116,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["userId"]),
+    ...mapGetters("user", ["userId", "userRole", "userToken"]),
+    created() {
+      console.log("User ID:", this.userId);
+      console.log("User Role:", this.userRole);
+    },
     initials() {
-      const [firstName, lastName] = [
-        this.admin?.firstName || "",
-        this.admin?.lastName || "",
-      ];
+      if (!this.admin) return "";
+      const { firstName = "", lastName = "" } = this.admin;
       return `${firstName[0] || ""}${lastName[0] || ""}`.toUpperCase();
     },
   },
