@@ -2,12 +2,12 @@
   <div class="payroll-create-form">
     <div class="form-header">
       <h2>Payment Register</h2>
-      <h2>Nomina</h2>
+      <h2>Payroll</h2>
     </div>
     <form @submit.prevent="save" class="form-grid">
       <div class="left-column">
         <div class="form-field">
-          <label>Serie Automatica:</label>
+          <label>Automatic Serie:</label>
           <pv-input-text v-model="form.serie" value="A" disabled/>
         </div>
 
@@ -27,17 +27,17 @@
 
       <div class="right-column">
         <div class="form-field">
-          <label>Devengado:</label>
+          <label>Received:</label>
           <pv-input-number v-model.number="form.salaryAmount" :min="0"/>
         </div>
 
         <div class="form-field">
-          <label>Aportacion al trabajador:</label>
+          <label>Contribution to the worker:</label>
           <pv-input-number v-model.number="form.salaryBonus" :min="0"/>
         </div>
 
         <div class="form-field">
-          <label>Anticipos:</label>
+          <label>Advances:</label>
           <pv-input-number v-model.number="form.pensionContribution" :min="0"/>
         </div>
 
