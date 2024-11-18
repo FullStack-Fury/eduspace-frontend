@@ -1,50 +1,45 @@
 {
   "classrooms": [
     {
-      "id": 1,
+      "id": "1",
       "name": "A101",
       "description": "Classroom for 1st grade students",
       "teacherId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "A102",
       "description": "Classroom for 2st grade students",
       "teacherId": 2
-    },
-    {
-      "id": 3,
-      "name": "A103",
-      "description": "Classroom for 3st grade students"
     }
   ],
   "resources": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Projector",
       "kind_of_resource": "Electronic",
       "idClassroom": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Whiteboard",
       "kind_of_resource": "Furniture",
       "idClassroom": 1
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Textbooks",
       "kind_of_resource": "Books",
       "idClassroom": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Laptops",
       "kind_of_resource": "Electronic",
       "idClassroom": 2
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Microscope",
       "kind_of_resource": "Scientific",
       "idClassroom": 3
@@ -57,7 +52,7 @@
       "resourceId": "1",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 3
+      "id": "3"
     },
     {
       "kind_of_report": "afafa",
@@ -65,7 +60,7 @@
       "resourceId": "4",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 4
+      "id": "4"
     },
     {
       "kind_of_report": "pruebafinall",
@@ -73,7 +68,7 @@
       "resourceId": "1",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 5
+      "id": "5"
     },
     {
       "kind_of_report": "fafaffa",
@@ -81,7 +76,7 @@
       "resourceId": "2",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 6
+      "id": "6"
     },
     {
       "kind_of_report": "fafaf",
@@ -89,7 +84,7 @@
       "resourceId": "4",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 7
+      "id": "7"
     },
     {
       "kind_of_report": "afaf",
@@ -97,7 +92,7 @@
       "resourceId": "1",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 8
+      "id": "8"
     },
     {
       "kind_of_report": "adada",
@@ -105,7 +100,7 @@
       "resourceId": "1",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 9
+      "id": "9"
     },
     {
       "kind_of_report": "aafa",
@@ -113,7 +108,7 @@
       "resourceId": "1",
       "created_at": "2024-10-30",
       "status": "completado",
-      "id": 10
+      "id": "10"
     },
     {
       "kind_of_report": "213",
@@ -122,31 +117,26 @@
       "created_at": "2024-11-17",
       "status": "en proceso",
       "idTeacher": "2",
-      "id": 11
+      "id": "11"
     }
   ],
   "shared-area": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Swimming pool",
       "capacity": 100,
       "description": "Swimming pool that is shared by all the teachers and students"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Primary schoolyard",
       "capacity": 200,
       "description": "Schoolyard that is shared by all the primary students"
-    },
-    {
-      "id": 3,
-      "name": "Secondary schoolyard",
-      "capacity": 300,
-      "description": "Schoolyard that is shared by all the secondary students"
     }
   ],
   "teachers": [
     {
+      "id": "1",
       "firstName": "maria fernanda",
       "lastName": "rosas alvarado",
       "email": "maria@school.com",
@@ -155,10 +145,10 @@
       "workingDays": "Monday - Friday",
       "field": "Literature",
       "administratorId": 3,
-      "password": "123456789",
-      "id": 1
+      "password": "123456789"
     },
     {
+      "id": "2",
       "firstName": "Luis",
       "lastName": "gonzales",
       "email": "luis@school.com",
@@ -167,37 +157,12 @@
       "workingDays": "Saturday - Sunday",
       "field": "Math",
       "administratorId": 8,
-      "password": "11122",
-      "id": 2
-    },
-    {
-      "firstName": "Oscar",
-      "lastName": "Antayhua",
-      "email": "oscar@school.com",
-      "dni": "555",
-      "phone": "22312",
-      "workingDays": "Monday - Friday",
-      "field": "",
-      "administratorId": 9,
-      "password": "555",
-      "id": 3
-    },
-    {
-      "firstName": "Oscar2",
-      "lastName": "Antayhua3",
-      "email": "123",
-      "dni": "123",
-      "phone": "123",
-      "workingDays": "Monday - Friday",
-      "field": "Literature",
-      "administratorId": 9,
-      "password": "123",
-      "id": 4
+      "password": "11122"
     }
   ],
   "administrators": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Admin1",
       "email": "admin1@school.com"
     },
@@ -209,7 +174,7 @@
       "address": "asdaasd",
       "phone": "12312312",
       "password": "",
-      "id": 2
+      "id": "2"
     },
     {
       "firstName": "Oscar",
@@ -219,7 +184,7 @@
       "address": "asdasdas",
       "phone": "960204077",
       "password": "oscarjac",
-      "id": 3
+      "id": "3"
     },
     {
       "firstName": "oscar",
@@ -229,7 +194,7 @@
       "address": "3521351",
       "phone": "6854351",
       "password": "oscarjac",
-      "id": 4
+      "id": "4"
     },
     {
       "firstName": "Gabriela",
@@ -239,7 +204,7 @@
       "address": "Los alisos 316",
       "phone": "93452314",
       "password": "gabriela13GG",
-      "id": 5
+      "id": "5"
     },
     {
       "firstName": "Gabriela",
@@ -249,7 +214,7 @@
       "address": "Los alisos 316",
       "phone": "93452314",
       "password": "gabriela13GG",
-      "id": 6
+      "id": "6"
     },
     {
       "firstName": "oaasda",
@@ -259,7 +224,7 @@
       "address": "asdasd",
       "phone": "21312312",
       "password": "1231das",
-      "id": 7
+      "id": "7"
     },
     {
       "firstName": "oscar",
@@ -269,7 +234,7 @@
       "address": "asdasd",
       "phone": "48462135",
       "password": "123456789",
-      "id": 8
+      "id": "8"
     },
     {
       "firstName": "root",
@@ -279,7 +244,7 @@
       "address": "adsasd",
       "phone": "45121325",
       "password": "123",
-      "id": 9
+      "id": "9"
     },
     {
       "id": "50fb",
@@ -309,12 +274,12 @@
       "address": "María Parado De Bellido",
       "phone": "213",
       "password": "123",
-      "id": 10
+      "id": "10"
     }
   ],
   "meet": [
     {
-      "id": 10,
+      "id": "10",
       "title": "asd",
       "description": "asd",
       "day": "2024-11-22",
@@ -335,7 +300,7 @@
   ],
   "shared-area-reservation": [
     {
-      "id": 1,
+      "id": "1",
       "title": "Teacher 1 Reservation",
       "start": "2024-09-28T02:00:00",
       "end": "2024-09-28T04:00:00",
@@ -350,7 +315,7 @@
       "pensionContribution": 50,
       "salaryBonus": 200,
       "salaryNet": 2150,
-      "id": 5
+      "id": "5"
     },
     {
       "teacherId": 2,
@@ -358,7 +323,7 @@
       "pensionContribution": 43,
       "salaryBonus": 2,
       "salaryNet": 2292,
-      "id": 6
+      "id": "6"
     }
   ]
 }

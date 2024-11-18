@@ -1,4 +1,6 @@
 <script>
+import {TeacherService} from "../../../payroll-management/services/teacher.service.js";
+
 export default {
   name: "classroom-create-and-edit",
   props: {
@@ -7,22 +9,38 @@ export default {
       required: true,
       default: () => ({
         name: '',
-        description: ''
+        description: '',
+        teacherId: null,
       }),
     },
     isCreateMode: {
       type: Boolean,
-      default: true
-    }
+      default: true,
+    },
   },
   data() {
     return {
-      form: { ...this.classroom }
+      form: { ...this.classroom },
+      teachers: [],
+      loadingTeachers: true, // Indicador de carga para los profesores
     };
   },
+  mounted() {
+    this.loadTeachers();
+  },
   methods: {
+    async loadTeachers() {
+      try {
+        const response = await TeacherService.getAll();
+        this.teachers = response.data; // Asegúrate de que `response.data` contenga un array de profesores
+      } catch (error) {
+        console.error("Error loading teachers:", error);
+      } finally {
+        this.loadingTeachers = false; // Termina el estado de carga
+      }
+    },
     save() {
-      if (!this.form.name || !this.form.description) {
+      if (!this.form.name || !this.form.description || !this.form.teacherId) {
         alert("Please fill in all fields.");
         return;
       }
@@ -30,8 +48,8 @@ export default {
     },
     cancel() {
       this.$emit("cancel");
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -59,13 +77,33 @@ export default {
         <pv-input-text v-model="form.description" placeholder="Enter description"/>
       </div>
 
+      <div class="form-field">
+        <pv-float-label>Teacher:</pv-float-label>
+        <div v-if="loadingTeachers">
+          <span>Loading teachers...</span>
+        </div>
+        <div v-else>
+          <select v-model="form.teacherId" class="teacher-select">
+            <option disabled value="">Select a teacher</option>
+            <option v-for="teacher in teachers" :key="teacher.id" :value="teacher.id">
+              {{ teacher.firstName }} {{ teacher.lastName }}
+            </option>
+          </select>
+        </div>
+      </div>
+
       <div class="form-actions">
-        <pv-button type="submit" label="Save" class="p-button-success"/>
         <pv-button
-          type="button"
-          label="Cancel"
-          class="p-button-secondary"
-          @click="cancel"
+            type="submit"
+            label="Save"
+            class="p-button-success"
+            :disabled="loadingTeachers || !form.name || !form.description || !form.teacherId"
+        />
+        <pv-button
+            type="button"
+            label="Cancel"
+            class="p-button-secondary"
+            @click="cancel"
         />
       </div>
     </form>
@@ -79,15 +117,13 @@ export default {
   padding: 30px;
   border-radius: 8px;
   max-width: 600px;
-  margin: auto;
+  margin-top: 50px;
   color: white;
   border: 1px solid #ccc;
-  border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .form-header {
-  margin-bottom: 20px;
   color: black;
   font-weight: bold;
 }
@@ -101,12 +137,17 @@ export default {
 .form-field {
   display: flex;
   flex-direction: column;
-  gap: 5px;
 }
 
 .form-actions {
   display: flex;
   justify-content: space-between;
   margin-top: 20px;
+}
+
+.teacher-select {
+  padding: 8px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
 }
 </style>

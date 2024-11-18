@@ -1,28 +1,53 @@
 <script>
 import http from "../../../shared/services/http-common.js";
 import ClassroomCard from "../../components/classrooms/classroom-card.component.vue";
+import { TeacherService } from "../../../payroll-management/services/teacher.service.js";
 
 export default {
   name: "classroom",
-  components: {ClassroomCard},
+  components: { ClassroomCard },
   data() {
     return {
-      classrooms: []
+      classrooms: [],
+      teachers: [], // Lista de profesores
     };
   },
   mounted() {
     this.loadClassroom();
+    this.loadTeachers();
   },
   methods: {
     async loadClassroom() {
       try {
         const response = await http.get("/classrooms");
         this.classrooms = response.data;
+        this.assignTeacherNames(); // Asignar nombres de profesores a los classrooms
       } catch (error) {
         console.error("Error loading classrooms:", error);
       }
     },
+    async loadTeachers() {
+      try {
+        const response = await TeacherService.getAll();
+        this.teachers = response.data;
+        this.assignTeacherNames(); // Asignar nombres de profesores a los classrooms si los classrooms ya están cargados
+      } catch (error) {
+        console.error("Error loading teachers:", error);
+      }
+    },
+    assignTeacherNames() {
+      if (this.teachers.length > 0 && this.classrooms.length > 0) {
+        this.classrooms = this.classrooms.map(classroom => {
+          const teacher = this.teachers.find(t => t.id === classroom.teacherId);
+          return {
+            ...classroom,
+            teacherName: teacher ? `${teacher.firstName} ${teacher.lastName}` : 'No Teacher Assigned'
+          };
+        });
+      }
+    },
     async deleteClassroom(id) {
+      console.log("Deleting classroom with ID:", id);
       try {
         await http.delete(`/classrooms/${id}`);
         this.classrooms = this.classrooms.filter(classroom => classroom.id !== id);
@@ -30,14 +55,11 @@ export default {
         console.error("Error deleting classroom:", error);
       }
     },
-    editClassroom(id) {
-      this.$router.push({name: "edit classroom", params: {id}});
-    },
     goToAdd() {
-      this.$router.push('/dashboard-admin/classrooms-shared-spaces/classroom/add');
-    }
-  }
-}
+      this.$router.push('/dashboard-admin/classrooms-shared-spaces/classrooms/add');
+    },
+  },
+};
 </script>
 
 <template>
@@ -62,7 +84,19 @@ export default {
     </div>
 
     <div class="cards-container">
-      <classroom-card v-for="classroom in classrooms" :key="classroom.id" :classroom="classroom" @delete="deleteClassroom" @edit="editClassroom"/>
+      <classroom-card
+          v-for="classroom in classrooms"
+          :key="classroom.id"
+          :classroom="classroom"
+          @delete="deleteClassroom"
+      >
+        <!-- Mostrar el nombre del profesor en la tarjeta del aula -->
+        <template #teacher-info>
+          <div class="teacher-info">
+            Teacher: {{ classroom.teacherName }}
+          </div>
+        </template>
+      </classroom-card>
     </div>
   </div>
 </template>
@@ -83,5 +117,10 @@ export default {
 
 .card {
   width: 300px;
+}
+
+.teacher-info {
+  margin-top: 10px;
+  color: #555;
 }
 </style>
