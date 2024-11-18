@@ -1,23 +1,3 @@
-<template>
-  <div class="login-form-container">
-    <h2>Sign in</h2>
-
-    <form @submit.prevent="submitLogin">
-      <pv-input-text v-model="email" placeholder="Email" required />
-      <pv-password v-model="password" placeholder="Password" toggleMask required />
-
-      <div class="role-selection">
-        <label for="role">Sign in as: </label>
-        <pv-select :options="roles" v-model="role" placeholder="Select Role" option-label="label" option-value="value" required />
-      </div>
-
-      <a href="#" class="forgot-password">Forgot your password?</a>
-
-      <pv-button type="submit" label="SIGN IN" class="sign-in-button" />
-    </form>
-  </div>
-</template>
-
 <script>
 export default {
   name: "login-form",
@@ -39,6 +19,24 @@ export default {
   }
 };
 </script>
+
+<template>
+  <div class="login-form-container">
+    <h2>Sign in</h2>
+
+    <form @submit.prevent="submitLogin">
+      <pv-input-text v-model="email" placeholder="Email" required />
+      <pv-password v-model="password" placeholder="Password" toggleMask required />
+
+      <div class="role-selection">
+      </div>
+
+      <a href="#" class="forgot-password">Forgot your password?</a>
+
+      <pv-button type="submit" label="SIGN IN" class="sign-in-button" />
+    </form>
+  </div>
+</template>
 
 <style scoped>
 /* Estilos del formulario de inicio de sesión */

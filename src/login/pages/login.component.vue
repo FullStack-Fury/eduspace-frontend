@@ -1,9 +1,9 @@
 <script>
 import LoginForm from '../components/login-form.component.vue';
 import { LoginService } from '../services/login.services.js';
-import {mapActions, mapGetters} from 'vuex';
-import {SignInRequest} from "../model/sign-in.request.js";
-import {SignInResponse} from "../model/sign-in.response.js";
+import { mapActions, mapGetters } from 'vuex';
+import { SignInRequest } from "../../iam/model/sign-in.request.js";
+import { SignInResponse } from "../../iam/model/sign-in.response.js";
 
 export default {
   name: "login",
@@ -13,7 +13,7 @@ export default {
       loginService: new LoginService(),
       signInRequest: new SignInRequest({}),
       signInResponseObject: new SignInResponse({})
-    }
+    };
   },
   computed: {
     ...mapGetters('user', ['userId', 'userRole', 'userToken'])
@@ -23,41 +23,48 @@ export default {
 
     async handleLogin({ email, password }) {
       try {
+        console.log("Login initiated");
 
-        let user = { username: email, password: password }
+        const user = { username: email, password: password };
 
+        // Crear la solicitud de inicio de sesión
         this.signInRequest = new SignInRequest(user);
         console.log('Request:', this.signInRequest);
 
+        // Realizar la solicitud de inicio de sesión
         const signInResponse = await this.loginService.signIn(this.signInRequest);
-        this.signInResponseObject =
-            new SignInResponse({ ...signInResponse.data });
+        console.log('Response:', signInResponse);
 
-        console.log('role:', this.signInResponseObject.role);
+        // Procesar la respuesta
+        this.signInResponseObject = new SignInResponse({ ...signInResponse.data });
+        console.log('Processed Response Object:', this.signInResponseObject);
 
-        //storing in vuex
-        this.setUser({
+        // Guardar los datos del usuario en Vuex (token, id y rol)
+        await this.setUser({
           id: this.signInResponseObject.id,
           role: this.signInResponseObject.role,
           token: this.signInResponseObject.token
-        })
+        });
 
+        console.log("User stored in Vuex:", {
+          id: this.userId,
+          role: this.userRole,
+          token: this.userToken
+        });
 
-        if (this.signInResponseObject.role === 'RoleAdmin') {
-          console.log('is an admin');
+        // Redireccionar según el rol del usuario
+        if (this.userRole === 'RoleAdmin') {
+          console.log("Redirecting to Admin Dashboard");
           this.$router.push('/dashboard-admin/home-admin');
-        }
-        else if (this.signInResponseObject.role === 'RoleTeacher') {
-          console.log('is a teacher');
+        } else if (this.userRole === 'RoleTeacher') {
+          console.log("Redirecting to Teacher Dashboard");
           this.$router.push('/dashboard-teacher/home-teacher');
+        } else {
+          console.warn("Unrecognized role:", this.userRole);
         }
-
-        console.log('token', this.userToken);
-        console.log('role', this.userRole);
-        console.log('id', this.userId);
-
       } catch (error) {
-        alert(error.message);
+        console.error("Error during login:", error);
+        alert("Error during login. Please check your credentials.");
       }
     },
     goToRegister() {
@@ -66,7 +73,6 @@ export default {
   }
 };
 </script>
-
 
 <template>
   <div class="login-container">

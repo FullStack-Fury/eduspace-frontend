@@ -65,7 +65,6 @@ app.use(store);
 app.use(i18n);
 
 // Use Router
-
 app.use(router);
 
 // Use PrimeVue

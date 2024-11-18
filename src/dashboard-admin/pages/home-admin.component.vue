@@ -129,7 +129,7 @@ export default {
     try {
       if (!this.userId) return;
 
-      const adminResponse = await http.get("/administrators");
+      const adminResponse = await http.get("/administratorprofiles");
       this.admin = adminResponse.data.find((a) => String(a.id) === String(this.userId));
 
       const meetingsResponse = await http.get("/meet");
@@ -138,7 +138,7 @@ export default {
               meeting.administrator?.name === `${this.admin.firstName} ${this.admin.lastName}`
       );
 
-      const teachersResponse = await http.get("/teachers");
+      const teachersResponse = await http.get("/teacherprofiles");
       this.teachers = teachersResponse.data.filter(
           (teacher) => String(teacher.administratorId) === String(this.userId)
       );

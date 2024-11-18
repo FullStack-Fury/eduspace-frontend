@@ -1,8 +1,15 @@
 import http from "../../shared/services/http-common.js";
+import {SignUpResponse} from "../../iam/model/sign-up.response.js";
+
 
 class RegisterService {
-    static registerAdministrator(command) {
-        return http.post("/administratorprofiles", command);
+    static async registerAdministrator(signUpRequest) {
+        if (!signUpRequest.isValid()) {
+            throw new Error("Invalid request data");
+        }
+
+        const response = await http.post("/administratorprofiles", signUpRequest);
+        return new SignUpResponse(response.data);
     }
 }
 
