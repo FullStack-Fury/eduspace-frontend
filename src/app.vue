@@ -115,8 +115,8 @@ export default {
         this.items = [
           { label: "Home", to: "/dashboard-teacher/home-teacher", svg: HomeIcon },
           { label: "Notifications", to: "/dashboard-teacher/notifications", svg: NotificationIcon },
-          { label: "Reservations", to: "/dashboard-teacher/reservations", svg: ReservationIcon },
           { label: "Breakdown Reports", to: "/dashboard-teacher/breakdown-reports", svg: BreakdownIcon },
+          { label: "Wages", to: "/dashboard-teacher/wages", svg: BreakdownIcon },
           { label: "Space Availability", to: "/dashboard-teacher/space-availability", svg: SpaceIcon },
         ];
       } else {
@@ -154,7 +154,7 @@ export default {
     if (!this.isAuthenticated) {
       this.$router.push({ name: "login" }); // Redirige al login si no está autenticado
     } else {
-      this.changeToolbar(); // Configura la barra lateral si el usuario está autenticado
+      this.changeToolbar(); // Confiregura la barra lateral si el usuario está autenticado
     }
   },
   watch: {
