@@ -117,12 +117,8 @@ export default {
   },
   computed: {
     ...mapGetters("user", ["userId", "userRole", "userToken"]),
-    created() {
-      console.log("User ID:", this.userId);
-      console.log("User Role:", this.userRole);
-    },
     initials() {
-      if (!this.admin) return "";
+      if (!this.admin) return "NA"; // Valor por defecto si no hay datos
       const { firstName = "", lastName = "" } = this.admin;
       return `${firstName[0] || ""}${lastName[0] || ""}`.toUpperCase();
     },
@@ -131,8 +127,17 @@ export default {
     try {
       if (!this.userId) return;
 
-      const adminResponse = await http.get("/administratorprofiles");
-      this.admin = adminResponse.data.find((a) => String(a.id) === String(this.userId));
+      const adminResponse = await http.get("/administrator-profiles");
+      console.log("Administrators from backend:", adminResponse.data);
+
+      this.admin = adminResponse.data.find((a) => Number(a.id) === Number(this.userId));
+
+      if (!this.admin) {
+        console.warn(`No administrator found for the current user ID: ${this.userId}`);
+        return;
+      }
+
+      console.log("Administrator data:", this.admin);
 
       const meetingsResponse = await http.get("/meet");
       this.meetings = meetingsResponse.data.filter(
@@ -140,7 +145,7 @@ export default {
               meeting.administrator?.name === `${this.admin.firstName} ${this.admin.lastName}`
       );
 
-      const teachersResponse = await http.get("/teacherprofiles");
+      const teachersResponse = await http.get("/teachers-profiles");
       this.teachers = teachersResponse.data.filter(
           (teacher) => String(teacher.administratorId) === String(this.userId)
       );
@@ -148,9 +153,10 @@ export default {
       const reportsResponse = await http.get("/reports");
       this.reports = reportsResponse.data;
     } catch (error) {
-      console.error("Error al cargar datos:", error);
+      console.error("Error loading data:", error);
     }
   },
+
 };
 </script>
 

@@ -103,62 +103,14 @@ export default {
             .filter(teacher => this.item.teachers.includes(teacher.id))
             .map(teacher => ({
               id: teacher.id,
-              firstName: teacher.name.split(" ")[0],
-              lastName: teacher.name.split(" ")[1]
+              name: teacher.name, // Utilizar el nombre completo si es necesario
+              username: teacher.username
             }));
 
-        // Asignar el administrador logueado al campo `administrator`
-        this.item.administrator = {
-          name: this.userName
-        };
-
-        const selectedClassroom = this.classrooms.find(
-            classroom => classroom.id === this.selectedClassroom
-        );
-        if (selectedClassroom) {
-          this.item.classroom = selectedClassroom.name;
-        }
-
-
-        // Eliminar `administrators` para evitar que se guarde un arreglo vacío
-        delete this.item.administrators;
-        // Emitir el evento para guardar
         this.$emit('save-requested', this.item);
-
-        // Enviar las notificaciones después de guardar la reunión
-        await this.sendNotifications();
-      }
-    },
-
-    async sendNotifications() {
-      const notificationService = new NotificationMService();
-
-
-      const adminId = this.$store.getters.userId;
-
-
-        // Emitir el evento con el objeto actualizado
-        this.$emit("save-requested", this.item);
       }
     }
-      for (const teacher of this.item.teachers) {
-        const notification = {
-          title: "Aviso de Meeting",
-          description: `Fue invitado a una reunión: ${this.item.name} el ${this.item.day} a las ${this.item.hour}.`,
-          type: 3,
-          adminId: adminId,
-          teacherId: teacher.id,
-          teacherName: teacher.name,
-        };
 
-        try {
-          await notificationService.createNotification(notification);  // Enviar la notificación
-          console.log(`Notificación enviada a: ${teacher.name}`);
-        } catch (error) {
-          console.error("Error al enviar notificación:", error);
-        }
-      }
-    }
   }
 };
 </script>
@@ -175,41 +127,13 @@ export default {
     <template #content>
       <div class="p-fluid">
         <div class="field mt-5">
-          <!-- Nombre del Administrador Logueado -->
-          <pv-float-label class="p-float-label">
-            <label for="admin-name">Administrator</label>
-            <pv-input-text
-                id="admin-name"
-                :value="userName"
-                class="p-inputtext p-readonly"
-                readonly
-            />
-          </pv-float-label>
-
-          <pv-float-label class="p-float-label">
-            <label for="title">Title</label>
-            <pv-input-text
-                class="p-inputtext"
-                id="title"
-                v-model="item.title"
-                :class="{ 'p-invalid': submitted && !item.title }"
-            />
-          </pv-float-label>
-
-          <pv-float-label class="p-float-label">
-            <label for="description">Description</label>
-            <pv-input-text
-                class="p-inputtext"
-                id="description"
-                v-model="item.description"
-                :class="{ 'p-invalid': submitted && !item.description }"
-            />
           <pv-float-label>
             <label for="name">Name</label>
-            <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }"/>
+            <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }" />
           </pv-float-label>
 
-          <pv-float-label class="p-float-label">
+          <pv-float-label>
+            <label for="day">Day</label>
             <pv-date-picker
                 v-model="item.day"
                 showIcon
@@ -221,35 +145,16 @@ export default {
             />
           </pv-float-label>
 
-          <pv-float-label class="p-float-label">
-            <label for="start">Start Time</label>
+          <pv-float-label>
+            <label for="hour">Hour</label>
             <pv-date-picker
-                class="p-datapicker"
-                v-model="item.start"
+                v-model="item.hour"
                 showIcon
                 fluid
                 timeOnly
                 iconDisplay="input"
-                :class="{ 'p-invalid': submitted && !item.start }"
-                placeholder="Select a start time"
-            >
-              <template #inputicon="slotProps">
-                <i class="pi pi-clock" @click="slotProps.clickCallback"/>
-              </template>
-            </pv-date-picker>
-          </pv-float-label>
-
-          <pv-float-label class="p-float-label">
-            <label for="end">End Time</label>
-            <pv-date-picker
-                class="p-datapicker"
-                v-model="item.end"
-                showIcon
-                fluid
-                timeOnly
-                iconDisplay="input"
-                :class="{ 'p-invalid': submitted && !item.end }"
-                placeholder="Select a end time"
+                :class="{ 'p-invalid': submitted && !item.hour }"
+                placeholder="Select a time"
             >
               <template #inputicon="slotProps">
                 <i class="pi pi-clock" @click="slotProps.clickCallback" />
@@ -257,10 +162,9 @@ export default {
             </pv-date-picker>
           </pv-float-label>
 
-          <pv-float-label class="p-float-label">
+          <pv-float-label>
             <label for="invite">Invite</label>
             <pv-multi-select
-                class="p-multiselect"
                 id="invite"
                 v-model="item.teachers"
                 :options="teachers"
@@ -271,20 +175,9 @@ export default {
             />
           </pv-float-label>
 
-          <pv-float-label class="p-float-label">
-            <label for="classroom">Classroom</label>
-            <pv-dropdown
-                id="classroom"
-                v-model="selectedClassroom"
-                :options="classrooms"
-                option-label="name"
-                option-value="id"
-                placeholder="Select a classroom"
-                :class="{ 'p-invalid': submitted && !selectedClassroom }"
-            />
           <pv-float-label>
             <label for="location">Location</label>
-            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
+            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }" />
           </pv-float-label>
         </div>
       </div>
@@ -292,27 +185,6 @@ export default {
   </create-and-edit>
 </template>
 
-
 <style scoped>
-.p-fluid {
-  margin: 1.5rem 0;
-}
-
-.p-float-label {
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 1rem; /* Espacio entre el título y el campo */
-}
-
-.p-float-label label {
-  font-size: 1rem;
-  margin-bottom: 0.5rem; /* Espacio entre el título y el campo */
-  transition: all 0.2s;
-  color: #6c757d; /* Color de etiqueta */
-}
-
-
-.p-invalid {
-  border-color: red; /* Borde rojo para entradas inválidas */
-}
+/* Estilos específicos */
 </style>

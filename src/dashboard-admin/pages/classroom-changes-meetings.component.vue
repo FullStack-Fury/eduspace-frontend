@@ -17,19 +17,7 @@ export default {
   <h2>Classroom Changes and Meetings</h2>
 
   <div class="p-grid p-align-center p-justify-center">
-    <div class="p-col-12 p-md-6">
-      <pv-card class="pv-card">
-        <template #header>
-          <h3>Classroom Changes</h3>
-          <p>
-            Provide essential details such as the date and time the change was made, the original classroom and the new classroom assigned, the reason behind the change, and the person who made the change.
-          </p>
-        </template>
-        <template #footer>
-          <pv-button  class = "pv-button" label="Go" @click="goToClassroomChanges" />
-        </template>
-      </pv-card>
-    </div>
+
     <div class="p-col-12 p-md-6">
       <pv-card class="pv-card">
         <template #header>

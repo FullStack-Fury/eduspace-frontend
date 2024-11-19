@@ -15,18 +15,6 @@
       <pv-column field="salaryAmount" header="Received"></pv-column>
       <pv-column field="pensionContribution" header="SS Company"></pv-column>
       <pv-column field="totalCost" header="Salary Cost"></pv-column>
-      <pv-column header="Actions">
-        <template #body="{ data }">
-          <div class="action-buttons">
-            <pv-button
-                label="Delete"
-                icon="pi pi-trash"
-                @click="deletePayroll(data.id)"
-                class="p-button-sm p-button-danger"
-            />
-          </div>
-        </template>
-      </pv-column>
     </pv-data-table>
   </div>
 </template>
@@ -63,7 +51,7 @@ export default {
     },
     async loadTeachers() {
       try {
-        const response = await http.get("/teachers");
+        const response = await http.get("/teachers-profiles");
         this.teachers = response.data;
       } catch (error) {
         console.error("Error loading teachers:", error);
@@ -87,14 +75,6 @@ export default {
     },
     createPayroll() {
       this.$router.push({ name: "create-payroll" });
-    },
-    async deletePayroll(id) {
-      try {
-        await http.delete(`/payroll/${id}`);
-        this.loadPayrolls();
-      } catch (error) {
-        console.error("Error deleting payroll:", error);
-      }
     },
   },
   mounted() {

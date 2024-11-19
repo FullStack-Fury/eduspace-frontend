@@ -17,17 +17,29 @@ export default {
   methods: {
     async saveClassroom(classroom) {
       try {
-        await http.post("/classrooms", classroom);
+        // Verifica que el teacherId esté definido
+        if (!classroom.teacherId) {
+          throw new Error("Teacher ID is not selected.");
+        }
+
+        // Realiza la solicitud POST con la URL correcta
+        const url = `/classrooms/teachers/${classroom.teacherId}`;
+        await http.post(url, {
+          name: classroom.name,
+          description: classroom.description,
+        });
+
         alert("Classroom created successfully");
-        this.$router.push("/dashboard-admin/classrooms-shared-spaces/classrooms");
+        this.$router.push("/dashboard-admin/classrooms-shared-spaces");
       } catch (error) {
         console.error("Error creating classroom:", error);
+        alert("Error creating classroom: " + error.message);
       }
     },
     cancel() {
-      this.$router.push("/dashboard-admin/classrooms-shared-spaces/classrooms");
+      this.$router.push("/dashboard-admin/classrooms-shared-spaces");
     },
-  },
+  }
 }
 </script>
 

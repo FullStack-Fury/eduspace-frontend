@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class TeachersService {
-    resourceEndpoint = '/teachers';
+    resourceEndpoint = '/teachers-profiles';
 
     getAllTeachers() {
         return http.get(this.resourceEndpoint);

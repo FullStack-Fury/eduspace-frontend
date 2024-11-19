@@ -4,9 +4,10 @@
     <pv-input-text v-model="formData.lastName" placeholder="Last Name" required />
     <pv-input-text v-model="formData.email" placeholder="Email" required />
     <pv-input-text v-model="formData.dni" placeholder="DNI" required />
+    <pv-input-text v-model="formData.address" placeholder="Address" required />
     <pv-input-text v-model="formData.phone" placeholder="Phone" required />
-    <pv-dropdown v-model="formData.workingDays" :options="days" placeholder="Working Days" />
-    <pv-dropdown v-model="formData.field" :options="fields" placeholder="Field" />
+    <pv-input-text v-model="formData.username" placeholder="Username" required />
+    <pv-password v-model="formData.password" placeholder="Password" required />
 
     <pv-button label="Save" type="submit" />
     <pv-button label="Cancel" @click="cancel" />
@@ -14,11 +15,10 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: 'add-teacher-form',
-  props: {
-    administratorId: Number
-  },
   data() {
     return {
       formData: {
@@ -29,23 +29,30 @@ export default {
         phone: '',
         workingDays: '',
         field: '',
-        administratorId: this.administratorId,
+        administratorId: null, // Se llenará automáticamente con el ID del administrador logueado
         password: '' // Campo para la contraseña
       },
       days: ['Monday - Friday', 'Saturday - Sunday'],
       fields: ['Math', 'Science', 'Literature'] // Agrega los campos necesarios
     };
   },
+  computed: {
+    ...mapGetters("user", ["userId"]), // Obtiene el userId desde Vuex
+  },
+  watch: {
+    userId: {
+      immediate: true,
+      handler(newValue) {
+        this.formData.administratorId = newValue; // Asigna el ID automáticamente
+      }
+    }
+  },
   methods: {
-    setPasswordAsDNI() {
-      // Asigna el valor del DNI como contraseña automáticamente
-      this.formData.password = this.formData.dni;
-    },
     submitForm() {
-      this.$emit('save', this.formData);
+      this.$emit('save', this.formData); // Emite el formulario completo
     },
     cancel() {
-      this.$emit('cancel');
+      this.$emit('cancel'); // Emite el evento de cancelar
     }
   }
 };

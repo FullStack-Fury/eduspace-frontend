@@ -4,7 +4,7 @@ import http from "../../shared/services/http-common.js";
 export class TeacherService {
     async getAll() {
         try {
-            const response = await http.get("/teachers");
+            const response = await http.get("/teachers-profiles");
             // Asegúrate de que los datos tengan el formato esperado
             return response.data.map(teacher => ({
                 id: teacher.id,

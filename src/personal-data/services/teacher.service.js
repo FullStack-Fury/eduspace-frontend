@@ -3,13 +3,11 @@ import http from "../../shared/services/http-common.js";
 
 export class TeacherService {
     static async fetchTeachers() {
-        const response = await http.get('/teachersprofiles');
+        const response = await http.get('/teachers-profiles');
         return response.data;
     }
 
     static async addTeacher(teacherData) {
-        // Agregar el campo de contraseña, que será el DNI
-        teacherData.password = teacherData.dni;
-        return http.post('/teachersprofiles', teacherData);
+        return http.post('/teachers-profiles', teacherData);
     }
 }

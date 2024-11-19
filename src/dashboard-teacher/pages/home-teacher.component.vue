@@ -119,7 +119,7 @@ export default {
       console.log("Teacher ID desde Vuex:", this.userId);
 
       // Realizar peticiones para cargar los datos
-      const teacherResponse = await http.get("/teachers");
+      const teacherResponse = await http.get("/teachers-profiles");
       const allTeachers = teacherResponse.data;
       this.teacher = allTeachers.find((t) => String(t.id) === String(this.userId)) || {
         email: null,

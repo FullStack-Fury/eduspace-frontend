@@ -42,7 +42,7 @@ export default {
   methods: {
     async loadTeachers() {
       try {
-        const response = await http.get("/teachers");
+        const response = await http.get("/teachers-profiles");
         this.availableTeachers = response.data || []; // Asigna un array vacío si la respuesta es indefinida
         console.log("Teachers loaded:", this.availableTeachers); // Para depurar y confirmar que se cargaron los datos
       } catch (error) {

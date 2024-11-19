@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class MeetService {
-    resourceEndpoint = '/meet';
+    resourceEndpoint = '/meetings';
 
     getAll() {
         return http.get(this.resourceEndpoint);

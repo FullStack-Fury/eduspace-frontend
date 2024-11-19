@@ -8,8 +8,6 @@
       <p>Email: {{ maskedEmail }}</p>
       <p>DNI: {{ teacher.dni }}</p>
       <p>Phone: {{ teacher.phone }}</p>
-      <p>Days: {{ teacher.workingDays }}</p>
-      <p>Field: {{ teacher.field }}</p>
     </template>
     <template #footer>
       <pv-button label="Edit" @click="editTeacher" class="edit-button"/>

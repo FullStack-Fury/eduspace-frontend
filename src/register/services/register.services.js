@@ -8,7 +8,7 @@ class RegisterService {
             throw new Error("Invalid request data");
         }
 
-        const response = await http.post("/administratorprofiles", signUpRequest);
+        const response = await http.post("/administrator-profiles", signUpRequest);
         return new SignUpResponse(response.data);
     }
 }

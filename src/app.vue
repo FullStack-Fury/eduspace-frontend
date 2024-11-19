@@ -69,15 +69,18 @@ import { mapGetters, mapActions } from "vuex";
 
 // Importar los SVG desde las rutas especificadas
 import HomeIcon from "/src/assets/admin/Home.svg";
+import ClassroomIcon from "/src/assets/admin/Clasroom.svg";
 import EnviromentIcon from "/src/assets/admin/Enviroment.svg";
 import PersonalDIcon from "/src/assets/admin/Personal_Data.svg";
+import PersonalMIcon from "/src/assets/admin/Personal_Management.svg";
 import SalaryIcon from "/src/assets/admin/Salary_Calculation.svg";
 
+// Íconos específicos para la vista del "teacher"
 import BreakdownIcon from "/src/assets/teacher/Breakdown_Reports.svg";
 import NotificationIcon from "/src/assets/teacher/Notification.svg";
+import PagesIcon from "/src/assets/teacher/Pages.svg";
 import ReservationIcon from "/src/assets/teacher/Reservation.svg";
 import SpaceIcon from "/src/assets/teacher/Space_Availability.svg";
-
 export default {
   name: "app",
   components: { LanguageSwitcher },
@@ -104,6 +107,7 @@ export default {
         this.items = [
           { label: "Home", to: "/dashboard-admin/home-admin", svg: HomeIcon },
           { label: "Classrooms and Shared Spaces", to: "/dashboard-admin/classrooms-shared-spaces", svg: EnviromentIcon },
+          {label: 'Classroom Changes and Meetings', to: '/dashboard-admin/classroom-changes-meetings', svg: ClassroomIcon},
           { label: "Personal Data", to: "/dashboard-admin/personal-data", svg: PersonalDIcon },
           { label: "Salary Calculation", to: "/dashboard-admin/salary-calculation", svg: SalaryIcon },
         ];

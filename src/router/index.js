@@ -9,20 +9,14 @@ import ClassroomManagementComponent from "../breakdown-management/pages/classroo
 import ResourceManagementComponent from "../breakdown-management/pages/resource-management.component.vue";
 import ReportResourceComponent from "../breakdown-management/pages/report-resource.component.vue";
 import ClassroomChangesMeetingsComponent from "../dashboard-admin/pages/classroom-changes-meetings.component.vue";
-import EnvironmentsEquipment from "../dashboard-admin/pages/environments-equipment.vue";
 import HomeAdminComponent from "../dashboard-admin/pages/home-admin.component.vue";
 import PersonalDataComponent from "../dashboard-admin/pages/personal-data.component.vue";
-import PersonnelManagementComponent from "../dashboard-admin/pages/personnel-management.component.vue";
-
-import SalaryCalculationComponent from "../dashboard-admin/pages/salary-calculation.component.vue";
 import HomeTeacherComponent from "../dashboard-teacher/pages/home-teacher.component.vue";
 import NotificationsComponent from "../notifications/pages/notification-management.component.vue";
 import ReservationsComponent from "../dashboard-teacher/pages/reservations.component.vue";
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../payroll-management/pages/payroll-summary-teacher.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
-import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
-import Add from "../space-and-resource-management/pages/add.vue";
 import RegisterComponent from "../register/pages/register.component.vue";
 import ReportsManagementComponent from "../breakdown-management/pages/reports-management.vue";
 import ClassroomsSharedSpacesComponent from "../dashboard-admin/pages/classrooms-shared-spaces.component.vue";
