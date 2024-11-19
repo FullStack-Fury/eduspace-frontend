@@ -34,7 +34,7 @@ export default {
       this.$router.push({name: "edit classroom", params: {id}});
     },
     goToAdd() {
-      this.$router.push('/dashboard-admin/classrooms-shared-spaces/classroom/add');
+      this.$router.push({name: 'add-classrooms'});
     }
   }
 }
