@@ -3,6 +3,8 @@ import CreateAndEdit from "../../shared/components/create-and-edit.component.vue
 import { TeachersService } from "../services/teachers.service.js";
 import { mapGetters } from "vuex";
 import {ClassroomsService} from "../services/classroom.service.js";
+import {NotificationMService} from "../services/notificationM.service.js";
+ // Importar el servicio de notificación
 
 export default {
   name: "meet-create-and-edit-dialog",
@@ -65,6 +67,7 @@ export default {
           });
     },
     formatTeachersForEdit() {
+      // Convertir item.teachers a IDs si es necesario
       if (Array.isArray(this.item.teachers) && this.item.teachers.length > 0 && typeof this.item.teachers[0] === 'object') {
         this.item.teachers = this.item.teachers.map(teacher => teacher.id);
       }
@@ -119,9 +122,41 @@ export default {
 
         // Eliminar `administrators` para evitar que se guarde un arreglo vacío
         delete this.item.administrators;
+        // Emitir el evento para guardar
+        this.$emit('save-requested', this.item);
+
+        // Enviar las notificaciones después de guardar la reunión
+        await this.sendNotifications();
+      }
+    },
+
+    async sendNotifications() {
+      const notificationService = new NotificationMService();
+
+
+      const adminId = this.$store.getters.userId;
+
 
         // Emitir el evento con el objeto actualizado
         this.$emit("save-requested", this.item);
+      }
+    }
+      for (const teacher of this.item.teachers) {
+        const notification = {
+          title: "Aviso de Meeting",
+          description: `Fue invitado a una reunión: ${this.item.name} el ${this.item.day} a las ${this.item.hour}.`,
+          type: 3,
+          adminId: adminId,
+          teacherId: teacher.id,
+          teacherName: teacher.name,
+        };
+
+        try {
+          await notificationService.createNotification(notification);  // Enviar la notificación
+          console.log(`Notificación enviada a: ${teacher.name}`);
+        } catch (error) {
+          console.error("Error al enviar notificación:", error);
+        }
       }
     }
   }
@@ -169,6 +204,9 @@ export default {
                 v-model="item.description"
                 :class="{ 'p-invalid': submitted && !item.description }"
             />
+          <pv-float-label>
+            <label for="name">Name</label>
+            <pv-input-text id="name" v-model="item.name" :class="{ 'p-invalid': submitted && !item.name }"/>
           </pv-float-label>
 
           <pv-float-label class="p-float-label">
@@ -196,7 +234,7 @@ export default {
                 placeholder="Select a start time"
             >
               <template #inputicon="slotProps">
-                <i class="pi pi-clock" @click="slotProps.clickCallback" />
+                <i class="pi pi-clock" @click="slotProps.clickCallback"/>
               </template>
             </pv-date-picker>
           </pv-float-label>
@@ -244,6 +282,9 @@ export default {
                 placeholder="Select a classroom"
                 :class="{ 'p-invalid': submitted && !selectedClassroom }"
             />
+          <pv-float-label>
+            <label for="location">Location</label>
+            <pv-input-text id="location" v-model="item.location" :class="{ 'p-invalid': submitted && !item.location }"/>
           </pv-float-label>
         </div>
       </div>

@@ -9,15 +9,20 @@ import ClassroomManagementComponent from "../breakdown-management/pages/classroo
 import ResourceManagementComponent from "../breakdown-management/pages/resource-management.component.vue";
 import ReportResourceComponent from "../breakdown-management/pages/report-resource.component.vue";
 import ClassroomChangesMeetingsComponent from "../dashboard-admin/pages/classroom-changes-meetings.component.vue";
+import EnvironmentsEquipment from "../dashboard-admin/pages/environments-equipment.vue";
 import HomeAdminComponent from "../dashboard-admin/pages/home-admin.component.vue";
 import PersonalDataComponent from "../dashboard-admin/pages/personal-data.component.vue";
 import PersonnelManagementComponent from "../dashboard-admin/pages/personnel-management.component.vue";
+
+import SalaryCalculationComponent from "../dashboard-admin/pages/salary-calculation.component.vue";
 import HomeTeacherComponent from "../dashboard-teacher/pages/home-teacher.component.vue";
-import NotificationsComponent from "../dashboard-teacher/pages/notifications.component.vue";
+import NotificationsComponent from "../notifications/pages/notification-management.component.vue";
 import ReservationsComponent from "../dashboard-teacher/pages/reservations.component.vue";
 import BreakdownReportsComponent from "../dashboard-teacher/pages/breakdown-reports.component.vue";
 import WagesComponent from "../payroll-management/pages/payroll-summary-teacher.component.vue";
 import PayrollSummaryComponent from "../payroll-management/pages/payroll-summary.component.vue";
+import SportsFacilities from "../space-and-resource-management/pages/sports-facilities.vue";
+import Add from "../space-and-resource-management/pages/add.vue";
 import RegisterComponent from "../register/pages/register.component.vue";
 import ReportsManagementComponent from "../breakdown-management/pages/reports-management.vue";
 import ClassroomsSharedSpacesComponent from "../dashboard-admin/pages/classrooms-shared-spaces.component.vue";
@@ -25,6 +30,7 @@ import AddClassroomsComponent from "../space-and-resource-management/pages/class
 import ClassroomsComponent from "../space-and-resource-management/pages/classrooms/classrooms.component.vue";
 import AddSharedSpaceComponent from "../space-and-resource-management/pages/shared-spaces/add-shared-space.component.vue";
 import SharedSpaceComponent from "../space-and-resource-management/pages/shared-spaces/shared-space.component.vue";
+import PersonalManagementComponent from "../personal-management/pages/personal-managment.component.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -50,7 +56,7 @@ const router = createRouter({
         { path: '/dashboard-admin/classroom-changes-meetings', name: 'classroom-changes-meetings', component: ClassroomChangesMeetingsComponent, meta: {title: 'Classroom Changes and Meetings'}},
         { path: '/dashboard-admin/home-admin', name: 'home-admin', component: HomeAdminComponent, meta: {title: 'Home Admin'} },
         { path: '/dashboard-admin/personal-data', name: 'personal-data', component: PersonalDataComponent, meta: {title: 'Personal Data'} },
-        { path: '/dashboard-admin/personal-management', name: 'personal-management', component: PersonnelManagementComponent, meta: {title: 'Personal Management'} },
+        { path: '/dashboard-admin/personal-management', name: 'personal-management', component: PersonalManagementComponent, meta: {title: 'Personal Management'} },
         { path: '/dashboard-admin/salary-calculation', name: 'salary-calculation', component: PayrollSummaryComponent, meta: {title: 'Breakdown Reports'}},
         { path: '/dashboard-admin/salary-calculation/management', name: 'payroll-management', component: PayrollManagementComponent, meta: { title: 'Payroll Management' } }, // Ruta a Payroll Management
         { path: '/dashboard-admin/salary-calculation/create', name: 'create-payroll', component: PayrollCreateAndEdit, meta: { title: 'Create Payroll' } },

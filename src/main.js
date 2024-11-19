@@ -66,6 +66,7 @@ app.use(store);
 app.use(i18n);
 
 // Use Router
+
 app.use(router);
 
 // Use PrimeVue
@@ -114,7 +115,8 @@ app.component('pv-button', Button)
     .component('pv-password', Password)
     .component('pv-dropdown', Dropdown)
     .component('pv-avatar', Avatar)
-    .component('pv-confirmpopup', ConfirmPopup);
+    .component('pv-confirmpopup', ConfirmPopup)
+    .component('pv-input', InputText)
 
 
 
