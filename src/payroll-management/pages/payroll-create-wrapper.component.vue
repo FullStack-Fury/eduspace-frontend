@@ -38,7 +38,7 @@ export default {
       payroll.salaryNet = this.calculateNetSalary(payroll);
 
       try {
-        const response = await http.post("/payroll", payroll);
+        const response = await http.post("/payrolls", payroll);
         console.log("Payroll saved:", response.data);
         this.$router.push("/dashboard-admin/salary-calculation/management");
       } catch (error) {

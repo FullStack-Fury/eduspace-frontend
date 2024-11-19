@@ -48,7 +48,7 @@ export default {
     },
     async loadPayrolls() {
       try {
-        const response = await http.get("/payroll");
+        const response = await http.get("/payrolls");
         this.payrolls = response.data.map((payroll) => ({
           ...payroll,
           teacherName: this.getTeacherName(payroll.teacherId), // Asigna el nombre del teacher

@@ -2,7 +2,7 @@ import http from "../../shared/services/http-common.js";
 import { Payroll } from "../model/payroll.entity.js";
 
 export class PayrollService {
-    resourceEndpoint = "/payroll";
+    resourceEndpoint = "/payrolls";
 
     getAll() {
         return http.get(this.resourceEndpoint).then(response =>
