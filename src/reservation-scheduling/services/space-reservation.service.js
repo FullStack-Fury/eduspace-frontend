@@ -1,7 +1,7 @@
 import http from "../../shared/services/http-common.js";
 
 export class SpaceReservationService {
-    reservationEndPoint = '/shared-area-reservation'
+    reservationEndPoint = '/shared-area'
 
     getAll() {
         return http.get(this.reservationEndPoint);
