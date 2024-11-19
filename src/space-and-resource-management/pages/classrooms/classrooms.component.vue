@@ -1,6 +1,7 @@
 <script>
 import http from "../../../shared/services/http-common.js";
 import ClassroomCard from "../../components/classrooms/classroom-card.component.vue";
+import {TeacherService} from "../../../personal-data/services/teacher.service.js";
 
 export default {
   name: "classroom",
@@ -10,14 +11,26 @@ export default {
       classrooms: []
     };
   },
-  mounted() {
-    this.loadClassroom();
+  async mounted() {
+    await this.loadClassroom();
   },
   methods: {
     async loadClassroom() {
       try {
         const response = await http.get("/classrooms");
-        this.classrooms = response.data;
+        const teachers = await TeacherService.fetchTeachers();
+
+        console.log("Classrooms data:", response.data);
+        console.log("Teachers data:", teachers);
+
+        this.classrooms = response.data.map(classroom => {
+          const teacher = teachers.find(t => t.id === classroom.teacherId);
+          console.log(`Mapping classroom: ${classroom.name}, teacher found:`, teacher);
+          return {
+            ...classroom,
+            teacherName: teacher ? `${teacher.firstName} ${teacher.lastName}` : 'Unassigned',
+          };
+        });
       } catch (error) {
         console.error("Error loading classrooms:", error);
       }
@@ -62,7 +75,12 @@ export default {
     </div>
 
     <div class="cards-container">
-      <classroom-card v-for="classroom in classrooms" :key="classroom.id" :classroom="classroom" @delete="deleteClassroom" @edit="editClassroom"/>
+      <classroom-card
+          v-for="classroom in classrooms"
+          :key="classroom.id"
+          :classroom="classroom"
+          @delete="deleteClassroom"
+          @edit="editClassroom"/>
     </div>
   </div>
 </template>

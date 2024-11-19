@@ -1,32 +1,27 @@
 {
   "classrooms": [
     {
-      "id": 1,
+      "id": "1",
       "name": "A101",
       "description": "Classroom for 1st grade students",
       "teacherId": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "A102",
       "description": "Classroom for 2st grade students",
       "teacherId": 2
-    },
-    {
-      "id": 3,
-      "name": "A103",
-      "description": "Classroom for 3st grade students"
     }
   ],
   "resources": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Projector",
       "kind_of_resource": "Electronic",
       "idClassroom": 1
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Whiteboard",
       "kind_of_resource": "Furniture",
       "idClassroom": 1
@@ -38,7 +33,7 @@
       "idClassroom": 2
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Laptops",
       "kind_of_resource": "Electronic",
       "idClassroom": 2
@@ -155,8 +150,7 @@
       "workingDays": "Monday - Friday",
       "field": "Literature",
       "administratorId": 3,
-      "password": "123456789",
-      "id": 1
+      "password": "123456789"
     },
     {
       "firstName": "Luis",
@@ -167,8 +161,7 @@
       "workingDays": "Saturday - Sunday",
       "field": "Math",
       "administratorId": 8,
-      "password": "11122",
-      "id": 2
+      "password": "11122"
     }
   ],
   "administrators": [
@@ -225,7 +218,7 @@
       "address": "Los alisos 316",
       "phone": "93452314",
       "password": "gabriela13GG",
-      "id": 6
+      "id": "6"
     },
     {
       "firstName": "oaasda",
@@ -276,41 +269,27 @@
       "address": "a",
       "phone": "a",
       "password": "a"
+    },
+    {
+      "firstName": "asd",
+      "lastName": "Antayhuadd",
+      "email": "123",
+      "dni": "dasd",
+      "address": "María Parado De Bellido",
+      "phone": "213",
+      "password": "123",
+      "id": 10
     }
   ],
   "meet": [
     {
-      "id": 1,
-      "name": "Planning Meeting",
-      "day": "2024-09-05",
-      "hour": "09:52",
-      "location": "Room 101",
-      "teachers": [
-        {
-          "id": 1,
-          "name": "Maria",
-          "lastname": "Espinoza"
-        },
-        {
-          "id": 2,
-          "name": "Pepe",
-          "lastname": "Espinoza"
-        }
-      ],
-      "administrators": [
-        {
-          "id": 1,
-          "name": "Leonor",
-          "lastname": "Vivas"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "name": "Program",
-      "day": "2024-11-01",
-      "hour": "23:59",
-      "location": "Casa",
+      "id": "10",
+      "title": "asd",
+      "description": "asd",
+      "day": "2024-11-22",
+      "start": "11:34",
+      "end": "11:34",
+      "classroom": "A102",
       "teachers": [
         {
           "id": 1,

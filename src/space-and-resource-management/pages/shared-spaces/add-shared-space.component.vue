@@ -20,7 +20,7 @@ export default {
       try {
         const response = await http.post("/shared-area", shared_space); // Hacer la llamada POST
         console.log("Shared Space saved:", response.data);
-        this.$router.push("/dashboard-admin/classrooms-shared-spaces/sport-facilities");
+        this.$router.push("/dashboard-admin/classrooms-shared-spaces/shared-spaces");
       } catch (error) {
         console.error("Error saving shared space:", error);
       }

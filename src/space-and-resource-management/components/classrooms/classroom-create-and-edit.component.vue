@@ -1,4 +1,6 @@
 <script>
+import {TeacherService} from "../../../personal-data/services/teacher.service.js";
+
 export default {
   name: "classroom-create-and-edit",
   props: {
@@ -7,7 +9,8 @@ export default {
       required: true,
       default: () => ({
         name: '',
-        description: ''
+        description: '',
+        teacherId: null
       }),
     },
     isCreateMode: {
@@ -17,12 +20,23 @@ export default {
   },
   data() {
     return {
-      form: { ...this.classroom }
+      form: { ...this.classroom },
+      teachers: []
     };
+  },
+  async mounted() {
+    try {
+      const response = await TeacherService.fetchTeachers();
+      this.teachers = JSON.parse(JSON.stringify(response));
+      console.log("Teachers loaded:", this.teachers);
+      this.$forceUpdate();
+    } catch (error) {
+      console.error("Error loading teachers:", error);
+    }
   },
   methods: {
     save() {
-      if (!this.form.name || !this.form.description) {
+      if (!this.form.name || !this.form.description || !this.form.teacherId) {
         alert("Please fill in all fields.");
         return;
       }
@@ -31,6 +45,14 @@ export default {
     cancel() {
       this.$emit("cancel");
     }
+  },
+  computed: {
+    teacherOptions() {
+      return this.teachers.map(teacher => ({
+        label: `${teacher.firstName} ${teacher.lastName}`,
+        value: teacher.id,
+      }));
+    },
   }
 };
 </script>
@@ -58,6 +80,18 @@ export default {
         <pv-float-label>Description:</pv-float-label>
         <pv-input-text v-model="form.description" placeholder="Enter description"/>
       </div>
+
+      <pv-float-label for="teacher">Teacher</pv-float-label>
+      <pv-select
+          v-model="form.teacherId"
+          :options="teacherOptions"
+          option-label="label"
+          option-value="value"
+          placeholder="Select a teacher"
+          class="form-control"
+      />
+
+
 
       <div class="form-actions">
         <pv-button type="submit" label="Save" class="p-button-success"/>
