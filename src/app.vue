@@ -1,19 +1,80 @@
+<template>
+  <pv-toast />
+  <div class="app-container">
+    <header v-if="userRole" class="sidenav-wrapper">
+      <div :class="['sidenav', { 'admin-sidenav': userRole === 'RoleAdmin', 'teacher-sidenav': userRole === 'RoleTeacher' }]">
+        <div class="user-info">
+          <pv-avatar image="../src/assets/default-avatar.png" class="mr-2" size="xlarge" shape="circle"></pv-avatar>
+          <div class="info">
+            <p class="info" :style="{ color: userRole === 'RoleAdmin' ? '#064C58' : '#584F06' }">
+              {{ userRole === 'RoleAdmin' ? 'Administrator' : 'Teacher' }}
+            </p>
+            <p class="info">{{ currentUsername }}</p>
+          </div>
+        </div>
+
+        <div class="drawer-content">
+          <div v-for="item in items" :key="item.label" class="menu-item">
+            <router-link
+                v-if="item.to"
+                :to="item.to"
+                class="nav-link"
+                active-class="router-link-active"
+                exact-active-class="router-link-exact-active"
+            >
+              <pv-button
+                  :class="[
+                  'p-button-text',
+                  { 'admin-hover-active': userRole === 'RoleAdmin', 'teacher-hover-active': userRole === 'RoleTeacher' },
+                ]"
+              >
+                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;" />
+                {{ item.label }}
+              </pv-button>
+            </router-link>
+          </div>
+        </div>
+
+        <div class="footer-section">
+          <div class="logout-container">
+            <pv-button class="pv-button log-out logout-hover" @click="showLogoutConfirm($event)">
+              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon" />
+              <span>Log out</span>
+            </pv-button>
+          </div>
+          <div class="copyright-text">Copyright EduSpace team</div>
+        </div>
+      </div>
+    </header>
+
+    <main class="main-content">
+      <router-view />
+    </main>
+
+    <!-- Confirmación de Logout -->
+    <pv-confirmpopup group="logout-group">
+      <template #message="slotProps">
+        <div class="flex flex-col items-center w-full gap-4 border-b border-surface-200 dark:border-surface-700 p-4 mb-4 pb-0">
+          <i :class="slotProps.message.icon" class="text-6xl text-primary-500"></i>
+          <p>{{ slotProps.message.message }}</p>
+        </div>
+      </template>
+    </pv-confirmpopup>
+  </div>
+</template>
+
 <script>
 import LanguageSwitcher from "./public/components/language-switcher.component.vue";
 import { mapGetters, mapActions } from "vuex";
 
 // Importar los SVG desde las rutas especificadas
 import HomeIcon from "/src/assets/admin/Home.svg";
-import ClassroomIcon from "/src/assets/admin/Clasroom.svg";
 import EnviromentIcon from "/src/assets/admin/Enviroment.svg";
 import PersonalDIcon from "/src/assets/admin/Personal_Data.svg";
-import PersonalMIcon from "/src/assets/admin/Personal_Management.svg";
 import SalaryIcon from "/src/assets/admin/Salary_Calculation.svg";
 
-// Íconos específicos para la vista del "teacher"
 import BreakdownIcon from "/src/assets/teacher/Breakdown_Reports.svg";
 import NotificationIcon from "/src/assets/teacher/Notification.svg";
-import PagesIcon from "/src/assets/teacher/Pages.svg";
 import ReservationIcon from "/src/assets/teacher/Reservation.svg";
 import SpaceIcon from "/src/assets/teacher/Space_Availability.svg";
 
@@ -23,7 +84,7 @@ export default {
   data() {
     return {
       drawer: false,
-      items: [] // Inicializa vacío, se actualizará en changeToolbar según el rol
+      items: [], // Inicializa vacío, se actualizará en changeToolbar según el rol
     };
   },
   computed: {
@@ -52,7 +113,6 @@ export default {
           { label: "Notifications", to: "/dashboard-teacher/notifications", svg: NotificationIcon },
           { label: "Reservations", to: "/dashboard-teacher/reservations", svg: ReservationIcon },
           { label: "Breakdown Reports", to: "/dashboard-teacher/breakdown-reports", svg: BreakdownIcon },
-          {label: 'Wages', to: '/dashboard-teacher/wages', svg: PagesIcon},
           { label: "Space Availability", to: "/dashboard-teacher/space-availability", svg: SpaceIcon },
         ];
       } else {
@@ -61,6 +121,29 @@ export default {
           { label: "Login", to: "/login" },
         ];
       }
+    },
+    showLogoutConfirm(event) {
+      this.$confirm.require({
+        target: event.currentTarget,
+        group: "logout-group",
+        message: "Are you sure you want to log out?",
+        icon: "pi pi-exclamation-circle",
+        rejectProps: {
+          icon: "pi pi-times",
+          label: "Cancel",
+          outlined: true,
+        },
+        acceptProps: {
+          icon: "pi pi-check",
+          label: "Confirm",
+        },
+        accept: () => {
+          this.handleLogOut();
+        },
+        reject: () => {
+          this.$toast.add({ severity: "info", summary: "Cancelled", detail: "Logout cancelled", life: 3000 });
+        },
+      });
     },
   },
   created() {
@@ -78,59 +161,6 @@ export default {
 };
 </script>
 
-
-
-<template>
-  <pv-toast />
-  <div class="app-container">
-    <header v-if=" userRole" class="sidenav-wrapper">
-    <div :class="['sidenav', { 'admin-sidenav': userRole === 'RoleAdmin', 'teacher-sidenav': userRole === 'RoleTeacher' }]">
-        <div class="user-info">
-          <pv-avatar image="../src/assets/default-avatar.png" class="mr-2" size="xlarge" shape="circle"></pv-avatar>
-          <div class="info">
-            <p class="info" :style="{ color: userRole === 'RoleAdmin' ? '#064C58' : '#584F06' }">
-              {{ userRole === 'RoleAdmin' ? 'Administrator' : 'Teacher' }}
-            </p>
-            <p class="info">{{ currentUsername }}</p>
-          </div>
-
-        </div>
-
-
-        <div class="drawer-content">
-          <div v-for="item in items" :key="item.label" class="menu-item">
-            <router-link
-                v-if="item.to"
-                :to="item.to"
-                class="nav-link"
-                active-class="router-link-active"
-                exact-active-class="router-link-exact-active"
-            >
-              <pv-button :class="['p-button-text', { 'admin-hover-active': userRole === 'RoleAdmin', 'teacher-hover-active': userRole === 'RoleTeacher' }]">
-                <img v-if="item.svg" :src="item.svg" alt="icon" style="width: 20px; height: 20px; margin-right: 8px;" />
-                {{ item.label }}
-              </pv-button>
-            </router-link>
-          </div>
-        </div>
-
-        <div class="footer-section">
-          <div class="logout-container">
-            <pv-button class="pv-button log-out logout-hover" @click="handleLogOut">
-              <img src="./assets/Logo%20sidebar.png" alt="Logo" class="logout-icon" />
-              <span>Log out</span>
-            </pv-button>
-          </div>
-          <div class="copyright-text">Copyright EduSpace team</div>
-        </div>
-      </div>
-    </header>
-
-    <main class="main-content">
-      <router-view />
-    </main>
-  </div>
-</template>
 
 <style scoped>
 .user-info {

@@ -1,20 +1,20 @@
 <template>
-  <div v-if="teacher" class="dashboard-container">
+  <div class="dashboard-container">
     <!-- Información del Teacher -->
     <div class="teacher-info-card">
       <div class="teacher-avatar">
         <pv-avatar
-            :label="initials"
+            :label="initials || 'N/A'"
             size="large"
             style="background-color: #42a5f5; color: #ffffff; font-size: 30px;"
         ></pv-avatar>
       </div>
       <div class="teacher-details">
-        <h2>{{ fullName }}</h2>
+        <h2>{{ fullName || "Teacher Information Not Available" }}</h2>
         <p><strong>Status:</strong> Teacher</p>
-        <p><strong>Email:</strong> {{ teacher.email }}</p>
-        <p><strong>Phone:</strong> {{ teacher.phone }}</p>
-        <p><strong>DNI:</strong> {{ teacher.dni }}</p>
+        <p><strong>Email:</strong> {{ teacher?.email || "Not available" }}</p>
+        <p><strong>Phone:</strong> {{ teacher?.phone || "Not available" }}</p>
+        <p><strong>DNI:</strong> {{ teacher?.dni || "Not available" }}</p>
       </div>
     </div>
 
@@ -28,11 +28,11 @@
         <template #content>
           <ul>
             <li v-for="(reservation, index) in classroomReservations" :key="index">
-              <p><strong>Classroom:</strong> {{ reservation.name }}</p>
-              <p>{{ reservation.description }}</p>
+              <p><strong>Classroom:</strong> {{ reservation.name || "Unknown" }}</p>
+              <p>{{ reservation.description || "No description available" }}</p>
             </li>
             <p v-if="classroomReservations.length === 0">
-              No classroom reservations made by this teacher.
+              No classroom reservations available.
             </p>
           </ul>
         </template>
@@ -46,18 +46,18 @@
         <template #content>
           <ul>
             <li v-for="(reservation, index) in sharedAreaReservations" :key="index">
-              <p><strong>Title:</strong> {{ reservation.title }}</p>
-              <p><strong>Start:</strong> {{ reservation.start }}</p>
-              <p><strong>End:</strong> {{ reservation.end }}</p>
+              <p><strong>Title:</strong> {{ reservation.title || "Unknown" }}</p>
+              <p><strong>Start:</strong> {{ reservation.start || "N/A" }}</p>
+              <p><strong>End:</strong> {{ reservation.end || "N/A" }}</p>
               <p>
                 <strong>Area:</strong>
                 {{
-                  sharedAreas.find((area) => area.id === reservation.areaId)?.name || 'Unknown'
+                  sharedAreas.find((area) => area.id === reservation.areaId)?.name || "Unknown"
                 }}
               </p>
             </li>
             <p v-if="sharedAreaReservations.length === 0">
-              No shared area reservations made by this teacher.
+              No shared area reservations available.
             </p>
           </ul>
         </template>
@@ -71,20 +71,19 @@
         <template #content>
           <ul>
             <li v-for="(meeting, index) in meetings" :key="index">
-              <p><strong>Classroom:</strong> {{ meeting.classroom }}</p>
-              <p><strong>Date:</strong> {{ meeting.day }}</p>
-              <p><strong>Start:</strong> {{ meeting.start }}</p>
-              <p><strong>End:</strong> {{ meeting.end }}</p>
-              <p><strong>Title:</strong> {{ meeting.title }}</p>
-              <p><strong>Description:</strong> {{ meeting.description }}</p>
+              <p><strong>Classroom:</strong> {{ meeting.classroom || "Unknown" }}</p>
+              <p><strong>Date:</strong> {{ meeting.day || "N/A" }}</p>
+              <p><strong>Start:</strong> {{ meeting.start || "N/A" }}</p>
+              <p><strong>End:</strong> {{ meeting.end || "N/A" }}</p>
+              <p><strong>Title:</strong> {{ meeting.title || "No title" }}</p>
+              <p><strong>Description:</strong> {{ meeting.description || "No description" }}</p>
             </li>
-            <p v-if="meetings.length === 0">No meetings scheduled for this teacher.</p>
+            <p v-if="meetings.length === 0">No meetings scheduled.</p>
           </ul>
         </template>
       </pv-card>
     </div>
   </div>
-  <p v-else>Loading teacher information...</p>
 </template>
 
 <script>
@@ -105,7 +104,7 @@ export default {
   computed: {
     ...mapGetters(["userId"]),
     fullName() {
-      return `${this.teacher?.firstName || ""} ${this.teacher?.lastName || ""}`;
+      return `${this.teacher?.firstName || ""} ${this.teacher?.lastName || ""}`.trim();
     },
     initials() {
       const [firstName, lastName] = [
@@ -119,34 +118,28 @@ export default {
     try {
       console.log("Teacher ID desde Vuex:", this.userId);
 
-      // Obtener información del Teacher
+      // Realizar peticiones para cargar los datos
       const teacherResponse = await http.get("/teachers");
       const allTeachers = teacherResponse.data;
-      this.teacher = allTeachers.find((t) => String(t.id) === String(this.userId));
+      this.teacher = allTeachers.find((t) => String(t.id) === String(this.userId)) || {
+        email: null,
+        phone: null,
+        dni: null,
+      };
 
-      if (!this.teacher) {
-        console.warn("No se encontró información del profesor logueado.");
-        return;
-      }
-
-      // Obtener reservaciones de aulas
       const classroomResponse = await http.get("/classrooms");
-      const allClassrooms = classroomResponse.data;
-      this.classroomReservations = allClassrooms.filter(
+      this.classroomReservations = classroomResponse.data.filter(
           (classroom) => classroom.teacherId === this.userId
       );
 
-      // Obtener reservaciones de áreas comunes
       const sharedAreaReservationResponse = await http.get("/shared-area-reservation");
       this.sharedAreaReservations = sharedAreaReservationResponse.data.filter(
           (reservation) => reservation.teacherId === this.userId
       );
 
-      // Obtener áreas compartidas
       const sharedAreaResponse = await http.get("/shared-area");
       this.sharedAreas = sharedAreaResponse.data;
 
-      // Obtener reuniones
       const meetResponse = await http.get("/meet");
       this.meetings = meetResponse.data.filter((meet) =>
           meet.teachers.some((teacher) => teacher.id === this.userId)
@@ -157,7 +150,6 @@ export default {
   },
 };
 </script>
-
 
 <style scoped>
 /* Contenedor Principal */

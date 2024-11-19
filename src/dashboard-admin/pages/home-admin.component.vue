@@ -1,23 +1,23 @@
 <template>
   <div class="dashboard-layout">
     <!-- Información del Administrador -->
-    <div v-if="admin" class="admin-info">
+    <div class="admin-info">
       <div class="admin-avatar">
         <pv-avatar
-            :label="initials"
+            :label="initials || 'NA'"
             size="xlarge"
             style="background-color: #2196F3; color: white; font-size: 30px;"
         ></pv-avatar>
       </div>
       <div class="admin-details">
-        <p><strong>Name:</strong> {{ admin.firstName }}</p>
-        <p><strong>Last Name:</strong> {{ admin.lastName }}</p>
-        <p><strong>Birthdate:</strong> 03-03-1956</p>
-        <p><strong>Cell Phone:</strong> {{ admin.phone }}</p>
+        <p><strong>Name:</strong> {{ admin?.firstName || "Not available" }}</p>
+        <p><strong>Last Name:</strong> {{ admin?.lastName || "Not available" }}</p>
+        <p><strong>Cell Phone:</strong> {{ admin?.phone || "Not available" }}</p>
         <p><strong>Status:</strong> Admin</p>
-        <p><strong>Email:</strong> {{ admin.email }}</p>
+        <p><strong>Email:</strong> {{ admin?.email || "Not available" }}</p>
       </div>
     </div>
+
 
     <!-- Tarjeta de Profesores -->
     <pv-card class="teachers-card scrollable-card">

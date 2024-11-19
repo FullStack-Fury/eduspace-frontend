@@ -52,6 +52,7 @@ import MultiSelect from "primevue/multiselect";
 import Password from "primevue/password";
 import Dropdown from "primevue/dropdown";
 import Avatar from "primevue/avatar";
+import ConfirmPopup from "primevue/confirmpopup";
 
 // Create app instance
 
@@ -112,7 +113,8 @@ app.component('pv-button', Button)
     .component('pv-iftalabel', IftaLabel)
     .component('pv-password', Password)
     .component('pv-dropdown', Dropdown)
-    .component('pv-avatar', Avatar);
+    .component('pv-avatar', Avatar)
+    .component('pv-confirmpopup', ConfirmPopup);
 
 
 
