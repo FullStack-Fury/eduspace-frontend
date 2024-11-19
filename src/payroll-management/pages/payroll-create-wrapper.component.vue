@@ -50,14 +50,15 @@ export default {
       }
     },
     calculateNetSalary(payroll) {
-      const { salaryAmount, salaryBonus, pensionContribution } = payroll;
+      const {salaryAmount, salaryBonus, pensionContribution} = payroll;
       return salaryAmount + salaryBonus - pensionContribution;
     },
     async savePayroll(payroll) {
       payroll.salaryNet = this.calculateNetSalary(payroll);
 
       try {
-        const response = await http.post("/payrolls", payroll);
+        // Realiza el POST a la ruta con el teacherId en la URL
+        const response = await http.post(`/payrolls/teachers${payroll.teacherId}`, payroll);
         console.log("Payroll saved:", response.data);
 
         // Enviar notificación al profesor después de guardar la nómina
