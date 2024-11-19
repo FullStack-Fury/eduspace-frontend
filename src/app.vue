@@ -7,6 +7,7 @@ import HomeIcon from "/src/assets/admin/Home.svg";
 import ClassroomIcon from "/src/assets/admin/Clasroom.svg";
 import EnviromentIcon from "/src/assets/admin/Enviroment.svg";
 import PersonalDIcon from "/src/assets/admin/Personal_Data.svg";
+import PersonalMIcon from "/src/assets/admin/Personal_Management.svg";
 import SalaryIcon from "/src/assets/admin/Salary_Calculation.svg";
 
 // Íconos específicos para la vista del "teacher"
@@ -51,6 +52,7 @@ export default {
           { label: "Notifications", to: "/dashboard-teacher/notifications", svg: NotificationIcon },
           { label: "Reservations", to: "/dashboard-teacher/reservations", svg: ReservationIcon },
           { label: "Breakdown Reports", to: "/dashboard-teacher/breakdown-reports", svg: BreakdownIcon },
+          {label: 'Wages', to: '/dashboard-teacher/wages', svg: PagesIcon},
           { label: "Space Availability", to: "/dashboard-teacher/space-availability", svg: SpaceIcon },
         ];
       } else {
@@ -76,6 +78,8 @@ export default {
 };
 </script>
 
+
+
 <template>
   <pv-toast />
   <div class="app-container">
@@ -89,7 +93,9 @@ export default {
             </p>
             <p class="info">{{ currentUsername }}</p>
           </div>
+
         </div>
+
 
         <div class="drawer-content">
           <div v-for="item in items" :key="item.label" class="menu-item">

@@ -169,41 +169,6 @@
       "administratorId": 8,
       "password": "11122",
       "id": 2
-    },
-    {
-      "firstName": "Oscar",
-      "lastName": "Antayhua",
-      "email": "oscar@school.com",
-      "dni": "555",
-      "phone": "22312",
-      "workingDays": "Monday - Friday",
-      "field": "",
-      "administratorId": 9,
-      "password": "555",
-      "id": 3
-    },
-    {
-      "firstName": "Oscar2",
-      "lastName": "Antayhua3",
-      "email": "123",
-      "dni": "123",
-      "phone": "123",
-      "workingDays": "Monday - Friday",
-      "field": "Literature",
-      "administratorId": 9,
-      "password": "123",
-      "id": 4
-    },
-    {
-      "firstName": "Oscar",
-      "lastName": "Antayhua",
-      "email": "asdas",
-      "dni": "asd",
-      "phone": "asd",
-      "workingDays": "Monday - Friday",
-      "field": "",
-      "password": "asd",
-      "id": 5
     }
   ],
   "administrators": [
@@ -311,61 +276,90 @@
       "address": "a",
       "phone": "a",
       "password": "a"
-    },
-    {
-      "firstName": "asd",
-      "lastName": "Antayhuadd",
-      "email": "123",
-      "dni": "dasd",
-      "address": "María Parado De Bellido",
-      "phone": "213",
-      "password": "123",
-      "id": 10
     }
   ],
   "meet": [
     {
-      "id": 10,
-      "title": "asd",
-      "description": "asd",
-      "day": "2024-11-22",
-      "start": "11:34",
-      "end": "11:34",
-      "classroom": "A102",
+      "id": 1,
+      "name": "Planning Meeting",
+      "day": "2024-09-05",
+      "hour": "09:52",
+      "location": "Room 101",
       "teachers": [
         {
-          "id": 2,
-          "firstName": "Luis",
-          "lastName": "gonzales"
-        }
-      ],
-      "administrator": {
-        "name": "root root"
-      }
-    },
-    {
-      "id": 11,
-      "title": "asdasd",
-      "description": "asdas",
-      "day": "2024-11-14",
-      "start": "23:22",
-      "end": "23:23",
-      "classroom": "A103",
-      "teachers": [
-        {
-          "id": 2,
-          "firstName": "Luis",
-          "lastName": "gonzales"
+          "id": 1,
+          "name": "Maria",
+          "lastname": "Espinoza"
         },
         {
-          "id": 3,
-          "firstName": "Oscar",
-          "lastName": "Antayhua"
+          "id": 2,
+          "name": "Pepe",
+          "lastname": "Espinoza"
         }
       ],
-      "administrator": {
-        "name": "root root"
-      }
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Program",
+      "day": "2024-11-01",
+      "hour": "23:59",
+      "location": "Casa",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria",
+          "lastname": "Espinoza"
+        },
+        {
+          "id": 2,
+          "name": "Pepe",
+          "lastname": "Espinoza"
+        }
+      ],
+      "administrators": [
+        {
+          "id": 1,
+          "name": "Leonor",
+          "lastname": "Vivas"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "REunión",
+      "day": "2024-11-05",
+      "hour": "19:00",
+      "location": "Break de monterrico",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "Maria undefined"
+        },
+        {
+          "id": 2,
+          "name": "Pepe undefined"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "reunion",
+      "day": "2024-11-05",
+      "hour": "07:34",
+      "location": "salon 15",
+      "teachers": [
+        {
+          "id": 1,
+          "name": "maria fernanda rosas alvarado"
+        }
+      ]
     }
   ],
   "shared-area-reservation": [
