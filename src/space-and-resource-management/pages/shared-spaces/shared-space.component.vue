@@ -10,14 +10,16 @@ export default {
       shared_spaces: []
     };
   },
-  mounted() {
-    this.loadArea();
+  async mounted() {
+    await this.loadArea();
   },
   methods: {
     async loadArea() {
       try {
         const response = await http.get("/shared-area");
         this.shared_spaces = response.data;
+
+        return response.data;
       } catch (error) {
         console.error("Error loading spaces:", error);
       }

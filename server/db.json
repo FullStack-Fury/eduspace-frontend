@@ -1,16 +1,10 @@
 {
   "classrooms": [
     {
-      "id": "1",
-      "name": "A101",
-      "description": "Classroom for 1st grade students",
-      "teacherId": 1
-    },
-    {
-      "id": "2",
-      "name": "A102",
-      "description": "Classroom for 2st grade students",
-      "teacherId": 2
+      "id": "8523",
+      "name": "A204",
+      "description": "Salon para Andres",
+      "teacherId": "9f80"
     }
   ],
   "resources": [
@@ -122,16 +116,10 @@
   ],
   "shared-area": [
     {
-      "id": "1",
-      "name": "Swimming pool",
-      "capacity": 100,
-      "description": "Swimming pool that is shared by all the teachers and students"
-    },
-    {
-      "id": "2",
-      "name": "Primary schoolyard",
-      "capacity": 200,
-      "description": "Schoolyard that is shared by all the primary students"
+      "id": "e90a",
+      "name": "Futbol",
+      "capacity": 20,
+      "description": "campo futbol"
     }
   ],
   "teachers": [
@@ -158,6 +146,18 @@
       "field": "Math",
       "administratorId": 8,
       "password": "11122"
+    },
+    {
+      "id": "9f80",
+      "firstName": "Andres",
+      "lastName": "torres",
+      "email": "andres@gmail.com",
+      "dni": "764485",
+      "phone": "9546854",
+      "workingDays": "Monday - Friday",
+      "field": "Math",
+      "administratorId": "8d8c",
+      "password": "764485"
     }
   ],
   "administrators": [
@@ -275,6 +275,66 @@
       "phone": "213",
       "password": "123",
       "id": "10"
+    },
+    {
+      "id": "1def",
+      "firstName": "Valery",
+      "lastName": "Ortiz",
+      "email": "valery@gmail.com",
+      "dni": "7677775",
+      "address": "mi casa",
+      "phone": "985213374",
+      "password": "13456"
+    },
+    {
+      "id": "a9cf",
+      "firstName": "Valery",
+      "lastName": "Ortiz",
+      "email": "valery@gmail.com",
+      "dni": "7677775",
+      "address": "mi casa",
+      "phone": "985213374",
+      "password": "13456"
+    },
+    {
+      "id": "eb6e",
+      "firstName": "Valery",
+      "lastName": "Ortiz",
+      "email": "valery@gmail.com",
+      "dni": "7677775",
+      "address": "mi casa",
+      "phone": "985213374",
+      "password": "13456"
+    },
+    {
+      "id": "8d8c",
+      "firstName": "fabrizio",
+      "lastName": "Sanchez",
+      "email": "fabrizio@gmail.com",
+      "dni": "7658498",
+      "address": "mi casa",
+      "phone": "987654321",
+      "password": "1234"
+    },
+    {
+      "id": "63ac",
+      "firstName": "alessandro",
+      "lastName": "sanchez",
+      "email": "fabrizio@gmail.com",
+      "dni": "321654",
+      "address": "mi casa",
+      "phone": "9876543",
+      "password": "1234"
+    },
+    {
+      "id": "6cf4",
+      "firstName": "fabri",
+      "lastName": "sanchez ",
+      "email": "fabrizio2@gmail.com",
+      "dni": "987654",
+      "address": "mi casa",
+      "phone": "3215478",
+      "password": "4321"
     }
   ],
   "meet": [

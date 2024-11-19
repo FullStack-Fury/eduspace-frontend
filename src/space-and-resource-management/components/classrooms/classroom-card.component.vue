@@ -15,6 +15,9 @@ export default {
         console.error("Error deleting classroom:", error);
       }
     },
+    editClassroom(id) {
+      this.$router.push({ name: 'edit-classroom', params: { id } });
+    }
   },
 };
 </script>
@@ -33,7 +36,22 @@ export default {
         <i class="pi pi-box text-yellow-500"></i>
         <span>Classroom</span>
       </div>
-      <pv-button label="Delete" severity="danger" text raised class="w-full" @click="deleteClassroom"/>
+      <pv-button
+          label="Delete"
+          severity="danger"
+          text
+          raised
+          class="w-full"
+          @click="deleteClassroom"
+      />
+<!--      <pv-button
+          label="Edit"
+          severity="primary"
+          text
+          raised
+          class="w-full"
+          @click="editClassroom(classroom.id)"
+      />-->
     </div>
   </div>
 </template>

@@ -1,5 +1,6 @@
 <script>
 import {TeacherService} from "../../../personal-data/services/teacher.service.js";
+import http from "../../../shared/services/http-common.js";
 
 export default {
   name: "classroom-create-and-edit",
@@ -18,6 +19,7 @@ export default {
       default: true
     }
   },
+
   data() {
     return {
       form: { ...this.classroom },
@@ -28,19 +30,37 @@ export default {
     try {
       const response = await TeacherService.fetchTeachers();
       this.teachers = JSON.parse(JSON.stringify(response));
-      console.log("Teachers loaded:", this.teachers);
+
+      // Cargar datos de la clase si no es modo creación
+      if (!this.isCreateMode && this.$route.params.id) {
+        const classroomResponse = await http.get(`/classrooms/${this.$route.params.id}`);
+        this.form = { ...classroomResponse.data };
+      }
+
       this.$forceUpdate();
     } catch (error) {
-      console.error("Error loading teachers:", error);
+      console.error("Error loading data:", error);
     }
   },
   methods: {
-    save() {
+    async save() {
       if (!this.form.name || !this.form.description || !this.form.teacherId) {
         alert("Please fill in all fields.");
         return;
       }
-      this.$emit("save", this.form);
+
+      try {
+        if (this.isCreateMode) {
+          await http.post('/classrooms', this.form);
+          alert("Classroom created successfully!");
+        } else {
+          await http.put(`/classrooms/${this.$route.params.id}`, this.form);
+          alert("Classroom updated successfully!");
+        }
+        this.$router.push('/dashboard-admin/classrooms-shared-spaces/classrooms');
+      } catch (error) {
+        console.error("Error saving classroom:", error);
+      }
     },
     cancel() {
       this.$emit("cancel");

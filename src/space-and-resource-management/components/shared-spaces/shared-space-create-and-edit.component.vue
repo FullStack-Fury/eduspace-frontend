@@ -9,7 +9,6 @@ export default {
         name: '',
         capacity: 0,
         description: '',
-        location: '',
       }),
     },
     isCreateMode: {
@@ -24,7 +23,7 @@ export default {
   },
   methods: {
     save() {
-      if (!this.form.name || !this.form.capacity || !this.form.description || !this.form.location) {
+      if (!this.form.name || !this.form.capacity || !this.form.description) {
         alert("Please fill in all fields.");
         return;
       }
@@ -64,11 +63,6 @@ export default {
       <div class="form-field">
         <pv-float-label>Description:</pv-float-label>
         <pv-input-text v-model="form.description" placeholder="Enter description"/>
-      </div>
-
-      <div class="form-field">
-        <pv-float-label>Location:</pv-float-label>
-        <pv-input-text v-model="form.location" placeholder="Enter location"/>
       </div>
 
       <div class="form-actions">

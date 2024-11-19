@@ -29,9 +29,6 @@ export default {
       <div class="mb-2">
         <span class="font-medium text-600">Description: {{ shared_space.description }}</span>
       </div>
-      <div class="mb-3">
-        <span class="font-medium text-600">Location: {{ shared_space.location }}</span>
-      </div>
       <div class="flex align-items-center gap-2 mb-3">
         <i class="pi pi-box text-yellow-500"></i>
         <span>equipment</span>

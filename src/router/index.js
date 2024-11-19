@@ -59,6 +59,7 @@ const router = createRouter({
         { path: '/dashboard-admin/classrooms-shared-spaces/shared-spaces/add', name: 'add-shared-spaces', component: AddSharedSpaceComponent, meta: {title: 'Add Shared Spaces'}},
         { path: '/dashboard-admin/classrooms-shared-spaces/classrooms', name: 'classrooms', component: ClassroomsComponent, meta: {title: 'Classrooms'}},
         { path: '/dashboard-admin/classrooms-shared-spaces/classrooms/add', name: 'add-classrooms', component: AddClassroomsComponent, meta: {title: 'Add Classrooms'}},
+        { path: '/dashboard-admin/classrooms-shared-spaces/classrooms/edit/:id', name: 'edit-classsroom', component: AddClassroomsComponent, meta: {title: 'Edit Classrooms'}, props: (route) => ({  isCreateMode: false, id: route.params.id })},
 
         /**
          *  Dashboard-teacher

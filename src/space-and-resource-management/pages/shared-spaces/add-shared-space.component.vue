@@ -11,7 +11,6 @@ export default {
         name: '',
         capacity: 0,
         description: '',
-        location: '',
       }
     };
   },
